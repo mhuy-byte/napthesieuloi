@@ -165,7 +165,7 @@
         </div>
     </section>
 
-    <!-- ================= TRANG QUẢN TRỊ ADMIN (ẨN) ================= -->
+    <!-- ================= TRANG QUẢN TRỊ ADMIN (ẨN HOÀN TOÀN) ================= -->
     <section id="admin" class="container mx-auto px-4 py-16 hidden">
         <div class="bg-gray-900 border border-yellow-500/30 rounded-3xl p-6 md:p-8 shadow-2xl">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center pb-6 mb-8 border-b border-gray-800 gap-4">
@@ -199,7 +199,7 @@
                 <button onclick="switchAdminTab('packages')" id="admin-tab-btn-packages" class="px-5 py-2.5 rounded-xl font-bold text-sm transition bg-gray-950 text-gray-400 hover:text-white">Chỉnh Sửa Giá Gói Nạp</button>
             </div>
 
-            <!-- TAB 1: QUẢN LÝ ĐƠN (CÓ THÔNG TIN THẺ CÀO) -->
+            <!-- TAB 1: QUẢN LÝ ĐƠN -->
             <div id="admin-pane-orders" class="admin-pane">
                 <div class="bg-gray-950 rounded-2xl border border-gray-800 overflow-hidden">
                     <div class="overflow-x-auto">
@@ -228,7 +228,7 @@
         </div>
     </section>
 
-    <!-- FOOTER (CHỨA CƠ CHẾ CLICK ẨN ĐĂNG NHẬP ADMIN) -->
+    <!-- FOOTER (BẤM 5 LẦN ĐỂ MỞ ADMIN VỚI MẬT KHẨU 30911) -->
     <footer id="support" class="bg-gray-900 border-t border-gray-800 py-12 text-center text-gray-400 text-sm">
         <div class="container mx-auto px-4">
             <h3 class="text-lg font-bold text-white mb-2">HỖ TRỢ KHÁCH HÀNG 24/7</h3>
@@ -237,25 +237,25 @@
         </div>
     </footer>
 
-    <!-- MODAL BẮT BUỘC ĐĂNG KÝ / ĐĂNG NHẬP KHI VÀO WEB -->
+    <!-- MODAL ĐĂNG KÝ / ĐĂNG NHẬP DÀNH CHO NGƯỜI CHƠI -->
     <div id="authModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center">
         <div class="bg-gray-900 border border-gray-800 w-full max-w-md p-8 rounded-3xl shadow-2xl relative">
             <div class="text-center mb-6">
-                <div class="w-14 h-14 bg-yellow-500/10 text-yellow-400 rounded-2xl mx-auto flex items-center justify-center text-2xl mb-3"><i class="fa-solid fa-user-shield"></i></div>
-                <h3 class="text-2xl font-black text-white">CHÀO MỪNG ĐẾN VỚI HỆ THỐNG</h3>
-                <p class="text-gray-400 text-xs mt-1">Vui lòng đăng nhập hoặc tạo tài khoản để tiếp tục</p>
+                <div class="w-14 h-14 bg-yellow-500/10 text-yellow-400 rounded-2xl mx-auto flex items-center justify-center text-2xl mb-3"><i class="fa-solid fa-user-plus"></i></div>
+                <h3 class="text-2xl font-black text-white">ĐĂNG KÝ / ĐĂNG NHẬP</h3>
+                <p class="text-gray-400 text-xs mt-1">Tạo tài khoản người chơi để nạp game và tích điểm</p>
             </div>
             <form onsubmit="handleAuthSubmit(event)" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-semibold text-gray-300 mb-1">Tên tài khoản / Số điện thoại <span class="text-red-500">*</span></label>
-                    <input type="text" id="authUsernameInput" required class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400 text-sm" placeholder="Nhập tên tài khoản...">
+                    <label class="block text-xs font-semibold text-gray-300 mb-1">Tên tài khoản người chơi <span class="text-red-500">*</span></label>
+                    <input type="text" id="authUsernameInput" required class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400 text-sm" placeholder="Nhập tên tài khoản của bạn...">
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold text-gray-300 mb-1">Mật khẩu <span class="text-red-500">*</span></label>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1">Mật khẩu tài khoản <span class="text-red-500">*</span></label>
                     <input type="password" id="authPasswordInput" required class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400 text-sm" placeholder="••••••••">
                 </div>
                 <button type="submit" class="w-full bg-yellow-400 hover:bg-yellow-300 text-gray-950 font-black py-3 rounded-xl shadow-lg transition text-sm">
-                    Vào Hệ Thống Ngay
+                    Vào Trang Web Ngay
                 </button>
             </form>
         </div>
@@ -288,7 +288,6 @@
                         </label>
                     </div>
                 </div>
-                <!-- Phần thẻ cào có truyền số seri và mã thẻ -->
                 <div id="scratchCardSection" class="hidden space-y-3 bg-gray-950/60 p-4 rounded-2xl border border-gray-800">
                     <div>
                         <label class="block text-xs font-semibold text-gray-300 mb-1">Nhà Mạng</label>
@@ -300,11 +299,11 @@
                     </div>
                     <div>
                         <label class="block text-xs font-semibold text-gray-300 mb-1">Số Serial Thẻ <span class="text-red-500">*</span></label>
-                        <input type="text" id="cardSerial" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-2 text-white text-sm" placeholder="Nhập số seri in trên thẻ...">
+                        <input type="text" id="cardSerial" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-2 text-white text-sm" placeholder="Nhập số seri...">
                     </div>
                     <div>
                         <label class="block text-xs font-semibold text-gray-300 mb-1">Mã Số Thẻ (PIN) <span class="text-red-500">*</span></label>
-                        <input type="text" id="cardPin" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-2 text-white text-sm" placeholder="Nhập mã số thẻ...">
+                        <input type="text" id="cardPin" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-2 text-white text-sm" placeholder="Nhập mã thẻ...">
                     </div>
                 </div>
                 <div id="bankingSection" class="p-4 rounded-2xl bg-yellow-500/5 border border-yellow-500/20 text-center">
@@ -346,7 +345,6 @@
                 updateUserUI();
             }
 
-            // Lắng nghe dữ liệu người dùng để đồng bộ điểm
             db.ref('users').on('value', (snapshot) => {
                 usersData = snapshot.val() || {};
                 if (currentUser && usersData[currentUser.username]) {
@@ -356,7 +354,6 @@
                 }
             });
 
-            // Lắng nghe gói nạp
             db.ref('packagesData').on('value', (snapshot) => {
                 if (snapshot.exists()) {
                     packagesData = snapshot.val();
@@ -388,7 +385,6 @@
                 if (!document.getElementById('admin').classList.contains('hidden')) renderAdminData();
             });
 
-            // Lắng nghe đơn hàng
             db.ref('orders').on('value', (snapshot) => {
                 const data = snapshot.val() || {};
                 ordersList = [];
@@ -400,7 +396,7 @@
                 if (!document.getElementById('admin').classList.contains('hidden')) renderAdminData();
             });
 
-            // Cơ chế ẩn đăng nhập Admin: Click 5 lần vào footer copyright
+            // Cơ chế ẩn đăng nhập Admin: Click 5 lần vào footer với mật khẩu 30911
             let clickCount = 0;
             document.getElementById('secretAdminTrigger').addEventListener('click', () => {
                 clickCount++;
@@ -419,7 +415,7 @@
             });
         };
 
-        // Xử lý đăng ký / đăng nhập người dùng khi vào web
+        // Đăng ký/Đăng nhập người chơi (Chặn từ khóa admin)
         function handleAuthSubmit(e) {
             e.preventDefault();
             const username = document.getElementById('authUsernameInput').value.trim();
@@ -427,10 +423,14 @@
 
             if (!username) return;
 
+            if (username.toLowerCase() === 'admin') {
+                alert("Tên tài khoản 'admin' dành riêng cho quản trị viên! Vui lòng chọn tên tài khoản người chơi khác.");
+                return;
+            }
+
             db.ref('users/' + username).once('value', (snapshot) => {
                 let userData = snapshot.val();
                 if (!userData) {
-                    // Tạo tài khoản mới nếu chưa có
                     userData = { username: username, points: 0 };
                     db.ref('users/' + username).set(userData);
                 }
@@ -459,7 +459,6 @@
             window.location.reload();
         }
 
-        // Chuyển tab game
         function switchGameTab(game) {
             currentActiveGameTab = game;
             document.querySelectorAll('.game-tab').forEach(btn => {
@@ -497,7 +496,6 @@
             });
         }
 
-        // Mini Game: Vòng quay may mắn (Trừ 50 điểm)
         function spinWheel() {
             if (!currentUser) {
                 alert("Vui lòng đăng nhập để chơi minigame.");
@@ -505,36 +503,24 @@
             }
             const currentPoints = currentUser.points || 0;
             if (currentPoints < 50) {
-                alert("Bạn không đủ điểm! Cần ít nhất 50 điểm để quay thưởng (Mỗi 10k nạp thành công = 10 điểm).");
+                alert("Bạn không đủ điểm! Cần ít nhất 50 điểm để quay thưởng.");
                 return;
             }
 
-            // Trừ 50 điểm
             currentUser.points -= 50;
             db.ref('users/' + currentUser.username).update({ points: currentUser.points });
             updateUserUI();
 
-            const rewards = [
-                "Chúc bạn may mắn lần sau!",
-                "Nhận thêm 50 điểm thưởng!",
-                "Nhận ngay Voucher giảm giá 20%!",
-                "Nhận thêm 100 điểm thưởng!",
-                "Chúc bạn may mắn lần sau!"
-            ];
-            const randomIndex = Math.floor(Math.random() * rewards.length);
-            const prize = rewards[randomIndex];
+            const rewards = ["Chúc bạn may mắn lần sau!", "Nhận thêm 50 điểm thưởng!", "Nhận ngay Voucher giảm giá 20%!", "Nhận thêm 100 điểm thưởng!", "Chúc bạn may mắn lần sau!"];
+            const prize = rewards[Math.floor(Math.random() * rewards.length)];
 
-            if (prize.includes("50 điểm")) {
-                currentUser.points += 50;
-            } else if (prize.includes("100 điểm")) {
-                currentUser.points += 100;
-            }
+            if (prize.includes("50 điểm")) currentUser.points += 50;
+            else if (prize.includes("100 điểm")) currentUser.points += 100;
+
             db.ref('users/' + currentUser.username).update({ points: currentUser.points });
-
             document.getElementById('wheelResultBox').innerHTML = `<i class="fa-solid fa-gift mr-2"></i> Kết quả: <b>${prize}</b>`;
         }
 
-        // Render lịch sử đơn của user
         function renderUserHistory() {
             const tbody = document.getElementById('userHistoryTableBody');
             const searchKeyword = document.getElementById('searchHistoryInput').value.toLowerCase();
@@ -555,7 +541,7 @@
 
                 let methodDisplay = o.method;
                 if (o.method.includes('Thẻ cào')) {
-                    methodDisplay = `Thẻ cào (${o.telco})<br><span class="text-[10px] text-gray-400 font-mono">Seri: ${o.serial} \vert{} PIN:${o.pin}</span>`;
+                    methodDisplay = `Thẻ cào (${o.telco})<br><span class="text-[10px] text-gray-400 font-mono">Seri: ${o.serial} | PIN: ${o.pin}</span>`;
                 }
 
                 tbody.innerHTML += `
@@ -571,7 +557,6 @@
             });
         }
 
-        // --- ADMIN PANEL ---
         function logoutAdmin() {
             document.getElementById('admin').classList.add('hidden');
             window.location.hash = '#home';
@@ -597,7 +582,6 @@
             }, 0);
             document.getElementById('statTotalRevenue').innerText = totalRev.toLocaleString('vi-VN') + 'đ';
 
-            // Quản lý đơn hàng (Admin xem rõ Seri và Mã thẻ cào)
             const adminTbody = document.getElementById('adminOrdersTableBody');
             adminTbody.innerHTML = '';
             ordersList.forEach((o) => {
@@ -608,7 +592,7 @@
 
                 let methodDetails = o.method;
                 if (o.method.includes('Thẻ cào')) {
-                    methodDetails = `<b class="text-yellow-300">Thẻ cào (${o.telco})</b><br><span class="font-mono text-xs text-gray-300">Seri: ${o.serial}<br>PIN:${o.pin}</span>`;
+                    methodDetails = `<b class="text-yellow-300">Thẻ cào (${o.telco})</b><br><span class="font-mono text-xs text-gray-300">Seri: ${o.serial}<br>PIN: ${o.pin}</span>`;
                 }
 
                 adminTbody.innerHTML += `
@@ -627,7 +611,6 @@
                 `;
             });
 
-            // Sửa giá gói
             const editContainer = document.getElementById('adminPackageEditContainer');
             editContainer.innerHTML = '';
             for (let gameKey in packagesData) {
@@ -641,4 +624,123 @@
                             <div class="grid grid-cols-2 gap-2">
                                 <div>
                                     <label class="block text-[10px] text-gray-400 mb-1">Giá Gốc</label>
-                                    <input type="text" id="oldPrice
+                                    <input type="text" id="oldPrice_${gameKey}_${pkgIndex}" value="${pkg.oldPrice}" class="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-1.5 text-xs text-white">
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] text-gray-400 mb-1">Giá Bán</label>
+                                    <input type="text" id="price_${gameKey}_${pkgIndex}" value="${pkg.price}" class="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-1.5 text-xs text-yellow-400 font-bold">
+                                </div>
+                            </div>
+                            <button onclick="savePackagePrice('${gameKey}', ${pkgIndex})" class="w-full bg-yellow-400 hover:bg-yellow-300 text-gray-950 font-bold py-2 rounded-xl text-xs transition">Lưu Thay Đổi</button>
+                        </div>
+                    `;
+                });
+            }
+        }
+
+        function updateOrderStatus(firebaseKey, newStatus, username, priceStr) {
+            db.ref('orders/' + firebaseKey).once('value', (snapshot) => {
+                const orderData = snapshot.val();
+                if (orderData && orderData.status !== 'Thành công' && newStatus === 'Thành công') {
+                    const amount = parseInt(priceStr.replace(/\D/g, '')) || 0;
+                    const earnedPoints = Math.floor(amount / 1000);
+
+                    db.ref('users/' + username).once('value', (userSnap) => {
+                        let uData = userSnap.val() || { points: 0 };
+                        uData.points = (uData.points || 0) + earnedPoints;
+                        db.ref('users/' + username).update({ points: uData.points });
+                    });
+                }
+
+                db.ref('orders/' + firebaseKey).update({ status: newStatus }, (error) => {
+                    if (!error) alert(`Đã cập nhật đơn hàng thành: ${newStatus}`);
+                });
+            });
+        }
+
+        function savePackagePrice(gameKey, pkgIndex) {
+            packagesData[gameKey][pkgIndex].oldPrice = document.getElementById(`oldPrice_${gameKey}_${pkgIndex}`).value;
+            packagesData[gameKey][pkgIndex].price = document.getElementById(`price_${gameKey}_${pkgIndex}`).value;
+
+            db.ref('packagesData').set(packagesData, (error) => {
+                if (!error) alert("Đã cập nhật giá gói nạp thành công!");
+            });
+        }
+
+        let selectedPackageInfo = { name: '', price: '' };
+        function openCheckoutModal(packageName, price) {
+            selectedPackageInfo = { name: packageName, price: price };
+            document.getElementById('modalPackageTitle').innerText = packageName;
+            document.getElementById('modalPackagePrice').innerText = price;
+            
+            const modal = document.getElementById('checkoutModal');
+            const content = document.getElementById('checkoutModalContent');
+            modal.classList.remove('hidden');
+            setTimeout(() => { modal.classList.remove('opacity-0'); content.classList.remove('scale-95'); content.classList.add('scale-100'); }, 10);
+        }
+
+        function closeCheckoutModal() {
+            const modal = document.getElementById('checkoutModal');
+            const content = document.getElementById('checkoutModalContent');
+            modal.classList.add('opacity-0'); content.classList.remove('scale-100'); content.classList.add('scale-95');
+            setTimeout(() => { modal.classList.add('hidden'); }, 300);
+        }
+
+        function togglePaymentMethod() {
+            const method = document.querySelector('input[name="paymentMethod"]:checked').value;
+            if (method === 'Thẻ cào') {
+                document.getElementById('scratchCardSection').classList.remove('hidden');
+                document.getElementById('bankingSection').classList.add('hidden');
+            } else {
+                document.getElementById('scratchCardSection').classList.add('hidden');
+                document.getElementById('bankingSection').classList.add('hidden');
+            }
+        }
+
+        function handleCheckoutSubmit(e) {
+            e.preventDefault();
+            const playerId = document.getElementById('playerIdInput').value;
+            const method = document.querySelector('input[name="paymentMethod"]:checked').value;
+            
+            let paymentDetail = method;
+            let telco = "";
+            let serial = "";
+            let pin = "";
+
+            if(method === 'Thẻ cào') {
+                telco = document.getElementById('cardTelco').value;
+                serial = document.getElementById('cardSerial').value;
+                pin = document.getElementById('cardPin').value;
+                if (!serial || !pin) {
+                    alert("Vui lòng điền đầy đủ số seri và mã thẻ cào!");
+                    return;
+                }
+            }
+
+            const newOrderCode = '#DH' + Math.floor(10000 + Math.random() * 90000);
+            const newOrder = {
+                code: newOrderCode,
+                username: currentUser ? currentUser.username : 'Khách',
+                playerId: playerId,
+                packageName: selectedPackageInfo.name,
+                price: selectedPackageInfo.price,
+                method: paymentDetail,
+                telco: telco,
+                serial: serial,
+                pin: pin,
+                status: 'Đang xử lý',
+                createdAt: Date.now()
+            };
+
+            db.ref('orders').push(newOrder, (error) => {
+                if (!error) {
+                    alert(`Tạo đơn hàng ${newOrderCode} thành công! Thông tin đơn đã gửi về Admin.`);
+                    closeCheckoutModal();
+                } else {
+                    alert("Có lỗi xảy ra, vui lòng thử lại.");
+                }
+            });
+        }
+    </script>
+</body>
+</html>
