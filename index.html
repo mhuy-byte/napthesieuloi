@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nạp Thẻ Siêu Lời - Free Fire, Liên Quân, FC Online</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-900 text-white font-sans">
+
+    <!-- Header -->
+    <header class="bg-gray-800 border-b border-gray-700 sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <span class="text-2xl font-black text-yellow-400 tracking-wider">⚡ NẠP THẺ SIÊU LỜI</span>
+            </div>
+            <nav class="hidden md:flex space-x-6">
+                <a href="#home" class="hover:text-yellow-400 transition">Trang chủ</a>
+                <a href="#packages" class="hover:text-yellow-400 transition">Bảng giá gói</a>
+                <a href="#history" class="hover:text-yellow-400 transition">Lịch sử đơn hàng</a>
+                <a href="#support" class="hover:text-yellow-400 transition">Hỗ trợ</a>
+            </nav>
+            <div>
+                <button class="bg-yellow-500 hover:bg-yellow-400 text-gray-900 font-bold px-4 py-2 rounded-lg transition shadow-lg">
+                    <i class="fa-solid fa-user mr-2"></i>Đăng nhập
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Banner Quảng cáo -->
+    <section class="container mx-auto px-4 py-6">
+        <div class="bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 rounded-2xl p-8 md:p-12 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between">
+            <div class="z-10 max-w-xl">
+                <span class="bg-yellow-400 text-gray-900 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Siêu Khuyến Mãi</span>
+                <h1 class="text-3xl md:text-5xl font-extrabold mt-4 mb-4 leading-tight">Nạp Game Siêu Rẻ - Nhận Quà Cực Khủng</h1>
+                <p class="text-gray-200 mb-6">Cam kết uy tín 100%, chiết khấu cao nhất thị trường cho Free Fire, Liên Quân & FC Online. Xử lý tự động trong 30 giây!</p>
+                <a href="#packages" class="bg-yellow-400 hover:bg-yellow-300 text-gray-900 font-bold px-6 py-3 rounded-xl shadow-lg transition inline-block">Nạp Ngay Hôm Nay</a>
+            </div>
+            <div class="mt-6 md:mt-0 z-10">
+                <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 text-center">
+                    <p class="text-sm text-yellow-300 font-semibold">GIAO DỊCH TRONG NGÀY</p>
+                    <p class="text-3xl font-black mt-1">14,892+</p>
+                    <p class="text-xs text-gray-300 mt-1">Game thủ đã tin tưởng</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chọn Game & Gói Nạp -->
+    <section id="packages" class="container mx-auto px-4 py-8">
+        <h2 class="text-2xl font-bold mb-6 border-l-4 border-yellow-400 pl-3">Chọn Trò Chơi & Gói Nạp</h2>
+        
+        <!-- Tab Game -->
+        <div class="flex space-x-4 mb-6 overflow-x-auto pb-2">
+            <button class="game-tab active bg-yellow-500 text-gray-900 font-bold px-6 py-2.5 rounded-xl shadow transition whitespace-nowrap">Free Fire</button>
+            <button class="game-tab bg-gray-800 text-gray-300 hover:bg-gray-700 font-bold px-6 py-2.5 rounded-xl transition whitespace-nowrap">Liên Quân Mobile</button>
+            <button class="game-tab bg-gray-800 text-gray-300 hover:bg-gray-700 font-bold px-6 py-2.5 rounded-xl transition whitespace-nowrap">FC Online</button>
+        </div>
+
+        <!-- Danh sách gói -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Gói 1 -->
+            <div class="bg-gray-800 border border-gray-700 rounded-xl p-5 hover:border-yellow-400 transition relative shadow-lg">
+                <span class="absolute top-3 right-3 bg-red-500 text-white text-xs font-bold px-2.5 py-1 rounded-md">-50% Lời</span>
+                <h3 class="text-xl font-bold mb-2">Gói 1: 420 Kim Cương</h3>
+                <p class="text-gray-400 text-sm mb-4">Tặng kèm vé quay x10 sự kiện độc quyền.</p>
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-gray-400 line-through text-sm">100.000đ</span>
+                    <span class="text-yellow-400 font-black text-2xl">50.000đ</span>
+                </div>
+                <button onclick="openCheckout('Gói 420 Kim Cương', '50.000đ')" class="w-full bg-yellow-500 hover:bg-yellow-400 text-gray-900 font-bold py-2.5 rounded-lg transition">Chọn Gói</button>
+            </div>
+            <!-- Gói 2 -->
+            <div class="bg-gray-800 border border-gray-700 rounded-xl p-5 hover:border-yellow-400 transition relative shadow-lg">
+                <span class="absolute top-3 right-3 bg-red-500 text-white text-xs font-bold px-2.5 py-1 rounded-md">HOT</span>
+                <h3 class="text-xl font-bold mb-2">Gói 2: 1080 Kim Cương</h3>
+                <p class="text-gray-400 text-sm mb-4">Nhân đôi giá trị cho tài khoản mới.</p>
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-gray-400 line-through text-sm">250.000đ</span>
+                    <span class="text-yellow-400 font-black text-2xl">100.000đ</span>
+                </div>
+                <button onclick="openCheckout('Gói 1080 Kim Cương', '100.000đ')" class="w-full bg-yellow-500 hover:bg-yellow-400 text-gray-900 font-bold py-2.5 rounded-lg transition">Chọn Gói</button>
+            </div>
+            <!-- Gói 3 -->
+            <div class="bg-gray-800 border border-gray-700 rounded-xl p-5 hover:border-yellow-400 transition relative shadow-lg">
+                <span class="absolute top-3 right-3 bg-red-500 text-white text-xs font-bold px-2.5 py-1 rounded-md">Siêu Lời</span>
+                <h3 class="text-xl font-bold mb-2">Gói 3: Thẻ Vô Cực + 2200 Kim Cương</h3>
+                <p class="text-gray-400 text-sm mb-4">Mở toàn bộ phần thưởng mùa mới nhất.</p>
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-gray-400 line-through text-sm">500.000đ</span>
+                    <span class="text-yellow-400 font-black text-2xl">200.000đ</span>
+                </div>
+                <button onclick="openCheckout('Thẻ Vô Cực + 2200 KC', '200.000đ')" class="w-full bg-yellow-500 hover:bg-yellow-400 text-gray-900 font-bold py-2.5 rounded-lg transition">Chọn Gói</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lịch sử đơn hàng -->
+    <section id="history" class="container mx-auto px-4 py-8">
+        <h2 class="text-2xl font-bold mb-6 border-l-4 border-yellow-400 pl-3">Lịch Sử Giao Dịch Gần Đây</h2>
+        <div class="bg-gray-800 rounded-xl border border-gray-700 overflow-hidden shadow-lg">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-gray-700 text-gray-300 text-sm">
+                            <th class="p-4">Mã Đơn</th>
+                            <th class="p-4">Tài khoản / ID</th>
+                            <th class="p-4">Gói Nạp</th>
+                            <th class="p-4">Số Tiền</th>
+                            <th class="p-4">Trạng Thái</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-700 text-sm">
+                        <tr>
+                            <td class="p-4 font-mono text-yellow-400">#DH98231</td>
+                            <td class="p-4">1204958321</td>
+                            <td class="p-4">Gói 1080 Kim Cương</td>
+                            <td class="p-4">100.000đ</td>
+                            <td class="p-4"><span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-xs font-bold">Thành công</span></td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-mono text-yellow-400">#DH98230</td>
+                            <td class="p-4">882391024</td>
+                            <td class="p-4">Gói 420 Kim Cương</td>
+                            <td class="p-4">50.000đ</td>
+                            <td class="p-4"><span class="bg-yellow-500/20 text-yellow-400 px-3 py-1 rounded-full text-xs font-bold">Đang xử lý</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="support" class="bg-gray-800 border-t border-gray-700 mt-12 py-8 text-center text-gray-400 text-sm">
+        <p class="mb-2">Hệ thống nạp thẻ game chính thức - Bảo mật tuyệt đối, hỗ trợ 24/7.</p>
+        <p>&copy; 2026 Nạp Thẻ Siêu Lời. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
