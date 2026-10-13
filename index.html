@@ -110,7 +110,7 @@
         <div id="packages-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
     </section>
 
-    <!-- MINI GAME -->
+    <!-- MINI GAME VÒNG QUAY -->
     <section id="minigame" class="container mx-auto px-4 py-16 border-b border-gray-900">
         <div class="max-w-2xl mx-auto bg-gray-900 border border-yellow-500/30 rounded-3xl p-8 shadow-2xl text-center relative overflow-hidden">
             <div class="absolute -top-12 -right-12 w-40 h-40 bg-yellow-500/10 rounded-full blur-2xl"></div>
@@ -118,17 +118,33 @@
             <h2 class="text-3xl font-black mt-3 mb-2 text-white">VÒNG QUAY MAY MẮN</h2>
             <p class="text-gray-400 text-sm mb-6">Dùng điểm tích lũy từ đơn nạp thành công để tham gia quay thưởng (Cần 50 điểm / lần quay).</p>
             
-            <div class="bg-gray-950 border border-gray-800 p-6 rounded-2xl mb-6 inline-block">
+            <div class="bg-gray-950 border border-gray-800 p-4 rounded-2xl mb-6 inline-block">
                 <p class="text-xs text-gray-400 mb-1">Điểm hiện có của bạn:</p>
-                <p id="spinUserPointsDisplay" class="text-3xl font-black text-yellow-400">0 Điểm</p>
+                <p id="spinUserPointsDisplay" class="text-2xl font-black text-yellow-400">0 Điểm</p>
             </div>
 
-            <div id="wheelResultBox" class="min-h-[40px] mb-4 text-emerald-400 font-bold text-lg"></div>
+            <!-- VÒNG QUAY CANVAS -->
+            <div class="relative w-72 h-72 mx-auto mb-6 flex items-center justify-center">
+                <div class="absolute -top-3 z-20 w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[24px] border-t-yellow-400 filter drop-shadow"></div>
+                <div class="w-full h-full rounded-full border-4 border-yellow-500/50 overflow-hidden shadow-2xl relative bg-gray-950 transition-transform duration-[4000ms] ease-out" id="wheelElement">
+                    <canvas id="wheelCanvas" width="300" height="300" class="w-full h-full"></canvas>
+                </div>
+            </div>
 
-            <div>
-                <button onclick="spinWheel()" class="bg-gradient-to-r from-yellow-500 to-amber-400 hover:from-yellow-400 hover:to-amber-300 text-gray-950 font-black px-8 py-4 rounded-2xl shadow-xl transition transform active:scale-95 text-base flex items-center gap-2 mx-auto">
-                    <i class="fa-solid fa-dharmachakra animate-spin"></i> Quay Ngay (50 Điểm)
+            <div id="wheelResultBox" class="min-h-[40px] mb-4 text-emerald-400 font-bold text-base"></div>
+
+            <div class="flex flex-col gap-4">
+                <button onclick="spinWheel()" id="spinBtn" class="bg-gradient-to-r from-yellow-500 to-amber-400 hover:from-yellow-400 hover:to-amber-300 text-gray-950 font-black px-8 py-4 rounded-2xl shadow-xl transition transform active:scale-95 text-base flex items-center justify-center gap-2 mx-auto w-full max-w-xs">
+                    <i class="fa-solid fa-dharmachakra"></i> Quay Ngay (50 Điểm)
                 </button>
+            </div>
+
+            <!-- KHO QUÀ CÁ NHÂN -->
+            <div class="mt-8 pt-6 border-t border-gray-800 text-left">
+                <h4 class="text-xs font-bold uppercase text-yellow-400 mb-3"><i class="fa-solid fa-box-archive mr-1"></i> Kho Vật Phẩm / Voucher Của Bạn</h4>
+                <div id="userVouchersList" class="flex flex-wrap gap-2 text-xs text-gray-300">
+                    <span class="text-gray-500 italic">Chưa có phần thưởng nào. Hãy quay ngay!</span>
+                </div>
             </div>
         </div>
     </section>
@@ -138,8 +154,8 @@
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
             <div>
                 <span class="text-yellow-400 text-xs font-bold uppercase tracking-widest bg-yellow-500/10 px-3 py-1 rounded-full border border-yellow-500/20">Kiểm Tra Đơn</span>
-                <h2 class="text-2xl font-black mt-2">Lịch Sử Giao Dịch Đã Gửi</h2>
-                <p class="text-gray-400 text-xs mt-1">Trạng thái cập nhật thành công sẽ tự động cộng điểm thưởng vào tài khoản</p>
+                <h2 class="text-2xl font-black mt-2">Lịch Sử Giao Dịch Của Bạn</h2>
+                <p class="text-gray-400 text-xs mt-1">Trạng thái cập nhật thành công sẽ tự động cộng điểm thưởng vào tài khoản cá nhân</p>
             </div>
             <div class="w-full md:w-auto">
                 <input type="text" id="searchHistoryInput" onkeyup="renderUserHistory()" placeholder="Tra cứu mã đơn hoặc ID..." class="bg-gray-900 border border-gray-800 rounded-xl px-4 py-2.5 text-sm w-full md:w-72 focus:outline-none focus:border-yellow-400 transition">
@@ -152,7 +168,7 @@
                     <thead>
                         <tr class="bg-gray-800/60 text-gray-400 text-xs uppercase tracking-wider">
                             <th class="p-4">Mã Đơn</th>
-                            <th class="p-4">ID / Tài Khoản</th>
+                            <th class="p-4">ID Nhân Vật</th>
                             <th class="p-4">Gói Nạp</th>
                             <th class="p-4">Số Tiền</th>
                             <th class="p-4">Hình Thức</th>
@@ -228,7 +244,7 @@
         </div>
     </section>
 
-    <!-- FOOTER (BẤM 5 LẦN VÀO DÒNG CHỮ NÀY ĐỂ MỞ ADMIN VỚI MẬT KHẨU 30911) -->
+    <!-- FOOTER -->
     <footer id="support" class="bg-gray-900 border-t border-gray-800 py-12 text-center text-gray-400 text-sm">
         <div class="container mx-auto px-4">
             <h3 class="text-lg font-bold text-white mb-2">HỖ TRỢ KHÁCH HÀNG 24/7</h3>
@@ -237,13 +253,13 @@
         </div>
     </footer>
 
-    <!-- MODAL ĐĂNG KÝ / ĐĂNG NHẬP NGƯỜI CHƠI -->
+    <!-- MODAL ĐĂNG KÝ / ĐĂNG NHẬP -->
     <div id="authModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center">
         <div class="bg-gray-900 border border-gray-800 w-full max-w-md p-8 rounded-3xl shadow-2xl relative">
             <div class="text-center mb-6">
                 <div class="w-14 h-14 bg-yellow-500/10 text-yellow-400 rounded-2xl mx-auto flex items-center justify-center text-2xl mb-3"><i class="fa-solid fa-user-plus"></i></div>
                 <h3 class="text-2xl font-black text-white">ĐĂNG KÝ / ĐĂNG NHẬP</h3>
-                <p class="text-gray-400 text-xs mt-1">Nhập tên bất kỳ để tự động tạo tài khoản hoặc đăng nhập</p>
+                <p class="text-gray-400 text-xs mt-1">Nhập tên tài khoản bất kỳ để vào hệ thống</p>
             </div>
             <form onsubmit="handleAuthSubmit(event)" class="space-y-4">
                 <div>
@@ -337,6 +353,16 @@
         let packagesData = {};
         let currentActiveGameTab = 'freefire';
 
+        // Cấu hình phần thưởng vòng quay
+        const wheelPrizes = [
+            { name: "+50 Điểm Thưởng", type: "points", val: 50, color: "#eab308" },
+            { name: "Vé Giảm 20%", type: "voucher", val: "Giảm 20%", color: "#3b82f6" },
+            { name: "Gói Nạp Free", type: "gift", val: "Gói Nạp Miễn Phí", color: "#ec4899" },
+            { name: "+100 Điểm", type: "points", val: 100, color: "#10b981" },
+            { name: "Vé Giảm 50%", type: "voucher", val: "Giảm 50%", color: "#8b5cf6" },
+            { name: "Chúc May Mắn", type: "none", val: 0, color: "#4b5563" }
+        ];
+
         window.onload = function() {
             if (!currentUser) {
                 document.getElementById('authModal').classList.remove('hidden');
@@ -345,10 +371,13 @@
                 updateUserUI();
             }
 
+            drawWheel();
+
             db.ref('users').on('value', (snapshot) => {
                 usersData = snapshot.val() || {};
                 if (currentUser && usersData[currentUser.username]) {
                     currentUser.points = usersData[currentUser.username].points || 0;
+                    currentUser.vouchers = usersData[currentUser.username].vouchers || [];
                     localStorage.setItem('currentUser', JSON.stringify(currentUser));
                     updateUserUI();
                 }
@@ -396,7 +425,6 @@
                 if (!document.getElementById('admin').classList.contains('hidden')) renderAdminData();
             });
 
-            // MỞ ADMIN KHI CLICK 5 LẦN VÀO FOOTER (MẬT KHẨU: 30911)
             let clickCount = 0;
             document.getElementById('secretAdminTrigger').addEventListener('click', () => {
                 clickCount++;
@@ -415,6 +443,87 @@
             });
         };
 
+        // Vẽ vòng quay Canvas
+        function drawWheel() {
+            const canvas = document.getElementById('wheelCanvas');
+            if (!canvas.getContext) return;
+            const ctx = canvas.getContext('2d');
+            const numSegments = wheelPrizes.length;
+            const arc = (2 * Math.PI) / numSegments;
+            const radius = canvas.width / 2;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            wheelPrizes.forEach((prize, i) => {
+                const angle = i * arc;
+                ctx.beginPath();
+                ctx.fillStyle = prize.color;
+                ctx.moveTo(radius, radius);
+                ctx.arc(radius, radius, radius, angle, angle + arc, false);
+                ctx.lineTo(radius, radius);
+                ctx.fill();
+                ctx.save();
+
+                ctx.translate(radius, radius);
+                ctx.rotate(angle + arc / 2);
+                ctx.textAlign = "right";
+                ctx.fillStyle = "#ffffff";
+                ctx.font = "bold 11px sans-serif";
+                ctx.fillText(prize.name, radius - 15, 5);
+                ctx.restore();
+            });
+        }
+
+        let currentRotation = 0;
+        function spinWheel() {
+            if (!currentUser) {
+                alert("Vui lòng đăng nhập để chơi minigame.");
+                return;
+            }
+            const currentPoints = currentUser.points || 0;
+            if (currentPoints < 50) {
+                alert("Bạn không đủ điểm! Cần ít nhất 50 điểm để quay thưởng.");
+                return;
+            }
+
+            // Trừ 50 điểm
+            currentUser.points -= 50;
+            db.ref('users/' + currentUser.username).update({ points: currentUser.points });
+            updateUserUI();
+
+            document.getElementById('spinBtn').disabled = true;
+            document.getElementById('wheelResultBox').innerText = "Đang quay thưởng...";
+
+            const prizeIndex = Math.floor(Math.random() * wheelPrizes.length);
+            const degreesPerSegment = 360 / wheelPrizes.length;
+            const extraSpins = 360 * 5; 
+            const targetDegree = extraSpins + (360 - (prizeIndex * degreesPerSegment + degreesPerSegment / 2));
+            
+            currentRotation += targetDegree;
+            const wheel = document.getElementById('wheelElement');
+            wheel.style.transform = `rotate(${currentRotation}deg)`;
+
+            setTimeout(() => {
+                const prize = wheelPrizes[prizeIndex];
+                if (!currentUser.vouchers) currentUser.vouchers = [];
+
+                if (prize.type === 'points') {
+                    currentUser.points += prize.val;
+                } else if (prize.type === 'voucher' || prize.type === 'gift') {
+                    currentUser.vouchers.push(prize.val);
+                }
+
+                db.ref('users/' + currentUser.username).update({
+                    points: currentUser.points,
+                    vouchers: currentUser.vouchers
+                });
+
+                updateUserUI();
+                document.getElementById('wheelResultBox').innerHTML = `<i class="fa-solid fa-gift mr-1"></i> Chúc mừng bạn trúng: <b class="text-yellow-400">${prize.name}</b>`;
+                document.getElementById('spinBtn').disabled = false;
+            }, 4000);
+        }
+
         function handleAuthSubmit(e) {
             e.preventDefault();
             const username = document.getElementById('authUsernameInput').value.trim();
@@ -430,7 +539,7 @@
             db.ref('users/' + username).once('value', (snapshot) => {
                 let userData = snapshot.val();
                 if (!userData) {
-                    userData = { username: username, points: 0 };
+                    userData = { username: username, points: 0, vouchers: [] };
                     db.ref('users/' + username).set(userData);
                 }
                 currentUser = userData;
@@ -449,6 +558,14 @@
                 document.getElementById('userAccountInfo').classList.remove('hidden');
                 document.getElementById('userAccountInfo').classList.add('flex');
                 document.getElementById('btnLogout').classList.remove('hidden');
+
+                const vouchersContainer = document.getElementById('userVouchersList');
+                const vList = currentUser.vouchers || [];
+                if (vList.length === 0) {
+                    vouchersContainer.innerHTML = `<span class="text-gray-500 italic">Chưa có phần thưởng nào. Hãy quay ngay!</span>`;
+                } else {
+                    vouchersContainer.innerHTML = vList.map(v => `<span class="bg-gray-950 border border-yellow-500/30 text-yellow-400 px-3 py-1 rounded-lg font-bold"><i class="fa-solid fa-ticket mr-1"></i>${v}</span>`).join('');
+                }
             }
         }
 
@@ -495,40 +612,25 @@
             });
         }
 
-        function spinWheel() {
-            if (!currentUser) {
-                alert("Vui lòng đăng nhập để chơi minigame.");
-                return;
-            }
-            const currentPoints = currentUser.points || 0;
-            if (currentPoints < 50) {
-                alert("Bạn không đủ điểm! Cần ít nhất 50 điểm để quay thưởng.");
-                return;
-            }
-
-            currentUser.points -= 50;
-            db.ref('users/' + currentUser.username).update({ points: currentUser.points });
-            updateUserUI();
-
-            const rewards = ["Chúc bạn may mắn lần sau!", "Nhận thêm 50 điểm thưởng!", "Nhận ngay Voucher giảm giá 20%!", "Nhận thêm 100 điểm thưởng!", "Chúc bạn may mắn lần sau!"];
-            const prize = rewards[Math.floor(Math.random() * rewards.length)];
-
-            if (prize.includes("50 điểm")) currentUser.points += 50;
-            else if (prize.includes("100 điểm")) currentUser.points += 100;
-
-            db.ref('users/' + currentUser.username).update({ points: currentUser.points });
-            document.getElementById('wheelResultBox').innerHTML = `<i class="fa-solid fa-gift mr-2"></i> Kết quả: <b>${prize}</b>`;
-        }
-
+        // Đã sửa lại lịch sử giao dịch chỉ hiển thị đúng của tài khoản đang đăng nhập
         function renderUserHistory() {
             const tbody = document.getElementById('userHistoryTableBody');
-            const searchKeyword = document.getElementById('searchHistoryInput').value.toLowerCase();
+            const searchKeyword = document.getElementById('searchHistoryInput').value.toLowerCase().trim();
             tbody.innerHTML = '';
 
-            const userOrders = ordersList.filter(o => o.username === currentUser?.username || o.playerId.toLowerCase().includes(searchKeyword) || o.code.toLowerCase().includes(searchKeyword));
+            if (!currentUser) {
+                tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-gray-500">Vui lòng đăng nhập để xem lịch sử.</td></tr>`;
+                return;
+            }
+
+            const userOrders = ordersList.filter(o => {
+                if (o.username !== currentUser.username) return false;
+                if (!searchKeyword) return true;
+                return o.playerId.toLowerCase().includes(searchKeyword) || o.code.toLowerCase().includes(searchKeyword) || o.packageName.toLowerCase().includes(searchKeyword);
+            });
 
             if (userOrders.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-gray-500">Chưa có đơn hàng nào được tạo.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-gray-500">Chưa có giao dịch nào thuộc về tài khoản của bạn.</td></tr>`;
                 return;
             }
 
@@ -546,7 +648,7 @@
                 tbody.innerHTML += `
                     <tr class="hover:bg-gray-800/30 transition">
                         <td class="p-4 font-mono text-yellow-400 font-bold">${o.code}</td>
-                        <td class="p-4 text-gray-300">ID: ${o.playerId} <br><span class="text-[10px] text-gray-500">(${o.username})</span></td>
+                        <td class="p-4 text-gray-300">ID: ${o.playerId}</td>
                         <td class="p-4">${o.packageName}</td>
                         <td class="p-4 font-semibold">${o.price}</td>
                         <td class="p-4 text-xs">${methodDisplay}</td>
