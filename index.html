@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nạp Thẻ Siêu Lời - Hệ Thống Nạp Game Uy Tín</title>
+    <title>Nạp Thẻ Siêu Lời - Hệ Thống Nạp Game Uy Tín & Quản Trị</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -29,21 +29,21 @@
                     <i class="fa-solid fa-bolt text-yellow-500"></i> NẠP THẺ SIÊU LỜI
                 </span>
             </a>
-            <nav class="hidden md:flex space-x-8 font-medium">
+            <nav class="hidden md:flex space-x-6 font-medium text-sm">
                 <a href="#home" class="hover:text-yellow-400 transition">Trang Chủ</a>
                 <a href="#packages" class="hover:text-yellow-400 transition">Gói Nạp Game</a>
                 <a href="#history" class="hover:text-yellow-400 transition">Lịch Sử Giao Dịch</a>
-                <a href="#support" class="hover:text-yellow-400 transition">Hỗ Trợ</a>
+                <a href="#admin" onclick="checkAdminAccess(event)" class="text-yellow-400 hover:text-yellow-300 transition font-bold flex items-center gap-1.5"><i class="fa-solid fa-shield-halved"></i> Quản Trị Admin</a>
             </nav>
-            <div>
-                <button onclick="openLoginModal()" class="bg-gradient-to-r from-yellow-500 to-amber-400 hover:from-yellow-400 hover:to-amber-300 text-gray-950 font-bold px-5 py-2.5 rounded-xl transition shadow-lg flex items-center gap-2 text-sm">
+            <div class="flex items-center gap-3">
+                <button onclick="openLoginModal()" class="bg-gradient-to-r from-yellow-500 to-amber-400 hover:from-yellow-400 hover:to-amber-300 text-gray-950 font-bold px-4 py-2 rounded-xl transition shadow-lg text-xs flex items-center gap-1.5">
                     <i class="fa-solid fa-user-circle"></i> Đăng Nhập
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- ================= PHẦN 1: TRANG CHỦ (RIÊNG BIỆT) ================= -->
+    <!-- ================= PHẦN 1: TRANG CHỦ ================= -->
     <section id="home" class="container mx-auto px-4 py-12 border-b border-gray-900">
         <div class="glow-banner bg-gradient-to-r from-violet-900 via-indigo-900 to-gray-900 rounded-3xl p-8 md:p-12 border border-yellow-500/30 relative overflow-hidden flex flex-col md:flex-row items-center justify-between">
             <div class="z-10 max-w-xl text-center md:text-left">
@@ -54,16 +54,14 @@
                     Nạp Game Siêu Tốc - Chiết Khấu Cực Sốc X2
                 </h1>
                 <p class="text-gray-300 mb-6 text-sm md:text-base leading-relaxed">
-                    Chuyên cung cấp gói nạp uy tín cho Free Fire, Liên Quân & FC Online. Giao dịch an toàn, bảo mật tuyệt đối, nhận Kim Cương / Quân Huy / FC ngay lập tức sau 30 giây!
+                    Hệ thống kiểm duyệt đơn tự động và thủ công bảo mật tuyệt đối. Nhận ngay Kim Cương, Quân Huy, FC chỉ sau vài phút xác nhận từ Admin!
                 </p>
                 <div class="flex flex-wrap justify-center md:justify-start gap-4">
-                    <a href="#packages" class="bg-yellow-400 hover:bg-yellow-300 text-gray-950 font-bold px-6 py-3 rounded-xl shadow-lg transition">
+                    <a href="#packages" class="bg-yellow-400 hover:bg-yellow-300 text-gray-950 font-bold px-6 py-3 rounded-xl shadow-lg transition text-sm">
                         <i class="fa-solid fa-gamepad mr-2"></i>Xem Gói Nạp Ngay
                     </a>
                 </div>
             </div>
-
-            <!-- Hoạt ảnh quảng cáo trang chủ -->
             <div class="mt-8 md:mt-0 z-10 flex flex-col items-center">
                 <div class="relative animate-float">
                     <div class="w-40 h-40 md:w-52 md:h-52 bg-gradient-to-tr from-yellow-500 to-amber-300 rounded-3xl p-1 shadow-2xl rotate-3">
@@ -78,254 +76,43 @@
         </div>
     </section>
 
-    <!-- ================= PHẦN 2: GÓI NẠP GAME (RIÊNG BIỆT) ================= -->
+    <!-- ================= PHẦN 2: GÓI NẠP GAME ================= -->
     <section id="packages" class="container mx-auto px-4 py-16 border-b border-gray-900">
         <div class="text-center mb-10">
             <span class="text-yellow-400 text-xs font-bold uppercase tracking-widest bg-yellow-500/10 px-3 py-1 rounded-full border border-yellow-500/20">Khu Vực Gói Nạp</span>
             <h2 class="text-3xl font-black mt-3 mb-2">CHỌN TỰA GAME VÀ MỆNH GIÁ</h2>
-            <p class="text-gray-400 text-sm">Hỗ trợ đa dạng mệnh giá từ nhỏ đến lớn cho mọi game thủ</p>
+            <p class="text-gray-400 text-sm">Bảng giá gói được cập nhật trực tiếp bởi hệ thống quản trị</p>
         </div>
 
         <!-- Tab chọn Game -->
         <div class="flex justify-center space-x-3 mb-10 overflow-x-auto pb-2">
-            <button onclick="switchGameTab('freefire')" id="tab-btn-freefire" class="game-tab px-6 py-3 rounded-2xl font-bold transition flex items-center gap-2 bg-yellow-400 text-gray-950 shadow-lg shadow-yellow-500/20">
+            <button onclick="switchGameTab('freefire')" id="tab-btn-freefire" class="game-tab px-6 py-3 rounded-2xl font-bold transition flex items-center gap-2 bg-yellow-400 text-gray-950 shadow-lg shadow-yellow-500/20 text-sm">
                 <i class="fa-solid fa-fire text-red-600"></i> Free Fire
             </button>
-            <button onclick="switchGameTab('lienquan')" id="tab-btn-lienquan" class="game-tab px-6 py-3 rounded-2xl font-bold transition flex items-center gap-2 bg-gray-900 text-gray-300 border border-gray-800 hover:border-gray-700">
+            <button onclick="switchGameTab('lienquan')" id="tab-btn-lienquan" class="game-tab px-6 py-3 rounded-2xl font-bold transition flex items-center gap-2 bg-gray-900 text-gray-300 border border-gray-800 text-sm">
                 <i class="fa-solid fa-shield-sword text-blue-500"></i> Liên Quân Mobile
             </button>
-            <button onclick="switchGameTab('fconline')" id="tab-btn-fconline" class="game-tab px-6 py-3 rounded-2xl font-bold transition flex items-center gap-2 bg-gray-900 text-gray-300 border border-gray-800 hover:border-gray-700">
+            <button onclick="switchGameTab('fconline')" id="tab-btn-fconline" class="game-tab px-6 py-3 rounded-2xl font-bold transition flex items-center gap-2 bg-gray-900 text-gray-300 border border-gray-800 text-sm">
                 <i class="fa-solid fa-futbol text-emerald-500"></i> FC Online
             </button>
         </div>
 
-        <!-- Danh sách Gói Free Fire -->
-        <div id="game-pane-freefire" class="game-pane grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <!-- Gói 1 -->
-            <div class="bg-gray-900 border border-gray-800 rounded-2xl p-5 hover:border-yellow-400/60 transition group relative shadow-lg flex flex-col justify-between">
-                <div>
-                    <span class="absolute top-3 right-3 bg-blue-500/20 text-blue-400 text-[10px] font-bold px-2.5 py-1 rounded-md">Phổ Biến</span>
-                    <div class="w-12 h-12 bg-yellow-500/10 rounded-xl flex items-center justify-center text-yellow-400 mb-4 group-hover:scale-110 transition">
-                        <i class="fa-solid fa-gem text-xl"></i>
-                    </div>
-                    <h3 class="font-bold text-lg mb-1">110 Kim Cương</h3>
-                    <p class="text-gray-400 text-xs mb-4">Gói nhỏ nạp nhanh chóng.</p>
-                </div>
-                <div>
-                    <div class="flex justify-between items-center mb-4 pt-4 border-t border-gray-800">
-                        <span class="text-gray-500 line-through text-xs">25.000đ</span>
-                        <span class="text-yellow-400 font-black text-xl">20.000đ</span>
-                    </div>
-                    <button onclick="openCheckoutModal('Free Fire: 110 Kim Cương', '20.000đ')" class="w-full bg-gray-800 hover:bg-yellow-400 hover:text-gray-950 font-bold py-2.5 rounded-xl transition text-sm">Nạp Ngay</button>
-                </div>
-            </div>
-            <!-- Gói 2 -->
-            <div class="bg-gray-900 border border-gray-800 rounded-2xl p-5 hover:border-yellow-400/60 transition group relative shadow-lg flex flex-col justify-between">
-                <div>
-                    <span class="absolute top-3 right-3 bg-red-500 text-white text-[10px] font-bold px-2.5 py-1 rounded-md">-20% Lời</span>
-                    <div class="w-12 h-12 bg-yellow-500/10 rounded-xl flex items-center justify-center text-yellow-400 mb-4 group-hover:scale-110 transition">
-                        <i class="fa-solid fa-gem text-xl"></i>
-                    </div>
-                    <h3 class="font-bold text-lg mb-1">420 Kim Cương</h3>
-                    <p class="text-gray-400 text-xs mb-4">Tặng kèm vé quay sự kiện độc quyền.</p>
-                </div>
-                <div>
-                    <div class="flex justify-between items-center mb-4 pt-4 border-t border-gray-800">
-                        <span class="text-gray-500 line-through text-xs">100.000đ</span>
-                        <span class="text-yellow-400 font-black text-xl">50.000đ</span>
-                    </div>
-                    <button onclick="openCheckoutModal('Free Fire: 420 Kim Cương', '50.000đ')" class="w-full bg-yellow-500 text-gray-950 hover:bg-yellow-400 font-bold py-2.5 rounded-xl transition text-sm shadow-md">Nạp Ngay</button>
-                </div>
-            </div>
-            <!-- Gói 3 -->
-            <div class="bg-gray-900 border border-gray-800 rounded-2xl p-5 hover:border-yellow-400/60 transition group relative shadow-lg flex flex-col justify-between">
-                <div>
-                    <span class="absolute top-3 right-3 bg-amber-500 text-gray-950 text-[10px] font-black px-2.5 py-1 rounded-md">HOT</span>
-                    <div class="w-12 h-12 bg-yellow-500/10 rounded-xl flex items-center justify-center text-yellow-400 mb-4 group-hover:scale-110 transition">
-                        <i class="fa-solid fa-crown text-xl"></i>
-                    </div>
-                    <h3 class="font-bold text-lg mb-1">1080 Kim Cương</h3>
-                    <p class="text-gray-400 text-xs mb-4">Nhân đôi giá trị tài khoản mới.</p>
-                </div>
-                <div>
-                    <div class="flex justify-between items-center mb-4 pt-4 border-t border-gray-800">
-                        <span class="text-gray-500 line-through text-xs">250.000đ</span>
-                        <span class="text-yellow-400 font-black text-xl">100.000đ</span>
-                    </div>
-                    <button onclick="openCheckoutModal('Free Fire: 1080 Kim Cương', '100.000đ')" class="w-full bg-gray-800 hover:bg-yellow-400 hover:text-gray-950 font-bold py-2.5 rounded-xl transition text-sm">Nạp Ngay</button>
-                </div>
-            </div>
-            <!-- Gói 4 -->
-            <div class="bg-gray-900 border border-gray-800 rounded-2xl p-5 hover:border-yellow-400/60 transition group relative shadow-lg flex flex-col justify-between">
-                <div>
-                    <span class="absolute top-3 right-3 bg-purple-500 text-white text-[10px] font-bold px-2.5 py-1 rounded-md">Siêu Lời</span>
-                    <div class="w-12 h-12 bg-yellow-500/10 rounded-xl flex items-center justify-center text-yellow-400 mb-4 group-hover:scale-110 transition">
-                        <i class="fa-solid fa-fire-flame-curved text-xl"></i>
-                    </div>
-                    <h3 class="font-bold text-lg mb-1">Thẻ Vô Cực + 2200 KC</h3>
-                    <p class="text-gray-400 text-xs mb-4">Mở toàn bộ phần thưởng mùa mới.</p>
-                </div>
-                <div>
-                    <div class="flex justify-between items-center mb-4 pt-4 border-t border-gray-800">
-                        <span class="text-gray-500 line-through text-xs">500.000đ</span>
-                        <span class="text-yellow-400 font-black text-xl">200.000đ</span>
-                    </div>
-                    <button onclick="openCheckoutModal('Free Fire: Thẻ Vô Cực + 2200 KC', '200.000đ')" class="w-full bg-gray-800 hover:bg-yellow-400 hover:text-gray-950 font-bold py-2.5 rounded-xl transition text-sm">Nạp Ngay</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Danh sách Gói Liên Quân (Ẩn mặc định) -->
-        <div id="game-pane-lienquan" class="game-pane grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 hidden">
-            <div class="bg-gray-900 border border-gray-800 rounded-2xl p-5 hover:border-yellow-400/60 transition group relative shadow-lg flex flex-col justify-between">
-                <div>
-                    <div class="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center text-blue-400 mb-4">
-                        <i class="fa-solid fa-coins text-xl"></i>
-                    </div>
-                    <h3 class="font-bold text-lg mb-1">90 Quân Huy</h3>
-                    <p class="text-gray-400 text-xs mb-4">Nạp nhanh tiết kiệm.</p>
-                </div>
-                <div>
-                    <div class="flex justify-between items-center mb-4 pt-4 border-t border-gray-800">
-                        <span class="text-gray-500 line-through text-xs">25.000đ</span>
-                        <span class="text-yellow-400 font-black text-xl">20.000đ</span>
-                    </div>
-                    <button onclick="openCheckoutModal('Liên Quân: 90 Quân Huy', '20.000đ')" class="w-full bg-gray-800 hover:bg-yellow-400 hover:text-gray-950 font-bold py-2.5 rounded-xl transition text-sm">Nạp Ngay</button>
-                </div>
-            </div>
-            <div class="bg-gray-900 border border-gray-800 rounded-2xl p-5 hover:border-yellow-400/60 transition group relative shadow-lg flex flex-col justify-between">
-                <div>
-                    <span class="absolute top-3 right-3 bg-red-500 text-white text-[10px] font-bold px-2.5 py-1 rounded-md">Phổ Biến</span>
-                    <div class="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center text-blue-400 mb-4">
-                        <i class="fa-solid fa-coins text-xl"></i>
-                    </div>
-                    <h3 class="font-bold text-lg mb-1">470 Quân Huy</h3>
-                    <p class="text-gray-400 text-xs mb-4">Tặng rương tướng ngẫu nhiên.</p>
-                </div>
-                <div>
-                    <div class="flex justify-between items-center mb-4 pt-4 border-t border-gray-800">
-                        <span class="text-gray-500 line-through text-xs">100.000đ</span>
-                        <span class="text-yellow-400 font-black text-xl">50.000đ</span>
-                    </div>
-                    <button onclick="openCheckoutModal('Liên Quân: 470 Quân Huy', '50.000đ')" class="w-full bg-yellow-500 text-gray-950 font-bold py-2.5 rounded-xl transition text-sm shadow-md">Nạp Ngay</button>
-                </div>
-            </div>
-            <div class="bg-gray-900 border border-gray-800 rounded-2xl p-5 hover:border-yellow-400/60 transition group relative shadow-lg flex flex-col justify-between">
-                <div>
-                    <div class="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center text-blue-400 mb-4">
-                        <i class="fa-solid fa-coins text-xl"></i>
-                    </div>
-                    <h3 class="font-bold text-lg mb-1">975 Quân Huy</h3>
-                    <p class="text-gray-400 text-xs mb-4">Đủ mua trang phục bậc S+.</p>
-                </div>
-                <div>
-                    <div class="flex justify-between items-center mb-4 pt-4 border-t border-gray-800">
-                        <span class="text-gray-500 line-through text-xs">200.000đ</span>
-                        <span class="text-yellow-400 font-black text-xl">100.000đ</span>
-                    </div>
-                    <button onclick="openCheckoutModal('Liên Quân: 975 Quân Huy', '100.000đ')" class="w-full bg-gray-800 hover:bg-yellow-400 hover:text-gray-950 font-bold py-2.5 rounded-xl transition text-sm">Nạp Ngay</button>
-                </div>
-            </div>
-            <div class="bg-gray-900 border border-gray-800 rounded-2xl p-5 hover:border-yellow-400/60 transition group relative shadow-lg flex flex-col justify-between">
-                <div>
-                    <span class="absolute top-3 right-3 bg-purple-500 text-white text-[10px] font-bold px-2.5 py-1 rounded-md">VIP Max</span>
-                    <div class="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center text-blue-400 mb-4">
-                        <i class="fa-solid fa-crown text-xl"></i>
-                    </div>
-                    <h3 class="font-bold text-lg mb-1">2020 Quân Huy</h3>
-                    <p class="text-gray-400 text-xs mb-4">Sở hữu tướng và skin giới hạn.</p>
-                </div>
-                <div>
-                    <div class="flex justify-between items-center mb-4 pt-4 border-t border-gray-800">
-                        <span class="text-gray-500 line-through text-xs">400.000đ</span>
-                        <span class="text-yellow-400 font-black text-xl">200.000đ</span>
-                    </div>
-                    <button onclick="openCheckoutModal('Liên Quân: 2020 Quân Huy', '200.000đ')" class="w-full bg-gray-800 hover:bg-yellow-400 hover:text-gray-950 font-bold py-2.5 rounded-xl transition text-sm">Nạp Ngay</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Danh sách Gói FC Online (Ẩn mặc định) -->
-        <div id="game-pane-fconline" class="game-pane grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 hidden">
-            <div class="bg-gray-900 border border-gray-800 rounded-2xl p-5 hover:border-yellow-400/60 transition group relative shadow-lg flex flex-col justify-between">
-                <div>
-                    <div class="w-12 h-12 bg-emerald-500/10 rounded-xl flex items-center justify-center text-emerald-400 mb-4">
-                        <i class="fa-solid fa-futbol text-xl"></i>
-                    </div>
-                    <h3 class="font-bold text-lg mb-1">120 FC</h3>
-                    <p class="text-gray-400 text-xs mb-4">Mở thẻ mùa giải mới.</p>
-                </div>
-                <div>
-                    <div class="flex justify-between items-center mb-4 pt-4 border-t border-gray-800">
-                        <span class="text-gray-500 line-through text-xs">100.000đ</span>
-                        <span class="text-yellow-400 font-black text-xl">50.000đ</span>
-                    </div>
-                    <button onclick="openCheckoutModal('FC Online: 120 FC', '50.000đ')" class="w-full bg-gray-800 hover:bg-yellow-400 hover:text-gray-950 font-bold py-2.5 rounded-xl transition text-sm">Nạp Ngay</button>
-                </div>
-            </div>
-            <div class="bg-gray-900 border border-gray-800 rounded-2xl p-5 hover:border-yellow-400/60 transition group relative shadow-lg flex flex-col justify-between">
-                <div>
-                    <span class="absolute top-3 right-3 bg-red-500 text-white text-[10px] font-bold px-2.5 py-1 rounded-md">HOT</span>
-                    <div class="w-12 h-12 bg-emerald-500/10 rounded-xl flex items-center justify-center text-emerald-400 mb-4">
-                        <i class="fa-solid fa-futbol text-xl"></i>
-                    </div>
-                    <h3 class="font-bold text-lg mb-1">260 FC</h3>
-                    <p class="text-gray-400 text-xs mb-4">Tích lũy BP cực khủng.</p>
-                </div>
-                <div>
-                    <div class="flex justify-between items-center mb-4 pt-4 border-t border-gray-800">
-                        <span class="text-gray-500 line-through text-xs">200.000đ</span>
-                        <span class="text-yellow-400 font-black text-xl">100.000đ</span>
-                    </div>
-                    <button onclick="openCheckoutModal('FC Online: 260 FC', '100.000đ')" class="w-full bg-yellow-500 text-gray-950 font-bold py-2.5 rounded-xl transition text-sm shadow-md">Nạp Ngay</button>
-                </div>
-            </div>
-            <div class="bg-gray-900 border border-gray-800 rounded-2xl p-5 hover:border-yellow-400/60 transition group relative shadow-lg flex flex-col justify-between">
-                <div>
-                    <div class="w-12 h-12 bg-emerald-500/10 rounded-xl flex items-center justify-center text-emerald-400 mb-4">
-                        <i class="fa-solid fa-futbol text-xl"></i>
-                    </div>
-                    <h3 class="font-bold text-lg mb-1">550 FC</h3>
-                    <p class="text-gray-400 text-xs mb-4">Xây dựng đội hình hoàng gia.</p>
-                </div>
-                <div>
-                    <div class="flex justify-between items-center mb-4 pt-4 border-t border-gray-800">
-                        <span class="text-gray-500 line-through text-xs">400.000đ</span>
-                        <span class="text-yellow-400 font-black text-xl">200.000đ</span>
-                    </div>
-                    <button onclick="openCheckoutModal('FC Online: 550 FC', '200.000đ')" class="w-full bg-gray-800 hover:bg-yellow-400 hover:text-gray-950 font-bold py-2.5 rounded-xl transition text-sm">Nạp Ngay</button>
-                </div>
-            </div>
-            <div class="bg-gray-900 border border-gray-800 rounded-2xl p-5 hover:border-yellow-400/60 transition group relative shadow-lg flex flex-col justify-between">
-                <div>
-                    <span class="absolute top-3 right-3 bg-purple-500 text-white text-[10px] font-bold px-2.5 py-1 rounded-md">Siêu Cấp</span>
-                    <div class="w-12 h-12 bg-emerald-500/10 rounded-xl flex items-center justify-center text-emerald-400 mb-4">
-                        <i class="fa-solid fa-trophy text-xl"></i>
-                    </div>
-                    <h3 class="font-bold text-lg mb-1">1200 FC</h3>
-                    <p class="text-gray-400 text-xs mb-4">Sở hữu trọn bộ gói VIP lớn.</p>
-                </div>
-                <div>
-                    <div class="flex justify-between items-center mb-4 pt-4 border-t border-gray-800">
-                        <span class="text-gray-500 line-through text-xs">1.000.000đ</span>
-                        <span class="text-yellow-400 font-black text-xl">500.000đ</span>
-                    </div>
-                    <button onclick="openCheckoutModal('FC Online: 1200 FC', '500.000đ')" class="w-full bg-gray-800 hover:bg-yellow-400 hover:text-gray-950 font-bold py-2.5 rounded-xl transition text-sm">Nạp Ngay</button>
-                </div>
-            </div>
+        <!-- Danh sách Gói (Render tự động từ JS) -->
+        <div id="packages-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Được render động qua JavaScript để đồng bộ việc Admin sửa giá -->
         </div>
     </section>
 
-    <!-- ================= PHẦN 3: LỊCH SỬ GIAO DỊCH (RIÊNG BIỆT) ================= -->
+    <!-- ================= PHẦN 3: LỊCH SỬ GIAO DỊCH (NGƯỜI DÙNG) ================= -->
     <section id="history" class="container mx-auto px-4 py-16 border-b border-gray-900">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
             <div>
                 <span class="text-yellow-400 text-xs font-bold uppercase tracking-widest bg-yellow-500/10 px-3 py-1 rounded-full border border-yellow-500/20">Kiểm Tra Đơn</span>
-                <h2 class="text-2xl font-black mt-2">Lịch Sử Giao Dịch Gần Đây</h2>
-                <p class="text-gray-400 text-xs mt-1">Theo dõi tình trạng đơn mua gói nạp đã được xử lý xong chưa</p>
+                <h2 class="text-2xl font-black mt-2">Lịch Sử Giao Dịch Của Bạn</h2>
+                <p class="text-gray-400 text-xs mt-1">Đơn mua gói nạp sẽ tự động cập nhật trạng thái khi Admin xác nhận</p>
             </div>
             <div class="w-full md:w-auto">
-                <input type="text" placeholder="Tra cứu mã đơn hoặc ID..." class="bg-gray-900 border border-gray-800 rounded-xl px-4 py-2.5 text-sm w-full md:w-72 focus:outline-none focus:border-yellow-400 transition">
+                <input type="text" id="searchHistoryInput" onkeyup="renderUserHistory()" placeholder="Tra cứu mã đơn hoặc ID..." class="bg-gray-900 border border-gray-800 rounded-xl px-4 py-2.5 text-sm w-full md:w-72 focus:outline-none focus:border-yellow-400 transition">
             </div>
         </div>
 
@@ -335,32 +122,95 @@
                     <thead>
                         <tr class="bg-gray-800/60 text-gray-400 text-xs uppercase tracking-wider">
                             <th class="p-4">Mã Đơn</th>
-                            <th class="p-4">Tài Khoản / ID</th>
+                            <th class="p-4">ID / Tài Khoản</th>
                             <th class="p-4">Gói Nạp</th>
                             <th class="p-4">Số Tiền</th>
                             <th class="p-4">Hình Thức</th>
                             <th class="p-4">Trạng Thái</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-gray-800/80 text-sm">
-                        <tr class="hover:bg-gray-800/30 transition">
-                            <td class="p-4 font-mono text-yellow-400 font-bold">#DH98231</td>
-                            <td class="p-4 text-gray-300">1204958321</td>
-                            <td class="p-4">Gói 1080 Kim Cương (Free Fire)</td>
-                            <td class="p-4 font-semibold">100.000đ</td>
-                            <td class="p-4 text-gray-400 text-xs">Chuyển khoản</td>
-                            <td class="p-4"><span class="bg-green-500/10 text-green-400 border border-green-500/20 px-3 py-1 rounded-full text-xs font-bold inline-flex items-center gap-1.5"><i class="fa-solid fa-check-circle"></i> Thành công</span></td>
-                        </tr>
-                        <tr class="hover:bg-gray-800/30 transition">
-                            <td class="p-4 font-mono text-yellow-400 font-bold">#DH98230</td>
-                            <td class="p-4 text-gray-300">882391024</td>
-                            <td class="p-4">Gói 470 Quân Huy (Liên Quân)</td>
-                            <td class="p-4 font-semibold">50.000đ</td>
-                            <td class="p-4 text-gray-400 text-xs">Thẻ cào (Viettel)</td>
-                            <td class="p-4"><span class="bg-amber-500/10 text-amber-400 border border-amber-500/20 px-3 py-1 rounded-full text-xs font-bold inline-flex items-center gap-1.5"><i class="fa-solid fa-clock-rotate-left"></i> Đang xử lý</span></td>
-                        </tr>
+                    <tbody id="userHistoryTableBody" class="divide-y divide-gray-800/80 text-sm">
+                        <!-- Dữ liệu render động -->
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= PHẦN 4: TRANG QUẢN TRỊ ADMIN (RIÊNG BIỆT) ================= -->
+    <section id="admin" class="container mx-auto px-4 py-16 hidden">
+        <div class="bg-gray-900 border border-yellow-500/30 rounded-3xl p-6 md:p-8 shadow-2xl">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center pb-6 mb-8 border-b border-gray-800 gap-4">
+                <div>
+                    <span class="bg-red-500/20 text-red-400 border border-red-500/30 text-xs font-bold px-3 py-1 rounded-full uppercase">Khu Vực Đặc Quyền</span>
+                    <h2 class="text-3xl font-black mt-2 flex items-center gap-2"><i class="fa-solid fa-gauge-high text-yellow-400"></i> Bảng Điều Khiển Admin</h2>
+                    <p class="text-gray-400 text-xs mt-1">Duyệt đơn hàng, kiểm tra doanh thu và tùy chỉnh giá trị gói nạp</p>
+                </div>
+                <button onclick="logoutAdmin()" class="bg-red-500/20 hover:bg-red-500/30 text-red-400 border border-red-500/30 font-bold px-4 py-2 rounded-xl text-xs transition flex items-center gap-2">
+                    <i class="fa-solid fa-right-from-bracket"></i> Thoát Admin
+                </button>
+            </div>
+
+            <!-- Thống kê tổng quan Admin -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+                <div class="bg-gray-950 p-5 rounded-2xl border border-gray-800 flex items-center justify-between">
+                    <div>
+                        <p class="text-xs text-gray-400 font-semibold">Tổng Đơn Hàng</p>
+                        <h3 id="statTotalOrders" class="text-2xl font-black text-white mt-1">0</h3>
+                    </div>
+                    <div class="w-12 h-12 bg-blue-500/10 text-blue-400 rounded-xl flex items-center justify-center text-xl"><i class="fa-solid fa-receipt"></i></div>
+                </div>
+                <div class="bg-gray-950 p-5 rounded-2xl border border-gray-800 flex items-center justify-between">
+                    <div>
+                        <p class="text-xs text-gray-400 font-semibold">Đơn Đang Chờ Duyệt</p>
+                        <h3 id="statPendingOrders" class="text-2xl font-black text-yellow-400 mt-1">0</h3>
+                    </div>
+                    <div class="w-12 h-12 bg-yellow-500/10 text-yellow-400 rounded-xl flex items-center justify-center text-xl"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                </div>
+                <div class="bg-gray-950 p-5 rounded-2xl border border-gray-800 flex items-center justify-between">
+                    <div>
+                        <p class="text-xs text-gray-400 font-semibold">Doanh Thu Thành Công</p>
+                        <h3 id="statTotalRevenue" class="text-2xl font-black text-green-400 mt-1">0đ</h3>
+                    </div>
+                    <div class="w-12 h-12 bg-green-500/10 text-green-400 rounded-xl flex items-center justify-center text-xl"><i class="fa-solid fa-wallet"></i></div>
+                </div>
+            </div>
+
+            <!-- Tabs con của Admin -->
+            <div class="flex space-x-3 mb-6 border-b border-gray-800 pb-3">
+                <button onclick="switchAdminTab('orders')" id="admin-tab-btn-orders" class="px-5 py-2.5 rounded-xl font-bold text-sm transition bg-yellow-400 text-gray-950">Quản Lý Đơn Hàng</button>
+                <button onclick="switchAdminTab('packages')" id="admin-tab-btn-packages" class="px-5 py-2.5 rounded-xl font-bold text-sm transition bg-gray-950 text-gray-400 hover:text-white">Chỉnh Sửa Giá Gói Nạp</button>
+            </div>
+
+            <!-- TAB 1: QUẢN LÝ ĐƠN HÀNG -->
+            <div id="admin-pane-orders" class="admin-pane">
+                <div class="bg-gray-950 rounded-2xl border border-gray-800 overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-gray-900 text-gray-400 text-xs uppercase tracking-wider">
+                                    <th class="p-4">Mã Đơn</th>
+                                    <th class="p-4">ID Người Chơi</th>
+                                    <th class="p-4">Gói Nạp</th>
+                                    <th class="p-4">Số Tiền</th>
+                                    <th class="p-4">Hình Thức</th>
+                                    <th class="p-4">Trạng Thái</th>
+                                    <th class="p-4 text-center">Hành Động Admin</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminOrdersTableBody" class="divide-y divide-gray-800 text-sm">
+                                <!-- Render động từ JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: CHỈNH SỬA GIÁ GÓI NẠP -->
+            <div id="admin-pane-packages" class="admin-pane hidden">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="adminPackageEditContainer">
+                    <!-- Render động các thẻ sửa giá gói nạp -->
+                </div>
             </div>
         </div>
     </section>
@@ -390,11 +240,11 @@
                     <i class="fa-solid fa-user-lock"></i>
                 </div>
                 <h3 class="text-2xl font-black text-white">ĐĂNG NHẬP HỆ THỐNG</h3>
-                <p class="text-gray-400 text-xs mt-1">Đăng nhập để xem lịch sử cá nhân hóa</p>
+                <p class="text-gray-400 text-xs mt-1">Nhập tài khoản để lưu lịch sử giao dịch cá nhân</p>
             </div>
             <form onsubmit="handleLoginSubmit(event)" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-semibold text-gray-300 mb-1">Tài khoản / Số điện thoại</label>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1">Số điện thoại / Tài khoản</label>
                     <input type="text" required class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400 text-sm transition" placeholder="Nhập số điện thoại...">
                 </div>
                 <div>
@@ -408,7 +258,7 @@
         </div>
     </div>
 
-    <!-- MODAL THANH TOÁN (YÊU CẦU ID + CHỌN HÌNH THỨC NẠP + THẺ CÀO) -->
+    <!-- MODAL THANH TOÁN (NẠP THẺ HOẶC CHUYỂN KHOẢN) -->
     <div id="checkoutModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
         <div class="bg-gray-900 border border-gray-800 w-full max-w-lg p-8 rounded-3xl shadow-2xl relative transform scale-95 transition-transform duration-300 max-h-[90vh] overflow-y-auto" id="checkoutModalContent">
             <button onclick="closeCheckoutModal()" class="absolute top-5 right-5 text-gray-400 hover:text-white text-xl w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center transition">
@@ -421,25 +271,23 @@
             </div>
 
             <form onsubmit="handleCheckoutSubmit(event)" class="space-y-4">
-                <!-- ID hoặc Tên đăng nhập người chơi -->
                 <div>
                     <label class="block text-xs font-semibold text-gray-300 mb-1">ID Nhân Vật / Tên Đăng Nhập Game <span class="text-red-500">*</span></label>
-                    <input type="text" id="playerIdInput" required class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400 text-sm transition" placeholder="Nhập ID trong game của bạn...">
+                    <input type="text" id="playerIdInput" required class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400 text-sm transition" placeholder="Nhập ID trong game...">
                 </div>
 
-                <!-- Chọn hình thức thanh toán -->
                 <div>
                     <label class="block text-xs font-semibold text-gray-300 mb-2">Chọn Hình Thức Thanh Toán <span class="text-red-500">*</span></label>
                     <div class="grid grid-cols-2 gap-3">
                         <label class="cursor-pointer border border-gray-800 bg-gray-950 rounded-xl p-3 flex items-center gap-3 hover:border-yellow-400 transition select-none">
-                            <input type="radio" name="paymentMethod" value="banking" checked onchange="togglePaymentMethod()" class="accent-yellow-400">
+                            <input type="radio" name="paymentMethod" value="Chuyển khoản" checked onchange="togglePaymentMethod()" class="accent-yellow-400">
                             <div>
                                 <p class="text-xs font-bold text-white">Chuyển Khoản QR</p>
-                                <p class="text-[10px] text-gray-400">Tự động 100%</p>
+                                <p class="text-[10px] text-gray-400">Duyệt tự động nhanh</p>
                             </div>
                         </label>
                         <label class="cursor-pointer border border-gray-800 bg-gray-950 rounded-xl p-3 flex items-center gap-3 hover:border-yellow-400 transition select-none">
-                            <input type="radio" name="paymentMethod" value="scratchcard" onchange="togglePaymentMethod()" class="accent-yellow-400">
+                            <input type="radio" name="paymentMethod" value="Thẻ cào" onchange="togglePaymentMethod()" class="accent-yellow-400">
                             <div>
                                 <p class="text-xs font-bold text-white">Nạp Thẻ Cào</p>
                                 <p class="text-[10px] text-gray-400">Viettel, Vina, Mobi</p>
@@ -448,29 +296,19 @@
                     </div>
                 </div>
 
-                <!-- Khung cấu hình riêng cho Thẻ Cào (Ẩn/Hiện theo lựa chọn) -->
+                <!-- Thẻ cào section -->
                 <div id="scratchCardSection" class="hidden space-y-3 bg-gray-950/60 p-4 rounded-2xl border border-gray-800">
                     <div>
                         <label class="block text-xs font-semibold text-gray-300 mb-1">Chọn Nhà Mạng</label>
                         <select id="cardTelco" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-yellow-400 text-sm">
-                            <option value="viettel">Viettel</option>
-                            <option value="vinaphone">Vinaphone</option>
-                            <option value="mobifone">Mobifone</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-300 mb-1">Chọn Mệnh Giá Thẻ (Khớp gói nạp)</label>
-                        <select id="cardAmount" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-yellow-400 text-sm">
-                            <option value="20000">20.000đ</option>
-                            <option value="50000">50.000đ</option>
-                            <option value="100000">100.000đ</option>
-                            <option value="200000">200.000đ</option>
-                            <option value="500000">500.000đ</option>
+                            <option value="Viettel">Viettel</option>
+                            <option value="Vinaphone">Vinaphone</option>
+                            <option value="Mobifone">Mobifone</option>
                         </select>
                     </div>
                     <div>
                         <label class="block text-xs font-semibold text-gray-300 mb-1">Số Serial Thẻ</label>
-                        <input type="text" id="cardSerial" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-yellow-400 text-sm" placeholder="Nhập số seri in trên thẻ...">
+                        <input type="text" id="cardSerial" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-yellow-400 text-sm" placeholder="Nhập số seri...">
                     </div>
                     <div>
                         <label class="block text-xs font-semibold text-gray-300 mb-1">Mã Số Thẻ (PIN)</label>
@@ -478,53 +316,244 @@
                     </div>
                 </div>
 
-                <!-- Khung thông tin chuyển khoản (Mặc định) -->
+                <!-- Chuyển khoản section -->
                 <div id="bankingSection" class="p-4 rounded-2xl bg-yellow-500/5 border border-yellow-500/20 text-center">
-                    <p class="text-xs text-yellow-300 font-semibold mb-1">HƯỚNG DẪN CHUYỂN KHOẢN NHANH</p>
-                    <p class="text-xs text-gray-300">Quét mã QR hoặc chuyển khoản qua STK: <b class="text-white">1903xxxxxx</b> (Techcombank) với nội dung cú pháp: <b class="text-yellow-400">NAPGAME [ID_CỦA_BẠN]</b></p>
+                    <p class="text-xs text-yellow-300 font-semibold mb-1">THÔNG TIN CHUYỂN KHOẢN</p>
+                    <p class="text-xs text-gray-300">STK: <b class="text-white">1903xxxxxx</b> (Techcombank) - Chủ TK: ADMIN<br>Nội dung: <b class="text-yellow-400">NAPGAME [ID_CỦA_BẠN]</b></p>
                 </div>
 
                 <button type="submit" class="w-full bg-yellow-400 hover:bg-yellow-300 text-gray-950 font-black py-3 rounded-xl shadow-lg transition text-sm">
-                    Xác Nhận Tạo Đơn Nạp
+                    Gửi Đơn Nạp Cho Admin
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- JAVASCRIPT XỬ LÝ GIAO DIỆN VÀ MODAL -->
+    <!-- JAVASCRIPT XỬ LÝ TOÀN BỘ HỆ THỐNG -->
     <script>
-        // Chuyển Tab danh mục game riêng biệt
+        // Dữ liệu mẫu các gói nạp (Có thể sửa trực tiếp bởi Admin)
+        let packagesData = JSON.parse(localStorage.getItem('packagesData')) || {
+            freefire: [
+                { id: 'ff1', name: '110 Kim Cương', desc: 'Gói nhỏ nạp nhanh chóng.', oldPrice: '25.000đ', price: '20.000đ', tag: 'Phổ Biến', icon: 'fa-gem' },
+                { id: 'ff2', name: '420 Kim Cương', desc: 'Tặng kèm vé quay sự kiện.', oldPrice: '100.000đ', price: '50.000đ', tag: '-20% Lời', icon: 'fa-gem' },
+                { id: 'ff3', name: '1080 Kim Cương', desc: 'Nhân đôi giá trị tài khoản.', oldPrice: '250.000đ', price: '100.000đ', tag: 'HOT', icon: 'fa-crown' },
+                { id: 'ff4', name: 'Thẻ Vô Cực + 2200 KC', desc: 'Mở toàn bộ phần thưởng mùa.', oldPrice: '500.000đ', price: '200.000đ', tag: 'Siêu Lời', icon: 'fa-fire-flame-curved' }
+            ],
+            lienquan: [
+                { id: 'lq1', name: '90 Quân Huy', desc: 'Nạp nhanh tiết kiệm.', oldPrice: '25.000đ', price: '20.000đ', tag: 'Mới', icon: 'fa-coins' },
+                { id: 'lq2', name: '470 Quân Huy', desc: 'Tặng rương tướng ngẫu nhiên.', oldPrice: '100.000đ', price: '50.000đ', tag: 'Phổ Biến', icon: 'fa-coins' },
+                { id: 'lq3', name: '975 Quân Huy', desc: 'Đủ mua trang phục bậc S+.', oldPrice: '200.000đ', price: '100.000đ', tag: 'HOT', icon: 'fa-coins' },
+                { id: 'lq4', name: '2020 Quân Huy', desc: 'Sở hữu tướng & skin giới hạn.', oldPrice: '400.000đ', price: '200.000đ', tag: 'VIP Max', icon: 'fa-crown' }
+            ],
+            fconline: [
+                { id: 'fc1', name: '120 FC', desc: 'Mở thẻ mùa giải mới.', oldPrice: '100.000đ', price: '50.000đ', tag: 'Mới', icon: 'fa-futbol' },
+                { id: 'fc2', name: '260 FC', desc: 'Tích lũy BP cực khủng.', oldPrice: '200.000đ', price: '100.000đ', tag: 'HOT', icon: 'fa-futbol' },
+                { id: 'fc3', name: '550 FC', desc: 'Xây dựng đội hình hoàng gia.', oldPrice: '400.000đ', price: '200.000đ', tag: 'VIP', icon: 'fa-futbol' },
+                { id: 'fc4', name: '1200 FC', desc: 'Trọn bộ gói ưu đãi lớn.', oldPrice: '1.000.000đ', price: '500.000đ', tag: 'Siêu Cấp', icon: 'fa-trophy' }
+            ]
+        };
+
+        // Dữ liệu danh sách đơn hàng lưu trong localStorage
+        let orders = JSON.parse(localStorage.getItem('orders')) || [
+            { code: '#DH98231', playerId: '1204958321', packageName: 'Gói 1080 Kim Cương (Free Fire)', price: '100.000đ', method: 'Chuyển khoản', status: 'Thành công' },
+            { code: '#DH98230', playerId: '882391024', packageName: 'Gói 470 Quân Huy (Liên Quân)', price: '50.000đ', method: 'Thẻ cào (Viettel)', status: 'Đang xử lý' }
+        ];
+
+        let currentActiveGameTab = 'freefire';
+
+        // Khởi chạy khi tải trang
+        window.onload = function() {
+            renderPackages(currentActiveGameTab);
+            renderUserHistory();
+            renderAdminData();
+        };
+
+        // Chuyển tab game trang chủ
         function switchGameTab(game) {
-            document.querySelectorAll('.game-pane').forEach(el => el.classList.add('hidden'));
+            currentActiveGameTab = game;
             document.querySelectorAll('.game-tab').forEach(btn => {
-                btn.className = "game-tab px-6 py-3 rounded-2xl font-bold transition flex items-center gap-2 bg-gray-900 text-gray-300 border border-gray-800 hover:border-gray-700";
+                btn.className = "game-tab px-6 py-3 rounded-2xl font-bold transition flex items-center gap-2 bg-gray-900 text-gray-300 border border-gray-800 text-sm";
+            });
+            document.getElementById('tab-btn-' + game).className = "game-tab px-6 py-3 rounded-2xl font-bold transition flex items-center gap-2 bg-yellow-400 text-gray-950 shadow-lg shadow-yellow-500/20 text-sm";
+            renderPackages(game);
+        }
+
+        // Render các gói nạp từ dữ liệu
+        function renderPackages(game) {
+            const container = document.getElementById('packages-container');
+            container.innerHTML = '';
+            const list = packagesData[game];
+
+            list.forEach(pkg => {
+                container.innerHTML += `
+                    <div class="bg-gray-900 border border-gray-800 rounded-2xl p-5 hover:border-yellow-400/60 transition group relative shadow-lg flex flex-col justify-between">
+                        <div>
+                            <span class="absolute top-3 right-3 bg-red-500/20 text-red-400 text-[10px] font-bold px-2.5 py-1 rounded-md">${pkg.tag}</span>
+                            <div class="w-12 h-12 bg-yellow-500/10 rounded-xl flex items-center justify-center text-yellow-400 mb-4 group-hover:scale-110 transition">
+                                <i class="fa-solid ${pkg.icon} text-xl"></i>
+                            </div>
+                            <h3 class="font-bold text-lg mb-1">${pkg.name}</h3>
+                            <p class="text-gray-400 text-xs mb-4">${pkg.desc}</p>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-center mb-4 pt-4 border-t border-gray-800">
+                                <span class="text-gray-500 line-through text-xs">${pkg.oldPrice}</span>
+                                <span class="text-yellow-400 font-black text-xl">${pkg.price}</span>
+                            </div>
+                            <button onclick="openCheckoutModal('${pkg.name} (${game.toUpperCase()})', '${pkg.price}')" class="w-full bg-yellow-400 hover:bg-yellow-300 text-gray-950 font-bold py-2.5 rounded-xl transition text-sm shadow-md">Nạp Ngay</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Render Lịch sử đơn hàng của User
+        function renderUserHistory() {
+            const tbody = document.getElementById('userHistoryTableBody');
+            const searchKeyword = document.getElementById('searchHistoryInput').value.toLowerCase();
+            tbody.innerHTML = '';
+
+            const filtered = orders.filter(o => o.code.toLowerCase().includes(searchKeyword) || o.playerId.toLowerCase().includes(searchKeyword));
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-gray-500">Không tìm thấy đơn hàng nào phù hợp.</td></tr>`;
+                return;
+            }
+
+            filtered.forEach(o => {
+                let badge = '';
+                if(o.status === 'Thành công') badge = `<span class="bg-green-500/10 text-green-400 border border-green-500/20 px-3 py-1 rounded-full text-xs font-bold inline-flex items-center gap-1.5"><i class="fa-solid fa-check-circle"></i> Thành công</span>`;
+                else if(o.status === 'Đang xử lý') badge = `<span class="bg-amber-500/10 text-amber-400 border border-amber-500/20 px-3 py-1 rounded-full text-xs font-bold inline-flex items-center gap-1.5"><i class="fa-solid fa-clock-rotate-left"></i> Đang xử lý</span>`;
+                else badge = `<span class="bg-red-500/10 text-red-400 border border-red-500/20 px-3 py-1 rounded-full text-xs font-bold inline-flex items-center gap-1.5"><i class="fa-solid fa-xmark-circle"></i> Đã hủy</span>`;
+
+                tbody.innerHTML += `
+                    <tr class="hover:bg-gray-800/30 transition">
+                        <td class="p-4 font-mono text-yellow-400 font-bold">${o.code}</td>
+                        <td class="p-4 text-gray-300">${o.playerId}</td>
+                        <td class="p-4">${o.packageName}</td>
+                        <td class="p-4 font-semibold">${o.price}</td>
+                        <td class="p-4 text-gray-400 text-xs">${o.method}</td>
+                        <td class="p-4">${badge}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        // --- HỆ THỐNG ADMIN & BẢNG ĐIỀU KHIỂN ---
+        function checkAdminAccess(e) {
+            e.preventDefault();
+            const pass = prompt("Vui lòng nhập mật khẩu quản trị Admin (Mật khẩu mặc định: admin123):");
+            if (pass === "admin123") {
+                document.getElementById('admin').classList.remove('hidden');
+                window.location.hash = '#admin';
+                renderAdminData();
+            } else if (pass !== null) {
+                alert("Mật khẩu không chính xác!");
+            }
+        }
+
+        function logoutAdmin() {
+            document.getElementById('admin').classList.add('hidden');
+            window.location.hash = '#home';
+        }
+
+        function switchAdminTab(tab) {
+            document.querySelectorAll('.admin-pane').forEach(el => el.classList.add('hidden'));
+            document.getElementById('admin-tab-btn-orders').className = "px-5 py-2.5 rounded-xl font-bold text-sm transition bg-gray-950 text-gray-400 hover:text-white";
+            document.getElementById('admin-tab-btn-packages').className = "px-5 py-2.5 rounded-xl font-bold text-sm transition bg-gray-950 text-gray-400 hover:text-white";
+
+            document.getElementById('admin-pane-' + tab).classList.remove('hidden');
+            document.getElementById('admin-tab-btn-' + tab).className = "px-5 py-2.5 rounded-xl font-bold text-sm transition bg-yellow-400 text-gray-950";
+        }
+
+        function renderAdminData() {
+            // Thống kê
+            document.getElementById('statTotalOrders').innerText = orders.length;
+            const pendingCount = orders.filter(o => o.status === 'Đang xử lý').length;
+            document.getElementById('statPendingOrders').innerText = pendingCount;
+
+            const totalRev = orders.filter(o => o.status === 'Thành công').reduce((acc, curr) => {
+                let num = parseInt(curr.price.replace(/\D/g, '')) || 0;
+                return acc + num;
+            }, 0);
+            document.getElementById('statTotalRevenue').innerText = totalRev.toLocaleString('vi-VN') + 'đ';
+
+            // Render bảng đơn hàng cho admin duyệt
+            const adminTbody = document.getElementById('adminOrdersTableBody');
+            adminTbody.innerHTML = '';
+            orders.forEach((o, index) => {
+                let badge = '';
+                if(o.status === 'Thành công') badge = `<span class="text-green-400 font-bold">Thành công</span>`;
+                else if(o.status === 'Đang xử lý') badge = `<span class="text-yellow-400 font-bold">Đang xử lý</span>`;
+                else badge = `<span class="text-red-400 font-bold">Đã hủy</span>`;
+
+                adminTbody.innerHTML += `
+                    <tr class="hover:bg-gray-900 transition">
+                        <td class="p-4 font-mono text-yellow-400 font-bold">${o.code}</td>
+                        <td class="p-4 text-gray-300">${o.playerId}</td>
+                        <td class="p-4">${o.packageName}</td>
+                        <td class="p-4 font-semibold">${o.price}</td>
+                        <td class="p-4 text-gray-400 text-xs">${o.method}</td>
+                        <td class="p-4">${badge}</td>
+                        <td class="p-4 text-center space-x-2">
+                            <button onclick="updateOrderStatus(${index}, 'Thành công')" class="bg-green-500/20 hover:bg-green-500/30 text-green-400 px-3 py-1.5 rounded-lg text-xs font-bold transition">Xác Nhận</button>
+                            <button onclick="updateOrderStatus(${index}, 'Đã hủy')" class="bg-red-500/20 hover:bg-red-500/30 text-red-400 px-3 py-1.5 rounded-lg text-xs font-bold transition">Hủy Đơn</button>
+                        </td>
+                    </tr>
+                `;
             });
 
-            document.getElementById('game-pane-' + game).classList.remove('hidden');
-            const activeBtn = document.getElementById('tab-btn-' + game);
-            activeBtn.className = "game-tab px-6 py-3 rounded-2xl font-bold transition flex items-center gap-2 bg-yellow-400 text-gray-950 shadow-lg shadow-yellow-500/20";
+            // Render form chỉnh sửa giá gói nạp cho admin
+            const editContainer = document.getElementById('adminPackageEditContainer');
+            editContainer.innerHTML = '';
+            for (let gameKey in packagesData) {
+                packagesData[gameKey].forEach((pkg, pkgIndex) => {
+                    editContainer.innerHTML += `
+                        <div class="bg-gray-950 p-4 rounded-2xl border border-gray-800 flex flex-col justify-between space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs uppercase bg-gray-900 px-2.5 py-1 rounded text-yellow-400 font-bold">${gameKey}</span>
+                                <h4 class="font-bold text-white text-sm">${pkg.name}</h4>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div>
+                                    <label class="block text-[10px] text-gray-400 mb-1">Giá Gốc</label>
+                                    <input type="text" id="oldPrice_${gameKey}_${pkgIndex}" value="${pkg.oldPrice}" class="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-1.5 text-xs text-white">
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] text-gray-400 mb-1">Giá Bán Khuyến Mãi</label>
+                                    <input type="text" id="price_${gameKey}_${pkgIndex}" value="${pkg.price}" class="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-1.5 text-xs text-yellow-400 font-bold">
+                                </div>
+                            </div>
+                            <button onclick="savePackagePrice('${gameKey}', ${pkgIndex})" class="w-full bg-yellow-400 hover:bg-yellow-300 text-gray-950 font-bold py-2 rounded-xl text-xs transition">Lưu Thay Đổi Giá</button>
+                        </div>
+                    `;
+                });
+            }
         }
 
-        // Modal Đăng Nhập
-        function openLoginModal() {
-            const modal = document.getElementById('loginModal');
-            const content = document.getElementById('loginModalContent');
-            modal.classList.remove('hidden');
-            setTimeout(() => { modal.classList.remove('opacity-0'); content.classList.remove('scale-95'); content.classList.add('scale-100'); }, 10);
-        }
-        function closeLoginModal() {
-            const modal = document.getElementById('loginModal');
-            const content = document.getElementById('loginModalContent');
-            modal.classList.add('opacity-0'); content.classList.remove('scale-100'); content.classList.add('scale-95');
-            setTimeout(() => { modal.classList.add('hidden'); }, 300);
-        }
-        function handleLoginSubmit(e) {
-            e.preventDefault();
-            alert('Đăng nhập thành công!');
-            closeLoginModal();
+        // Admin bấm xác nhận hoặc hủy đơn
+        function updateOrderStatus(index, newStatus) {
+            orders[index].status = newStatus;
+            localStorage.setItem('orders', JSON.stringify(orders));
+            renderUserHistory();
+            renderAdminData();
+            alert(`Đã cập nhật đơn hàng ${orders[index].code} thành: ${newStatus}`);
         }
 
-        // Modal Thanh Toán & Gói Nạp
+        // Admin lưu giá gói nạp mới
+        function savePackagePrice(gameKey, pkgIndex) {
+            const newOldPrice = document.getElementById(`oldPrice_${gameKey}_${pkgIndex}`).value;
+            const newPrice = document.getElementById(`price_${gameKey}_${pkgIndex}`).value;
+
+            packagesData[gameKey][pkgIndex].oldPrice = newOldPrice;
+            packagesData[gameKey][pkgIndex].price = newPrice;
+
+            localStorage.setItem('packagesData', JSON.stringify(packagesData));
+            renderPackages(currentActiveGameTab);
+            alert("Đã cập nhật giá gói nạp thành công! Giao diện trang chủ đã được đổi giá mới.");
+        }
+
+        // --- XỬ LÝ MUA HÀNG VÀ TẠO ĐƠN ---
         let selectedPackageInfo = { name: '', price: '' };
         function openCheckoutModal(packageName, price) {
             selectedPackageInfo = { name: packageName, price: price };
@@ -544,37 +573,66 @@
             setTimeout(() => { modal.classList.add('hidden'); }, 300);
         }
 
-        // Chuyển đổi giao diện giữa Chuyển khoản và Thẻ cào
         function togglePaymentMethod() {
             const method = document.querySelector('input[name="paymentMethod"]:checked').value;
-            const scratchSection = document.getElementById('scratchCardSection');
-            const bankingSection = document.getElementById('bankingSection');
-
-            if (method === 'scratchcard') {
-                scratchSection.classList.remove('hidden');
-                bankingSection.classList.add('hidden');
+            if (method === 'Thẻ cào') {
+                document.getElementById('scratchCardSection').classList.remove('hidden');
+                document.getElementById('bankingSection').classList.add('hidden');
             } else {
-                scratchSection.classList.add('hidden');
-                bankingSection.classList.remove('hidden');
+                document.getElementById('scratchCardSection').classList.add('hidden');
+                document.getElementById('bankingSection').classList.remove('hidden');
             }
         }
 
+        // Khách gửi đơn nạp -> Tự động báo về danh sách Admin và lịch sử
         function handleCheckoutSubmit(e) {
             e.preventDefault();
             const playerId = document.getElementById('playerIdInput').value;
             const method = document.querySelector('input[name="paymentMethod"]:checked').value;
             
-            if(method === 'scratchcard') {
-                const telco = document.getElementById('cardTelco').value.toUpperCase();
-                const amount = document.getElementById('cardAmount').value;
-                const serial = document.getElementById('cardSerial').value;
-                const pin = document.getElementById('cardPin').value;
-                
-                alert(`Đã gửi đơn nạp thẻ cào thành công!\n- Game: ${selectedPackageInfo.name}\n- ID: ${playerId}\n- Nhà mạng: ${telco} (${amount}đ)\n- Số Seri: ${serial}\n- Trạng thái: Đang chờ hệ thống gạch thẻ xử lý.`);
-            } else {
-                alert(`Đã tạo yêu cầu nạp qua Chuyển Khoản!\n- Game: ${selectedPackageInfo.name}\n- ID: ${playerId}\n- Số tiền: ${selectedPackageInfo.price}\nVui lòng thực hiện chuyển khoản để hoàn tất đơn.`);
+            let paymentDetail = method;
+            if(method === 'Thẻ cào') {
+                const telco = document.getElementById('cardTelco').value;
+                paymentDetail = `Thẻ cào (${telco})`;
             }
+
+            const newOrderCode = '#DH' + Math.floor(10000 + Math.random() * 90000);
+            const newOrder = {
+                code: newOrderCode,
+                playerId: playerId,
+                packageName: selectedPackageInfo.name,
+                price: selectedPackageInfo.price,
+                method: paymentDetail,
+                status: 'Đang xử lý'
+            };
+
+            orders.unshift(newOrder); // Đưa lên đầu danh sách
+            localStorage.setItem('orders', JSON.stringify(orders));
+
+            renderUserHistory();
+            renderAdminData();
             closeCheckoutModal();
+
+            alert(`Tạo đơn hàng ${newOrderCode} thành công!\nĐơn của bạn đã được chuyển đến hệ thống Admin để kiểm duyệt. Vui lòng theo dõi trạng thái tại mục Lịch Sử.`);
+        }
+
+        // Modal Đăng Nhập
+        function openLoginModal() {
+            const modal = document.getElementById('loginModal');
+            const content = document.getElementById('loginModalContent');
+            modal.classList.remove('hidden');
+            setTimeout(() => { modal.classList.remove('opacity-0'); content.classList.remove('scale-95'); content.classList.add('scale-100'); }, 10);
+        }
+        function closeLoginModal() {
+            const modal = document.getElementById('loginModal');
+            const content = document.getElementById('loginModalContent');
+            modal.classList.add('opacity-0'); content.classList.remove('scale-100'); content.classList.add('scale-95');
+            setTimeout(() => { modal.classList.add('hidden'); }, 300);
+        }
+        function handleLoginSubmit(e) {
+            e.preventDefault();
+            alert('Đăng nhập thành công!');
+            closeLoginModal();
         }
     </script>
 </body>
