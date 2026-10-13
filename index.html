@@ -6,6 +6,11 @@
     <title>Nạp Thẻ Siêu Lời - Hệ Thống Nạp Game Uy Tín & Quản Trị</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Firebase SDK (Compat Version cho trình duyệt) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+
     <style>
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
@@ -43,18 +48,18 @@
         </div>
     </header>
 
-    <!-- ================= PHẦN 1: TRANG CHỦ ================= -->
+    <!-- ================= TRANG CHỦ ================= -->
     <section id="home" class="container mx-auto px-4 py-12 border-b border-gray-900">
         <div class="glow-banner bg-gradient-to-r from-violet-900 via-indigo-900 to-gray-900 rounded-3xl p-8 md:p-12 border border-yellow-500/30 relative overflow-hidden flex flex-col md:flex-row items-center justify-between">
             <div class="z-10 max-w-xl text-center md:text-left">
                 <span class="inline-block bg-yellow-400 text-gray-950 text-xs font-black px-3 py-1 rounded-full uppercase tracking-widest mb-4 shadow-md">
-                    🔥 Hệ Thống Tự Động 100%
+                    🔥 Hệ Thống Đồng Bộ Cloud
                 </span>
                 <h1 class="text-3xl md:text-5xl font-black mb-4 leading-tight bg-gradient-to-r from-white via-yellow-200 to-yellow-400 bg-clip-text text-transparent">
                     Nạp Game Siêu Tốc - Chiết Khấu Cực Sốc X2
                 </h1>
                 <p class="text-gray-300 mb-6 text-sm md:text-base leading-relaxed">
-                    Hệ thống kiểm duyệt đơn tự động và thủ công bảo mật tuyệt đối. Nhận ngay Kim Cương, Quân Huy, FC chỉ sau vài phút xác nhận từ Admin!
+                    Hệ thống kiểm duyệt đơn tự động realtime. Nhận ngay Kim Cương, Quân Huy, FC chỉ sau vài phút xác nhận từ Admin!
                 </p>
                 <div class="flex flex-wrap justify-center md:justify-start gap-4">
                     <a href="#packages" class="bg-yellow-400 hover:bg-yellow-300 text-gray-950 font-bold px-6 py-3 rounded-xl shadow-lg transition text-sm">
@@ -76,12 +81,12 @@
         </div>
     </section>
 
-    <!-- ================= PHẦN 2: GÓI NẠP GAME ================= -->
+    <!-- ================= GÓI NẠP GAME ================= -->
     <section id="packages" class="container mx-auto px-4 py-16 border-b border-gray-900">
         <div class="text-center mb-10">
             <span class="text-yellow-400 text-xs font-bold uppercase tracking-widest bg-yellow-500/10 px-3 py-1 rounded-full border border-yellow-500/20">Khu Vực Gói Nạp</span>
             <h2 class="text-3xl font-black mt-3 mb-2">CHỌN TỰA GAME VÀ MỆNH GIÁ</h2>
-            <p class="text-gray-400 text-sm">Bảng giá gói được cập nhật trực tiếp bởi hệ thống quản trị</p>
+            <p class="text-gray-400 text-sm">Bảng giá gói được cập nhật trực tiếp từ cơ sở dữ liệu đám mây</p>
         </div>
 
         <!-- Tab chọn Game -->
@@ -97,19 +102,17 @@
             </button>
         </div>
 
-        <!-- Danh sách Gói (Render tự động từ JS) -->
-        <div id="packages-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <!-- Được render động qua JavaScript để đồng bộ việc Admin sửa giá -->
-        </div>
+        <!-- Danh sách Gói (Render tự động từ Firebase) -->
+        <div id="packages-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
     </section>
 
-    <!-- ================= PHẦN 3: LỊCH SỬ GIAO DỊCH (NGƯỜI DÙNG) ================= -->
+    <!-- ================= LỊCH SỬ GIAO DỊCH ================= -->
     <section id="history" class="container mx-auto px-4 py-16 border-b border-gray-900">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
             <div>
                 <span class="text-yellow-400 text-xs font-bold uppercase tracking-widest bg-yellow-500/10 px-3 py-1 rounded-full border border-yellow-500/20">Kiểm Tra Đơn</span>
-                <h2 class="text-2xl font-black mt-2">Lịch Sử Giao Dịch Của Bạn</h2>
-                <p class="text-gray-400 text-xs mt-1">Đơn mua gói nạp sẽ tự động cập nhật trạng thái khi Admin xác nhận</p>
+                <h2 class="text-2xl font-black mt-2">Lịch Sử Giao Dịch Đã Gửi</h2>
+                <p class="text-gray-400 text-xs mt-1">Trạng thái sẽ đổi thành công khi Admin duyệt đơn</p>
             </div>
             <div class="w-full md:w-auto">
                 <input type="text" id="searchHistoryInput" onkeyup="renderUserHistory()" placeholder="Tra cứu mã đơn hoặc ID..." class="bg-gray-900 border border-gray-800 rounded-xl px-4 py-2.5 text-sm w-full md:w-72 focus:outline-none focus:border-yellow-400 transition">
@@ -129,29 +132,27 @@
                             <th class="p-4">Trạng Thái</th>
                         </tr>
                     </thead>
-                    <tbody id="userHistoryTableBody" class="divide-y divide-gray-800/80 text-sm">
-                        <!-- Dữ liệu render động -->
-                    </tbody>
+                    <tbody id="userHistoryTableBody" class="divide-y divide-gray-800/80 text-sm"></tbody>
                 </table>
             </div>
         </div>
     </section>
 
-    <!-- ================= PHẦN 4: TRANG QUẢN TRỊ ADMIN (RIÊNG BIỆT) ================= -->
+    <!-- ================= TRANG QUẢN TRỊ ADMIN ================= -->
     <section id="admin" class="container mx-auto px-4 py-16 hidden">
         <div class="bg-gray-900 border border-yellow-500/30 rounded-3xl p-6 md:p-8 shadow-2xl">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center pb-6 mb-8 border-b border-gray-800 gap-4">
                 <div>
                     <span class="bg-red-500/20 text-red-400 border border-red-500/30 text-xs font-bold px-3 py-1 rounded-full uppercase">Khu Vực Đặc Quyền</span>
-                    <h2 class="text-3xl font-black mt-2 flex items-center gap-2"><i class="fa-solid fa-gauge-high text-yellow-400"></i> Bảng Điều Khiển Admin</h2>
-                    <p class="text-gray-400 text-xs mt-1">Duyệt đơn hàng, kiểm tra doanh thu và tùy chỉnh giá trị gói nạp</p>
+                    <h2 class="text-3xl font-black mt-2 flex items-center gap-2"><i class="fa-solid fa-gauge-high text-yellow-400"></i> Bảng Điều Khiển Admin (Realtime)</h2>
+                    <p class="text-gray-400 text-xs mt-1">Đơn hàng từ mọi thiết bị sẽ tự động đổ về đây ngay lập tức</p>
                 </div>
                 <button onclick="logoutAdmin()" class="bg-red-500/20 hover:bg-red-500/30 text-red-400 border border-red-500/30 font-bold px-4 py-2 rounded-xl text-xs transition flex items-center gap-2">
                     <i class="fa-solid fa-right-from-bracket"></i> Thoát Admin
                 </button>
             </div>
 
-            <!-- Thống kê tổng quan Admin -->
+            <!-- Thống kê -->
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
                 <div class="bg-gray-950 p-5 rounded-2xl border border-gray-800 flex items-center justify-between">
                     <div>
@@ -176,13 +177,12 @@
                 </div>
             </div>
 
-            <!-- Tabs con của Admin -->
             <div class="flex space-x-3 mb-6 border-b border-gray-800 pb-3">
                 <button onclick="switchAdminTab('orders')" id="admin-tab-btn-orders" class="px-5 py-2.5 rounded-xl font-bold text-sm transition bg-yellow-400 text-gray-950">Quản Lý Đơn Hàng</button>
                 <button onclick="switchAdminTab('packages')" id="admin-tab-btn-packages" class="px-5 py-2.5 rounded-xl font-bold text-sm transition bg-gray-950 text-gray-400 hover:text-white">Chỉnh Sửa Giá Gói Nạp</button>
             </div>
 
-            <!-- TAB 1: QUẢN LÝ ĐƠN HÀNG -->
+            <!-- TAB 1: DUYỆT ĐƠN -->
             <div id="admin-pane-orders" class="admin-pane">
                 <div class="bg-gray-950 rounded-2xl border border-gray-800 overflow-hidden">
                     <div class="overflow-x-auto">
@@ -198,33 +198,24 @@
                                     <th class="p-4 text-center">Hành Động Admin</th>
                                 </tr>
                             </thead>
-                            <tbody id="adminOrdersTableBody" class="divide-y divide-gray-800 text-sm">
-                                <!-- Render động từ JS -->
-                            </tbody>
+                            <tbody id="adminOrdersTableBody" class="divide-y divide-gray-800 text-sm"></tbody>
                         </table>
                     </div>
                 </div>
             </div>
 
-            <!-- TAB 2: CHỈNH SỬA GIÁ GÓI NẠP -->
+            <!-- TAB 2: SỬA GIÁ -->
             <div id="admin-pane-packages" class="admin-pane hidden">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="adminPackageEditContainer">
-                    <!-- Render động các thẻ sửa giá gói nạp -->
-                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="adminPackageEditContainer"></div>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER & HỖ TRỢ -->
+    <!-- FOOTER -->
     <footer id="support" class="bg-gray-900 border-t border-gray-800 py-12 text-center text-gray-400 text-sm">
         <div class="container mx-auto px-4">
             <h3 class="text-lg font-bold text-white mb-2">HỖ TRỢ KHÁCH HÀNG 24/7</h3>
-            <p class="mb-6">Mọi thắc mắc về đơn hàng, vui lòng liên hệ trực tiếp qua Zalo/Fanpage để được xử lý nhanh nhất.</p>
-            <div class="flex justify-center space-x-4 mb-6">
-                <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-blue-600 rounded-full flex items-center justify-center text-white transition"><i class="fa-brands fa-facebook-messenger"></i></a>
-                <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-sky-500 rounded-full flex items-center justify-center text-white transition"><i class="fa-solid fa-paper-plane"></i></a>
-                <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-red-600 rounded-full flex items-center justify-center text-white transition"><i class="fa-solid fa-phone"></i></a>
-            </div>
+            <p class="mb-6">Mọi thắc mắc về đơn hàng, vui lòng liên hệ trực tiếp qua Zalo/Fanpage.</p>
             <p class="text-xs text-gray-500">&copy; 2026 Nạp Thẻ Siêu Lời. All rights reserved.</p>
         </div>
     </footer>
@@ -232,107 +223,80 @@
     <!-- MODAL ĐĂNG NHẬP -->
     <div id="loginModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
         <div class="bg-gray-900 border border-gray-800 w-full max-w-md p-8 rounded-3xl shadow-2xl relative transform scale-95 transition-transform duration-300" id="loginModalContent">
-            <button onclick="closeLoginModal()" class="absolute top-5 right-5 text-gray-400 hover:text-white text-xl w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center transition">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
+            <button onclick="closeLoginModal()" class="absolute top-5 right-5 text-gray-400 hover:text-white text-xl w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center transition"><i class="fa-solid fa-xmark"></i></button>
             <div class="text-center mb-6">
-                <div class="w-14 h-14 bg-yellow-500/10 text-yellow-400 rounded-2xl mx-auto flex items-center justify-center text-2xl mb-3">
-                    <i class="fa-solid fa-user-lock"></i>
-                </div>
+                <div class="w-14 h-14 bg-yellow-500/10 text-yellow-400 rounded-2xl mx-auto flex items-center justify-center text-2xl mb-3"><i class="fa-solid fa-user-lock"></i></div>
                 <h3 class="text-2xl font-black text-white">ĐĂNG NHẬP HỆ THỐNG</h3>
-                <p class="text-gray-400 text-xs mt-1">Nhập tài khoản để lưu lịch sử giao dịch cá nhân</p>
             </div>
             <form onsubmit="handleLoginSubmit(event)" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-semibold text-gray-300 mb-1">Số điện thoại / Tài khoản</label>
-                    <input type="text" required class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400 text-sm transition" placeholder="Nhập số điện thoại...">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-gray-300 mb-1">Mật khẩu</label>
-                    <input type="password" required class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400 text-sm transition" placeholder="••••••••">
-                </div>
-                <button type="submit" class="w-full bg-yellow-400 hover:bg-yellow-300 text-gray-950 font-black py-3 rounded-xl shadow-lg transition text-sm">
-                    Xác Nhận Đăng Nhập
-                </button>
+                <div><label class="block text-xs font-semibold text-gray-300 mb-1">Số điện thoại</label><input type="text" required class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400 text-sm"></div>
+                <div><label class="block text-xs font-semibold text-gray-300 mb-1">Mật khẩu</label><input type="password" required class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400 text-sm"></div>
+                <button type="submit" class="w-full bg-yellow-400 hover:bg-yellow-300 text-gray-950 font-black py-3 rounded-xl shadow-lg transition text-sm">Đăng Nhập</button>
             </form>
         </div>
     </div>
 
-    <!-- MODAL THANH TOÁN (NẠP THẺ HOẶC CHUYỂN KHOẢN) -->
+    <!-- MODAL THANH TOÁN -->
     <div id="checkoutModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
         <div class="bg-gray-900 border border-gray-800 w-full max-w-lg p-8 rounded-3xl shadow-2xl relative transform scale-95 transition-transform duration-300 max-h-[90vh] overflow-y-auto" id="checkoutModalContent">
-            <button onclick="closeCheckoutModal()" class="absolute top-5 right-5 text-gray-400 hover:text-white text-xl w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center transition">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
+            <button onclick="closeCheckoutModal()" class="absolute top-5 right-5 text-gray-400 hover:text-white text-xl w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center transition"><i class="fa-solid fa-xmark"></i></button>
             <div class="text-center mb-6">
                 <span class="text-xs text-yellow-400 font-bold uppercase bg-yellow-500/10 px-3 py-1 rounded-full">Xác Nhận Thanh Toán</span>
                 <h3 id="modalPackageTitle" class="text-xl font-black text-white mt-2">Gói Nạp</h3>
                 <p id="modalPackagePrice" class="text-yellow-400 font-black text-2xl mt-1">0đ</p>
             </div>
-
             <form onsubmit="handleCheckoutSubmit(event)" class="space-y-4">
                 <div>
                     <label class="block text-xs font-semibold text-gray-300 mb-1">ID Nhân Vật / Tên Đăng Nhập Game <span class="text-red-500">*</span></label>
-                    <input type="text" id="playerIdInput" required class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400 text-sm transition" placeholder="Nhập ID trong game...">
+                    <input type="text" id="playerIdInput" required class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400 text-sm" placeholder="Nhập ID trong game...">
                 </div>
-
                 <div>
-                    <label class="block text-xs font-semibold text-gray-300 mb-2">Chọn Hình Thức Thanh Toán <span class="text-red-500">*</span></label>
+                    <label class="block text-xs font-semibold text-gray-300 mb-2">Hình Thức Thanh Toán</label>
                     <div class="grid grid-cols-2 gap-3">
-                        <label class="cursor-pointer border border-gray-800 bg-gray-950 rounded-xl p-3 flex items-center gap-3 hover:border-yellow-400 transition select-none">
+                        <label class="cursor-pointer border border-gray-800 bg-gray-950 rounded-xl p-3 flex items-center gap-3 hover:border-yellow-400">
                             <input type="radio" name="paymentMethod" value="Chuyển khoản" checked onchange="togglePaymentMethod()" class="accent-yellow-400">
-                            <div>
-                                <p class="text-xs font-bold text-white">Chuyển Khoản QR</p>
-                                <p class="text-[10px] text-gray-400">Duyệt tự động nhanh</p>
-                            </div>
+                            <div><p class="text-xs font-bold text-white">Chuyển Khoản QR</p><p class="text-[10px] text-gray-400">Tự động</p></div>
                         </label>
-                        <label class="cursor-pointer border border-gray-800 bg-gray-950 rounded-xl p-3 flex items-center gap-3 hover:border-yellow-400 transition select-none">
+                        <label class="cursor-pointer border border-gray-800 bg-gray-950 rounded-xl p-3 flex items-center gap-3 hover:border-yellow-400">
                             <input type="radio" name="paymentMethod" value="Thẻ cào" onchange="togglePaymentMethod()" class="accent-yellow-400">
-                            <div>
-                                <p class="text-xs font-bold text-white">Nạp Thẻ Cào</p>
-                                <p class="text-[10px] text-gray-400">Viettel, Vina, Mobi</p>
-                            </div>
+                            <div><p class="text-xs font-bold text-white">Nạp Thẻ Cào</p><p class="text-[10px] text-gray-400">Viettel, Vina...</p></div>
                         </label>
                     </div>
                 </div>
-
-                <!-- Thẻ cào section -->
                 <div id="scratchCardSection" class="hidden space-y-3 bg-gray-950/60 p-4 rounded-2xl border border-gray-800">
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-300 mb-1">Chọn Nhà Mạng</label>
-                        <select id="cardTelco" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-yellow-400 text-sm">
-                            <option value="Viettel">Viettel</option>
-                            <option value="Vinaphone">Vinaphone</option>
-                            <option value="Mobifone">Mobifone</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-300 mb-1">Số Serial Thẻ</label>
-                        <input type="text" id="cardSerial" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-yellow-400 text-sm" placeholder="Nhập số seri...">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-300 mb-1">Mã Số Thẻ (PIN)</label>
-                        <input type="text" id="cardPin" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-yellow-400 text-sm" placeholder="Nhập mã thẻ cào...">
-                    </div>
+                    <div><label class="block text-xs font-semibold text-gray-300 mb-1">Nhà Mạng</label><select id="cardTelco" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-2.5 text-white text-sm"><option value="Viettel">Viettel</option><option value="Vinaphone">Vinaphone</option><option value="Mobifone">Mobifone</option></select></div>
+                    <div><label class="block text-xs font-semibold text-gray-300 mb-1">Số Serial</label><input type="text" id="cardSerial" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-2 text-white text-sm" placeholder="Nhập seri..."></div>
+                    <div><label class="block text-xs font-semibold text-gray-300 mb-1">Mã Thẻ (PIN)</label><input type="text" id="cardPin" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-2 text-white text-sm" placeholder="Nhập mã thẻ..."></div>
                 </div>
-
-                <!-- Chuyển khoản section -->
                 <div id="bankingSection" class="p-4 rounded-2xl bg-yellow-500/5 border border-yellow-500/20 text-center">
                     <p class="text-xs text-yellow-300 font-semibold mb-1">THÔNG TIN CHUYỂN KHOẢN</p>
-                    <p class="text-xs text-gray-300">STK: <b class="text-white">1903xxxxxx</b> (Techcombank) - Chủ TK: ADMIN<br>Nội dung: <b class="text-yellow-400">NAPGAME [ID_CỦA_BẠN]</b></p>
+                    <p class="text-xs text-gray-300">STK: <b class="text-white">1903xxxxxx</b> (Techcombank)<br>Nội dung: <b class="text-yellow-400">NAPGAME [ID_CỦA_BẠN]</b></p>
                 </div>
-
-                <button type="submit" class="w-full bg-yellow-400 hover:bg-yellow-300 text-gray-950 font-black py-3 rounded-xl shadow-lg transition text-sm">
-                    Gửi Đơn Nạp Cho Admin
-                </button>
+                <button type="submit" class="w-full bg-yellow-400 hover:bg-yellow-300 text-gray-950 font-black py-3 rounded-xl shadow-lg transition text-sm">Gửi Đơn Nạp Cho Admin</button>
             </form>
         </div>
     </div>
 
-    <!-- JAVASCRIPT XỬ LÝ TOÀN BỘ HỆ THỐNG -->
+    <!-- JAVASCRIPT KẾT NỐI FIREBASE -->
     <script>
-        // Dữ liệu mẫu các gói nạp (Có thể sửa trực tiếp bởi Admin)
-        let packagesData = JSON.parse(localStorage.getItem('packagesData')) || {
+        // Cấu hình Firebase của bạn
+        const firebaseConfig = {
+            apiKey: "AIzaSyCcBLdyjH4FIs5NTttd0X19_ju1_ImkNew",
+            authDomain: "napthesieuloi.firebaseapp.com",
+            databaseURL: "https://napthesieuloi-default-rtdb.firebaseio.com",
+            projectId: "napthesieuloi",
+            storageBucket: "napthesieuloi.firebasestorage.app",
+            messagingSenderId: "616572324918",
+            appId: "1:616572324918:web:bc771e43bf0f662404dc97",
+            measurementId: "G-NWL0T2XGJE"
+        };
+
+        // Khởi tạo Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
+        // Gói nạp mặc định ban đầu
+        const defaultPackages = {
             freefire: [
                 { id: 'ff1', name: '110 Kim Cương', desc: 'Gói nhỏ nạp nhanh chóng.', oldPrice: '25.000đ', price: '20.000đ', tag: 'Phổ Biến', icon: 'fa-gem' },
                 { id: 'ff2', name: '420 Kim Cương', desc: 'Tặng kèm vé quay sự kiện.', oldPrice: '100.000đ', price: '50.000đ', tag: '-20% Lời', icon: 'fa-gem' },
@@ -353,22 +317,36 @@
             ]
         };
 
-        // Dữ liệu danh sách đơn hàng lưu trong localStorage
-        let orders = JSON.parse(localStorage.getItem('orders')) || [
-            { code: '#DH98231', playerId: '1204958321', packageName: 'Gói 1080 Kim Cương (Free Fire)', price: '100.000đ', method: 'Chuyển khoản', status: 'Thành công' },
-            { code: '#DH98230', playerId: '882391024', packageName: 'Gói 470 Quân Huy (Liên Quân)', price: '50.000đ', method: 'Thẻ cào (Viettel)', status: 'Đang xử lý' }
-        ];
-
+        let packagesData = JSON.parse(JSON.stringify(defaultPackages));
+        let ordersList = [];
         let currentActiveGameTab = 'freefire';
 
-        // Khởi chạy khi tải trang
-        window.onload = function() {
+        // Lắng nghe dữ liệu packages từ Firebase Realtime Database
+        db.ref('packagesData').on('value', (snapshot) => {
+            if (snapshot.exists()) {
+                packagesData = snapshot.val();
+            } else {
+                db.ref('packagesData').set(defaultPackages);
+            }
             renderPackages(currentActiveGameTab);
+            if (!document.getElementById('admin').classList.contains('hidden')) {
+                renderAdminData();
+            }
+        });
+
+        // Lắng nghe dữ liệu orders từ Firebase Realtime Database (Realtime Sync)
+        db.ref('orders').on('value', (snapshot) => {
+            const data = snapshot.val() || {};
+            ordersList = [];
+            for (let key in data) {
+                ordersList.push({ firebaseKey: key, ...data[key] });
+            }
+            ordersList.reverse(); // Mới nhất lên đầu
             renderUserHistory();
             renderAdminData();
-        };
+        });
 
-        // Chuyển tab game trang chủ
+        // Chuyển tab game
         function switchGameTab(game) {
             currentActiveGameTab = game;
             document.querySelectorAll('.game-tab').forEach(btn => {
@@ -378,11 +356,11 @@
             renderPackages(game);
         }
 
-        // Render các gói nạp từ dữ liệu
+        // Render gói nạp ra trang chủ
         function renderPackages(game) {
             const container = document.getElementById('packages-container');
             container.innerHTML = '';
-            const list = packagesData[game];
+            const list = packagesData[game] || [];
 
             list.forEach(pkg => {
                 container.innerHTML += `
@@ -407,16 +385,16 @@
             });
         }
 
-        // Render Lịch sử đơn hàng của User
+        // Render lịch sử đơn hàng của người dùng
         function renderUserHistory() {
             const tbody = document.getElementById('userHistoryTableBody');
             const searchKeyword = document.getElementById('searchHistoryInput').value.toLowerCase();
             tbody.innerHTML = '';
 
-            const filtered = orders.filter(o => o.code.toLowerCase().includes(searchKeyword) || o.playerId.toLowerCase().includes(searchKeyword));
+            const filtered = ordersList.filter(o => o.code.toLowerCase().includes(searchKeyword) || o.playerId.toLowerCase().includes(searchKeyword));
 
             if (filtered.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-gray-500">Không tìm thấy đơn hàng nào phù hợp.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-gray-500">Chưa có đơn hàng nào hoặc không tìm thấy kết quả.</td></tr>`;
                 return;
             }
 
@@ -439,10 +417,10 @@
             });
         }
 
-        // --- HỆ THỐNG ADMIN & BẢNG ĐIỀU KHIỂN ---
+        // --- ADMIN PANEL ---
         function checkAdminAccess(e) {
             e.preventDefault();
-            const pass = prompt("Vui lòng nhập mật khẩu quản trị Admin (Mật khẩu mặc định: admin123):");
+            const pass = prompt("Nhập mật khẩu quản trị Admin (Mật khẩu: admin123):");
             if (pass === "admin123") {
                 document.getElementById('admin').classList.remove('hidden');
                 window.location.hash = '#admin';
@@ -467,21 +445,20 @@
         }
 
         function renderAdminData() {
-            // Thống kê
-            document.getElementById('statTotalOrders').innerText = orders.length;
-            const pendingCount = orders.filter(o => o.status === 'Đang xử lý').length;
+            document.getElementById('statTotalOrders').innerText = ordersList.length;
+            const pendingCount = ordersList.filter(o => o.status === 'Đang xử lý').length;
             document.getElementById('statPendingOrders').innerText = pendingCount;
 
-            const totalRev = orders.filter(o => o.status === 'Thành công').reduce((acc, curr) => {
+            const totalRev = ordersList.filter(o => o.status === 'Thành công').reduce((acc, curr) => {
                 let num = parseInt(curr.price.replace(/\D/g, '')) || 0;
                 return acc + num;
             }, 0);
             document.getElementById('statTotalRevenue').innerText = totalRev.toLocaleString('vi-VN') + 'đ';
 
-            // Render bảng đơn hàng cho admin duyệt
+            // Duyệt đơn
             const adminTbody = document.getElementById('adminOrdersTableBody');
             adminTbody.innerHTML = '';
-            orders.forEach((o, index) => {
+            ordersList.forEach((o) => {
                 let badge = '';
                 if(o.status === 'Thành công') badge = `<span class="text-green-400 font-bold">Thành công</span>`;
                 else if(o.status === 'Đang xử lý') badge = `<span class="text-yellow-400 font-bold">Đang xử lý</span>`;
@@ -496,14 +473,14 @@
                         <td class="p-4 text-gray-400 text-xs">${o.method}</td>
                         <td class="p-4">${badge}</td>
                         <td class="p-4 text-center space-x-2">
-                            <button onclick="updateOrderStatus(${index}, 'Thành công')" class="bg-green-500/20 hover:bg-green-500/30 text-green-400 px-3 py-1.5 rounded-lg text-xs font-bold transition">Xác Nhận</button>
-                            <button onclick="updateOrderStatus(${index}, 'Đã hủy')" class="bg-red-500/20 hover:bg-red-500/30 text-red-400 px-3 py-1.5 rounded-lg text-xs font-bold transition">Hủy Đơn</button>
+                            <button onclick="updateOrderStatus('${o.firebaseKey}', 'Thành công')" class="bg-green-500/20 hover:bg-green-500/30 text-green-400 px-3 py-1.5 rounded-lg text-xs font-bold transition">Xác Nhận</button>
+                            <button onclick="updateOrderStatus('${o.firebaseKey}', 'Đã hủy')" class="bg-red-500/20 hover:bg-red-500/30 text-red-400 px-3 py-1.5 rounded-lg text-xs font-bold transition">Hủy Đơn</button>
                         </td>
                     </tr>
                 `;
             });
 
-            // Render form chỉnh sửa giá gói nạp cho admin
+            // Sửa giá gói nạp
             const editContainer = document.getElementById('adminPackageEditContainer');
             editContainer.innerHTML = '';
             for (let gameKey in packagesData) {
@@ -520,40 +497,39 @@
                                     <input type="text" id="oldPrice_${gameKey}_${pkgIndex}" value="${pkg.oldPrice}" class="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-1.5 text-xs text-white">
                                 </div>
                                 <div>
-                                    <label class="block text-[10px] text-gray-400 mb-1">Giá Bán Khuyến Mãi</label>
+                                    <label class="block text-[10px] text-gray-400 mb-1">Giá Bán</label>
                                     <input type="text" id="price_${gameKey}_${pkgIndex}" value="${pkg.price}" class="w-full bg-gray-900 border border-gray-800 rounded-lg px-3 py-1.5 text-xs text-yellow-400 font-bold">
                                 </div>
                             </div>
-                            <button onclick="savePackagePrice('${gameKey}', ${pkgIndex})" class="w-full bg-yellow-400 hover:bg-yellow-300 text-gray-950 font-bold py-2 rounded-xl text-xs transition">Lưu Thay Đổi Giá</button>
+                            <button onclick="savePackagePrice('${gameKey}', ${pkgIndex})" class="w-full bg-yellow-400 hover:bg-yellow-300 text-gray-950 font-bold py-2 rounded-xl text-xs transition">Lưu Thay Đổi</button>
                         </div>
                     `;
                 });
             }
         }
 
-        // Admin bấm xác nhận hoặc hủy đơn
-        function updateOrderStatus(index, newStatus) {
-            orders[index].status = newStatus;
-            localStorage.setItem('orders', JSON.stringify(orders));
-            renderUserHistory();
-            renderAdminData();
-            alert(`Đã cập nhật đơn hàng ${orders[index].code} thành: ${newStatus}`);
+        // Cập nhật trạng thái đơn hàng lên Firebase
+        function updateOrderStatus(firebaseKey, newStatus) {
+            db.ref('orders/' + firebaseKey).update({ status: newStatus }, (error) => {
+                if (!error) {
+                    alert(`Đã cập nhật đơn hàng thành: ${newStatus}`);
+                }
+            });
         }
 
-        // Admin lưu giá gói nạp mới
+        // Lưu giá gói nạp mới lên Firebase
         function savePackagePrice(gameKey, pkgIndex) {
-            const newOldPrice = document.getElementById(`oldPrice_${gameKey}_${pkgIndex}`).value;
-            const newPrice = document.getElementById(`price_${gameKey}_${pkgIndex}`).value;
+            packagesData[gameKey][pkgIndex].oldPrice = document.getElementById(`oldPrice_${gameKey}_${pkgIndex}`).value;
+            packagesData[gameKey][pkgIndex].price = document.getElementById(`price_${gameKey}_${pkgIndex}`).value;
 
-            packagesData[gameKey][pkgIndex].oldPrice = newOldPrice;
-            packagesData[gameKey][pkgIndex].price = newPrice;
-
-            localStorage.setItem('packagesData', JSON.stringify(packagesData));
-            renderPackages(currentActiveGameTab);
-            alert("Đã cập nhật giá gói nạp thành công! Giao diện trang chủ đã được đổi giá mới.");
+            db.ref('packagesData').set(packagesData, (error) => {
+                if (!error) {
+                    alert("Đã cập nhật giá gói nạp lên Cloud thành công!");
+                }
+            });
         }
 
-        // --- XỬ LÝ MUA HÀNG VÀ TẠO ĐƠN ---
+        // --- THANH TOÁN ---
         let selectedPackageInfo = { name: '', price: '' };
         function openCheckoutModal(packageName, price) {
             selectedPackageInfo = { name: packageName, price: price };
@@ -584,7 +560,7 @@
             }
         }
 
-        // Khách gửi đơn nạp -> Tự động báo về danh sách Admin và lịch sử
+        // Gửi đơn nạp đẩy trực tiếp lên Firebase Realtime Database
         function handleCheckoutSubmit(e) {
             e.preventDefault();
             const playerId = document.getElementById('playerIdInput').value;
@@ -603,20 +579,21 @@
                 packageName: selectedPackageInfo.name,
                 price: selectedPackageInfo.price,
                 method: paymentDetail,
-                status: 'Đang xử lý'
+                status: 'Đang xử lý',
+                createdAt: Date.now()
             };
 
-            orders.unshift(newOrder); // Đưa lên đầu danh sách
-            localStorage.setItem('orders', JSON.stringify(orders));
-
-            renderUserHistory();
-            renderAdminData();
-            closeCheckoutModal();
-
-            alert(`Tạo đơn hàng ${newOrderCode} thành công!\nĐơn của bạn đã được chuyển đến hệ thống Admin để kiểm duyệt. Vui lòng theo dõi trạng thái tại mục Lịch Sử.`);
+            // Đẩy đơn lên Firebase (bất kỳ thiết bị nào mua cũng sẽ đồng thời bắn về Admin real-time)
+            db.ref('orders').push(newOrder, (error) => {
+                if (!error) {
+                    alert(`Tạo đơn hàng ${newOrderCode} thành công!\nĐơn đã được gửi về hệ thống Admin.`);
+                    closeCheckoutModal();
+                } else {
+                    alert("Có lỗi xảy ra khi gửi đơn, vui lòng thử lại.");
+                }
+            });
         }
 
-        // Modal Đăng Nhập
         function openLoginModal() {
             const modal = document.getElementById('loginModal');
             const content = document.getElementById('loginModalContent');
@@ -636,4 +613,4 @@
         }
     </script>
 </body>
-</html>  
+</html>
