@@ -51,7 +51,7 @@
         </div>
     </header>
 
-    <!-- ================= TRANG CHỦ ================= -->
+    <!-- TRANG CHỦ -->
     <section id="home" class="container mx-auto px-4 py-12 border-b border-gray-900">
         <div class="glow-banner bg-gradient-to-r from-violet-900 via-indigo-900 to-gray-900 rounded-3xl p-8 md:p-12 border border-yellow-500/30 relative overflow-hidden flex flex-col md:flex-row items-center justify-between">
             <div class="z-10 max-w-xl text-center md:text-left">
@@ -87,7 +87,7 @@
         </div>
     </section>
 
-    <!-- ================= GÓI NẠP GAME ================= -->
+    <!-- GÓI NẠP GAME -->
     <section id="packages" class="container mx-auto px-4 py-16 border-b border-gray-900">
         <div class="text-center mb-10">
             <span class="text-yellow-400 text-xs font-bold uppercase tracking-widest bg-yellow-500/10 px-3 py-1 rounded-full border border-yellow-500/20">Khu Vực Gói Nạp</span>
@@ -110,7 +110,7 @@
         <div id="packages-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
     </section>
 
-    <!-- ================= MINI GAME: VÒNG QUAY ƯU ĐÃI ================= -->
+    <!-- MINI GAME -->
     <section id="minigame" class="container mx-auto px-4 py-16 border-b border-gray-900">
         <div class="max-w-2xl mx-auto bg-gray-900 border border-yellow-500/30 rounded-3xl p-8 shadow-2xl text-center relative overflow-hidden">
             <div class="absolute -top-12 -right-12 w-40 h-40 bg-yellow-500/10 rounded-full blur-2xl"></div>
@@ -133,7 +133,7 @@
         </div>
     </section>
 
-    <!-- ================= LỊCH SỬ GIAO DỊCH ================= -->
+    <!-- LỊCH SỬ GIAO DỊCH -->
     <section id="history" class="container mx-auto px-4 py-16 border-b border-gray-900">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
             <div>
@@ -165,7 +165,7 @@
         </div>
     </section>
 
-    <!-- ================= TRANG QUẢN TRỊ ADMIN (ẨN HOÀN TOÀN) ================= -->
+    <!-- TRANG QUẢN TRỊ ADMIN (ẨN) -->
     <section id="admin" class="container mx-auto px-4 py-16 hidden">
         <div class="bg-gray-900 border border-yellow-500/30 rounded-3xl p-6 md:p-8 shadow-2xl">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center pb-6 mb-8 border-b border-gray-800 gap-4">
@@ -228,7 +228,7 @@
         </div>
     </section>
 
-    <!-- FOOTER (BẤM 5 LẦN ĐỂ MỞ ADMIN VỚI MẬT KHẨU 30911) -->
+    <!-- FOOTER (BẤM 5 LẦN VÀO DÒNG CHỮ NÀY ĐỂ MỞ ADMIN VỚI MẬT KHẨU 30911) -->
     <footer id="support" class="bg-gray-900 border-t border-gray-800 py-12 text-center text-gray-400 text-sm">
         <div class="container mx-auto px-4">
             <h3 class="text-lg font-bold text-white mb-2">HỖ TRỢ KHÁCH HÀNG 24/7</h3>
@@ -237,18 +237,18 @@
         </div>
     </footer>
 
-    <!-- MODAL ĐĂNG KÝ / ĐĂNG NHẬP DÀNH CHO NGƯỜI CHƠI -->
+    <!-- MODAL ĐĂNG KÝ / ĐĂNG NHẬP NGƯỜI CHƠI -->
     <div id="authModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center">
         <div class="bg-gray-900 border border-gray-800 w-full max-w-md p-8 rounded-3xl shadow-2xl relative">
             <div class="text-center mb-6">
                 <div class="w-14 h-14 bg-yellow-500/10 text-yellow-400 rounded-2xl mx-auto flex items-center justify-center text-2xl mb-3"><i class="fa-solid fa-user-plus"></i></div>
                 <h3 class="text-2xl font-black text-white">ĐĂNG KÝ / ĐĂNG NHẬP</h3>
-                <p class="text-gray-400 text-xs mt-1">Tạo tài khoản người chơi để nạp game và tích điểm</p>
+                <p class="text-gray-400 text-xs mt-1">Nhập tên bất kỳ để tự động tạo tài khoản hoặc đăng nhập</p>
             </div>
             <form onsubmit="handleAuthSubmit(event)" class="space-y-4">
                 <div>
                     <label class="block text-xs font-semibold text-gray-300 mb-1">Tên tài khoản người chơi <span class="text-red-500">*</span></label>
-                    <input type="text" id="authUsernameInput" required class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400 text-sm" placeholder="Nhập tên tài khoản của bạn...">
+                    <input type="text" id="authUsernameInput" required class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400 text-sm" placeholder="VD: gamer99, vanan...">
                 </div>
                 <div>
                     <label class="block text-xs font-semibold text-gray-300 mb-1">Mật khẩu tài khoản <span class="text-red-500">*</span></label>
@@ -396,7 +396,7 @@
                 if (!document.getElementById('admin').classList.contains('hidden')) renderAdminData();
             });
 
-            // Cơ chế ẩn đăng nhập Admin: Click 5 lần vào footer với mật khẩu 30911
+            // MỞ ADMIN KHI CLICK 5 LẦN VÀO FOOTER (MẬT KHẨU: 30911)
             let clickCount = 0;
             document.getElementById('secretAdminTrigger').addEventListener('click', () => {
                 clickCount++;
@@ -415,7 +415,6 @@
             });
         };
 
-        // Đăng ký/Đăng nhập người chơi (Chặn từ khóa admin)
         function handleAuthSubmit(e) {
             e.preventDefault();
             const username = document.getElementById('authUsernameInput').value.trim();
@@ -424,7 +423,7 @@
             if (!username) return;
 
             if (username.toLowerCase() === 'admin') {
-                alert("Tên tài khoản 'admin' dành riêng cho quản trị viên! Vui lòng chọn tên tài khoản người chơi khác.");
+                alert("Tên tài khoản 'admin' dành riêng cho quản trị viên ẩn! Vui lòng nhập tên tài khoản người chơi khác.");
                 return;
             }
 
@@ -693,7 +692,7 @@
                 document.getElementById('bankingSection').classList.add('hidden');
             } else {
                 document.getElementById('scratchCardSection').classList.add('hidden');
-                document.getElementById('bankingSection').classList.add('hidden');
+                document.getElementById('bankingSection').classList.remove('hidden');
             }
         }
 
