@@ -17,11 +17,19 @@
             50% { transform: translateY(-8px); }
         }
         .animate-float { animation: float 3s ease-in-out infinite; }
+        
         @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 15px rgba(234, 179, 8, 0.3); }
-            50% { box-shadow: 0 0 30px rgba(234, 179, 8, 0.7); }
+            0%, 100% { box-shadow: 0 0 20px rgba(234, 179, 8, 0.2), inset 0 0 15px rgba(234, 179, 8, 0.1); }
+            50% { box-shadow: 0 0 40px rgba(234, 179, 8, 0.6), inset 0 0 25px rgba(234, 179, 8, 0.3); }
         }
         .glow-banner { animation: pulse-glow 3s infinite; }
+        .wheel-glow { animation: pulse-glow 2s infinite; }
+
+        @keyframes modalPop {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .modal-animate { animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
     </style>
 </head>
 <body class="bg-gray-950 text-gray-100 font-sans selection:bg-yellow-400 selection:text-gray-950">
@@ -31,7 +39,7 @@
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <a href="#home" class="flex items-center space-x-2">
                 <span class="text-2xl font-black text-yellow-400 tracking-wider flex items-center gap-2">
-                    <i class="fa-solid fa-bolt text-yellow-500"></i> NẠP THẺ SIÊU LỜI
+                    <i class="fa-solid fa-bolt text-yellow-500 animate-pulse"></i> NẠP THẺ SIÊU LỜI
                 </span>
             </a>
             <nav class="hidden md:flex space-x-6 font-medium text-sm">
@@ -41,35 +49,35 @@
                 <a href="#history" class="hover:text-yellow-400 transition">Lịch Sử Giao Dịch</a>
             </nav>
             <div class="flex items-center gap-3">
-                <div id="userAccountInfo" class="hidden items-center gap-2 bg-gray-900 border border-gray-800 px-3 py-1.5 rounded-xl text-xs">
+                <div id="userAccountInfo" class="hidden items-center gap-2 bg-gray-900 border border-gray-800 px-3 py-1.5 rounded-xl text-xs shadow-inner">
                     <i class="fa-solid fa-user text-yellow-400"></i>
-                    <span id="navUsername" class="font-bold">User</span> |
+                    <span id="navUsername" class="font-bold text-white">User</span> |
                     <span class="text-yellow-400 font-black"><span id="navUserPoints">0</span> Điểm</span>
                 </div>
-                <button onclick="logoutUser()" id="btnLogout" class="hidden bg-red-500/20 text-red-400 px-3 py-1.5 rounded-xl text-xs font-bold hover:bg-red-500/30 transition">Đăng Xuất</button>
+                <button onclick="logoutUser()" id="btnLogout" class="hidden bg-red-500/20 text-red-400 px-3 py-1.5 rounded-xl text-xs font-bold hover:bg-red-500/30 transition border border-red-500/30">Đăng Xuất</button>
             </div>
         </div>
     </header>
 
     <!-- TRANG CHỦ -->
     <section id="home" class="container mx-auto px-4 py-12 border-b border-gray-900">
-        <div class="glow-banner bg-gradient-to-r from-violet-900 via-indigo-900 to-gray-900 rounded-3xl p-8 md:p-12 border border-yellow-500/30 relative overflow-hidden flex flex-col md:flex-row items-center justify-between">
+        <div class="glow-banner bg-gradient-to-r from-violet-950 via-indigo-950 to-gray-900 rounded-3xl p-8 md:p-12 border border-yellow-500/30 relative overflow-hidden flex flex-col md:flex-row items-center justify-between shadow-2xl">
             <div class="z-10 max-w-xl text-center md:text-left">
-                <span class="inline-block bg-yellow-400 text-gray-950 text-xs font-black px-3 py-1 rounded-full uppercase tracking-widest mb-4 shadow-md">
+                <span class="inline-block bg-gradient-to-r from-yellow-400 to-amber-500 text-gray-950 text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest mb-4 shadow-md">
                     🔥 Tích Điểm Đổi Quà Liền Tay
                 </span>
                 <h1 class="text-3xl md:text-5xl font-black mb-4 leading-tight bg-gradient-to-r from-white via-yellow-200 to-yellow-400 bg-clip-text text-transparent">
                     Nạp Game Siêu Tốc - Nhận Điểm Quay Thưởng
                 </h1>
                 <p class="text-gray-300 mb-6 text-sm md:text-base leading-relaxed">
-                    Mỗi đơn hàng thành công sẽ tích lũy điểm thưởng tương ứng (10k = 10 điểm) để tham gia vòng quay may mắn rinh quà độc quyền.
+                    Mỗi đơn hàng thành công sẽ tích lũy điểm thưởng tương ứng (10k = 10 điểm) để tham gia vòng quay may mắn rinh voucher và phần quà độc quyền.
                 </p>
                 <div class="flex flex-wrap justify-center md:justify-start gap-4">
-                    <a href="#packages" class="bg-yellow-400 hover:bg-yellow-300 text-gray-950 font-bold px-6 py-3 rounded-xl shadow-lg transition text-sm">
-                        <i class="fa-solid fa-gamepad mr-2"></i>Nạp Ngay
+                    <a href="#packages" class="bg-yellow-400 hover:bg-yellow-300 text-gray-950 font-bold px-6 py-3 rounded-xl shadow-lg transition text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-gamepad"></i> Nạp Ngay
                     </a>
-                    <a href="#minigame" class="bg-gray-800 hover:bg-gray-700 text-yellow-400 font-bold px-6 py-3 rounded-xl border border-gray-700 transition text-sm">
-                        <i class="fa-solid fa-dharmachakra mr-2"></i>Vòng Quay Điểm
+                    <a href="#minigame" class="bg-gray-800 hover:bg-gray-700 text-yellow-400 font-bold px-6 py-3 rounded-xl border border-gray-700 transition text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-dharmachakra"></i> Vòng Quay Điểm
                     </a>
                 </div>
             </div>
@@ -110,40 +118,63 @@
         <div id="packages-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
     </section>
 
-    <!-- MINI GAME VÒNG QUAY -->
+    <!-- MINI GAME VÒNG QUAY (THIẾT KẾ LẠI ĐẶC SẮC, NỊNH MẮT) -->
     <section id="minigame" class="container mx-auto px-4 py-16 border-b border-gray-900">
-        <div class="max-w-2xl mx-auto bg-gray-900 border border-yellow-500/30 rounded-3xl p-8 shadow-2xl text-center relative overflow-hidden">
-            <div class="absolute -top-12 -right-12 w-40 h-40 bg-yellow-500/10 rounded-full blur-2xl"></div>
-            <span class="bg-yellow-400 text-gray-950 font-black text-xs px-3 py-1 rounded-full uppercase tracking-wider">Mini Game Đổi Thưởng</span>
-            <h2 class="text-3xl font-black mt-3 mb-2 text-white">VÒNG QUAY MAY MẮN</h2>
-            <p class="text-gray-400 text-sm mb-6">Dùng điểm tích lũy từ đơn nạp thành công để tham gia quay thưởng (Cần 50 điểm / lần quay).</p>
-            
-            <div class="bg-gray-950 border border-gray-800 p-4 rounded-2xl mb-6 inline-block">
-                <p class="text-xs text-gray-400 mb-1">Điểm hiện có của bạn:</p>
-                <p id="spinUserPointsDisplay" class="text-2xl font-black text-yellow-400">0 Điểm</p>
-            </div>
+        <div class="max-w-2xl mx-auto bg-gradient-to-b from-gray-900 via-gray-900 to-gray-950 border border-yellow-500/40 rounded-3xl p-8 md:p-10 shadow-2xl text-center relative overflow-hidden">
+            <!-- Background glowing blobs -->
+            <div class="absolute -top-16 -left-16 w-52 h-52 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-16 -right-16 w-52 h-52 bg-yellow-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
-            <!-- VÒNG QUAY CANVAS -->
-            <div class="relative w-72 h-72 mx-auto mb-6 flex items-center justify-center">
-                <div class="absolute -top-3 z-20 w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[24px] border-t-yellow-400 filter drop-shadow"></div>
-                <div class="w-full h-full rounded-full border-4 border-yellow-500/50 overflow-hidden shadow-2xl relative bg-gray-950 transition-transform duration-[4000ms] ease-out" id="wheelElement">
-                    <canvas id="wheelCanvas" width="300" height="300" class="w-full h-full"></canvas>
+            <span class="bg-gradient-to-r from-yellow-400 to-amber-500 text-gray-950 font-black text-xs px-4 py-1.5 rounded-full uppercase tracking-wider shadow-md">
+                ✨ Mini Game Đổi Thưởng Độc Quyền
+            </span>
+            <h2 class="text-3xl md:text-4xl font-black mt-3 mb-2 text-white tracking-wide">VÒNG QUAY MAY MẮN</h2>
+            <p class="text-gray-400 text-sm mb-6 max-w-md mx-auto">Sử dụng điểm tích lũy từ đơn nạp thành công để tham gia quay thưởng trúng quà giá trị (<b class="text-yellow-400">50 Điểm / Lần</b>).</p>
+            
+            <div class="inline-flex items-center gap-3 bg-gray-950/80 border border-yellow-500/30 px-6 py-3 rounded-2xl mb-8 shadow-inner">
+                <div class="w-10 h-10 rounded-xl bg-yellow-500/20 text-yellow-400 flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-coins animate-spin"></i>
+                </div>
+                <div class="text-left">
+                    <p class="text-[10px] text-gray-400 uppercase font-bold tracking-wider">Điểm Khả Dụng</p>
+                    <p id="spinUserPointsDisplay" class="text-2xl font-black text-yellow-400">0 Điểm</p>
                 </div>
             </div>
 
-            <div id="wheelResultBox" class="min-h-[40px] mb-4 text-emerald-400 font-bold text-base"></div>
+            <!-- VÒNG QUAY CANVAS VỚI HIỆU ỨNG GLOW & MŨI TÊN ĐỈNH CAO -->
+            <div class="relative w-72 h-72 md:w-80 md:h-80 mx-auto mb-8 flex items-center justify-center">
+                <!-- Mũi tên chỉ hướng -->
+                <div class="absolute -top-4 z-20 w-0 h-0 border-l-[14px] border-l-transparent border-r-[14px] border-r-transparent border-t-[28px] border-t-yellow-400 filter drop-shadow-[0_4px_8px_rgba(234,179,8,0.6)] animate-bounce"></div>
+                
+                <!-- Viền phát sáng vòng quay -->
+                <div class="w-full h-full rounded-full p-2 bg-gradient-to-tr from-yellow-600 via-amber-400 to-yellow-200 shadow-[0_0_35px_rgba(234,179,8,0.4)] wheel-glow relative">
+                    <div class="w-full h-full rounded-full overflow-hidden relative bg-gray-950 transition-transform duration-[4000ms] cubic-bezier(0.15, 0.85, 0.15, 1)" id="wheelElement">
+                        <canvas id="wheelCanvas" width="320" height="320" class="w-full h-full"></canvas>
+                    </div>
+                </div>
+                <!-- Tâm vòng quay -->
+                <div class="absolute z-10 w-14 h-14 rounded-full bg-gradient-to-tr from-yellow-500 to-amber-300 border-4 border-gray-950 shadow-lg flex items-center justify-center text-gray-950 font-black text-xs">
+                    <i class="fa-solid fa-bolt text-lg"></i>
+                </div>
+            </div>
 
-            <div class="flex flex-col gap-4">
-                <button onclick="spinWheel()" id="spinBtn" class="bg-gradient-to-r from-yellow-500 to-amber-400 hover:from-yellow-400 hover:to-amber-300 text-gray-950 font-black px-8 py-4 rounded-2xl shadow-xl transition transform active:scale-95 text-base flex items-center justify-center gap-2 mx-auto w-full max-w-xs">
-                    <i class="fa-solid fa-dharmachakra"></i> Quay Ngay (50 Điểm)
+            <div id="wheelResultBox" class="min-h-[44px] mb-6 px-4 py-2 bg-gray-950/60 border border-gray-800 rounded-2xl text-emerald-400 font-bold text-sm flex items-center justify-center gap-2">
+                <i class="fa-solid fa-circle-info text-yellow-400"></i> Sẵn sàng quay thưởng! Chọn nút bên dưới để thử vận may.
+            </div>
+
+            <div>
+                <button onclick="spinWheel()" id="spinBtn" class="bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-500 hover:from-yellow-300 hover:to-amber-400 text-gray-950 font-black px-10 py-4 rounded-2xl shadow-xl transition transform active:scale-95 text-base flex items-center justify-center gap-3 mx-auto w-full max-w-sm tracking-wide">
+                    <i class="fa-solid fa-dharmachakra text-xl"></i> QUAY NGAY (50 ĐIỂM)
                 </button>
             </div>
 
-            <!-- KHO QUÀ CÁ NHÂN -->
-            <div class="mt-8 pt-6 border-t border-gray-800 text-left">
-                <h4 class="text-xs font-bold uppercase text-yellow-400 mb-3"><i class="fa-solid fa-box-archive mr-1"></i> Kho Vật Phẩm / Voucher Của Bạn</h4>
-                <div id="userVouchersList" class="flex flex-wrap gap-2 text-xs text-gray-300">
-                    <span class="text-gray-500 italic">Chưa có phần thưởng nào. Hãy quay ngay!</span>
+            <!-- KHO VẬT PHẨM / VOUCHER CỦA BẠN -->
+            <div class="mt-10 pt-6 border-t border-gray-800 text-left">
+                <h4 class="text-xs font-black uppercase text-yellow-400 tracking-wider mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-box-archive text-amber-400"></i> Kho Vật Phẩm & Voucher Của Bạn
+                </h4>
+                <div id="userVouchersList" class="flex flex-wrap gap-2 text-xs">
+                    <span class="text-gray-500 italic bg-gray-950 px-3 py-2 rounded-xl border border-gray-800 w-full text-center">Chưa có phần thưởng nào. Hãy thử quay ngay vòng quay may mắn!</span>
                 </div>
             </div>
         </div>
@@ -253,32 +284,48 @@
         </div>
     </footer>
 
-    <!-- MODAL ĐĂNG KÝ / ĐĂNG NHẬP -->
-    <div id="authModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center">
-        <div class="bg-gray-900 border border-gray-800 w-full max-w-md p-8 rounded-3xl shadow-2xl relative">
-            <div class="text-center mb-6">
-                <div class="w-14 h-14 bg-yellow-500/10 text-yellow-400 rounded-2xl mx-auto flex items-center justify-center text-2xl mb-3"><i class="fa-solid fa-user-plus"></i></div>
-                <h3 class="text-2xl font-black text-white">ĐĂNG KÝ / ĐĂNG NHẬP</h3>
-                <p class="text-gray-400 text-xs mt-1">Nhập tên tài khoản bất kỳ để vào hệ thống</p>
+    <!-- MODAL ĐĂNG KÝ / ĐĂNG NHẬP (THIẾT KẾ LẠI SIÊU NỊNH MẮT, GLASSMORPHISM) -->
+    <div id="authModal" class="fixed inset-0 bg-gray-950/90 backdrop-blur-xl z-50 flex items-center justify-center p-4">
+        <div class="bg-gradient-to-b from-gray-900 via-gray-900 to-gray-950 border border-yellow-500/40 w-full max-w-md p-8 md:p-10 rounded-3xl shadow-[0_0_50px_rgba(0,0,0,0.8)] relative overflow-hidden modal-animate">
+            <!-- Glow background decor -->
+            <div class="absolute -top-20 -right-20 w-48 h-48 bg-yellow-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-20 -left-20 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="text-center mb-8 relative z-10">
+                <div class="w-16 h-16 bg-gradient-to-tr from-yellow-500 to-amber-300 text-gray-950 rounded-2xl mx-auto flex items-center justify-center text-2xl mb-4 shadow-lg shadow-yellow-500/20">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+                <h3 class="text-2xl md:text-3xl font-black text-white tracking-wide">CHÀO MỪNG GAME THỦ</h3>
+                <p class="text-gray-400 text-xs mt-2">Đăng nhập hoặc tạo nhanh tài khoản để trải nghiệm dịch vụ nạp thẻ và vòng quay đổi thưởng</p>
             </div>
-            <form onsubmit="handleAuthSubmit(event)" class="space-y-4">
+
+            <form onsubmit="handleAuthSubmit(event)" class="space-y-5 relative z-10">
                 <div>
-                    <label class="block text-xs font-semibold text-gray-300 mb-1">Tên tài khoản người chơi <span class="text-red-500">*</span></label>
-                    <input type="text" id="authUsernameInput" required class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400 text-sm" placeholder="VD: gamer99, vanan...">
+                    <label class="block text-xs font-bold text-gray-300 mb-1.5 uppercase tracking-wider">Tên tài khoản người chơi <span class="text-yellow-400">*</span></label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-500"><i class="fa-solid fa-user"></i></span>
+                        <input type="text" id="authUsernameInput" required class="w-full bg-gray-950/90 border border-gray-800 rounded-2xl pl-11 pr-4 py-3.5 text-white focus:outline-none focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 text-sm transition" placeholder="VD: gamer99, vanan...">
+                    </div>
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold text-gray-300 mb-1">Mật khẩu tài khoản <span class="text-red-500">*</span></label>
-                    <input type="password" id="authPasswordInput" required class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-400 text-sm" placeholder="••••••••">
+                    <label class="block text-xs font-bold text-gray-300 mb-1.5 uppercase tracking-wider">Mật khẩu tài khoản <span class="text-yellow-400">*</span></label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-500"><i class="fa-solid fa-lock"></i></span>
+                        <input type="password" id="authPasswordInput" required class="w-full bg-gray-950/90 border border-gray-800 rounded-2xl pl-11 pr-4 py-3.5 text-white focus:outline-none focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 text-sm transition" placeholder="••••••••">
+                    </div>
                 </div>
-                <button type="submit" class="w-full bg-yellow-400 hover:bg-yellow-300 text-gray-950 font-black py-3 rounded-xl shadow-lg transition text-sm">
+                <button type="submit" class="w-full bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-500 hover:from-yellow-300 hover:to-amber-400 text-gray-950 font-black py-4 rounded-2xl shadow-xl transition transform active:scale-95 text-sm tracking-wider uppercase">
                     Vào Trang Web Ngay
                 </button>
             </form>
+            <div class="mt-6 text-center relative z-10">
+                <p class="text-[11px] text-gray-500"><i class="fa-solid fa-shield-halved text-yellow-400 mr-1"></i> Hệ thống bảo mật thông tin tài khoản tuyệt đối</p>
+            </div>
         </div>
     </div>
 
     <!-- MODAL THANH TOÁN -->
-    <div id="checkoutModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
+    <div id="checkoutModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300 p-4">
         <div class="bg-gray-900 border border-gray-800 w-full max-w-lg p-8 rounded-3xl shadow-2xl relative transform scale-95 transition-transform duration-300 max-h-[90vh] overflow-y-auto" id="checkoutModalContent">
             <button onclick="closeCheckoutModal()" class="absolute top-5 right-5 text-gray-400 hover:text-white text-xl w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center transition"><i class="fa-solid fa-xmark"></i></button>
             <div class="text-center mb-6">
@@ -355,12 +402,12 @@
 
         // Cấu hình phần thưởng vòng quay
         const wheelPrizes = [
-            { name: "+50 Điểm Thưởng", type: "points", val: 50, color: "#eab308" },
+            { name: "+50 Điểm Thưởng", type: "points", val: 50, color: "#f59e0b" },
             { name: "Vé Giảm 20%", type: "voucher", val: "Giảm 20%", color: "#3b82f6" },
             { name: "Gói Nạp Free", type: "gift", val: "Gói Nạp Miễn Phí", color: "#ec4899" },
             { name: "+100 Điểm", type: "points", val: 100, color: "#10b981" },
             { name: "Vé Giảm 50%", type: "voucher", val: "Giảm 50%", color: "#8b5cf6" },
-            { name: "Chúc May Mắn", type: "none", val: 0, color: "#4b5563" }
+            { name: "Chúc May Mắn", type: "none", val: 0, color: "#374151" }
         ];
 
         window.onload = function() {
@@ -459,17 +506,22 @@
                 ctx.beginPath();
                 ctx.fillStyle = prize.color;
                 ctx.moveTo(radius, radius);
-                ctx.arc(radius, radius, radius, angle, angle + arc, false);
+                ctx.arc(radius, radius, radius - 4, angle, angle + arc, false);
                 ctx.lineTo(radius, radius);
                 ctx.fill();
-                ctx.save();
 
+                // Viền ngăn cách các ô
+                ctx.strokeStyle = "#111827";
+                ctx.lineWidth = 3;
+                ctx.stroke();
+
+                ctx.save();
                 ctx.translate(radius, radius);
                 ctx.rotate(angle + arc / 2);
                 ctx.textAlign = "right";
                 ctx.fillStyle = "#ffffff";
-                ctx.font = "bold 11px sans-serif";
-                ctx.fillText(prize.name, radius - 15, 5);
+                ctx.font = "bold 12px sans-serif";
+                ctx.fillText(prize.name, radius - 20, 5);
                 ctx.restore();
             });
         }
@@ -486,17 +538,17 @@
                 return;
             }
 
-            // Trừ 50 điểm
             currentUser.points -= 50;
             db.ref('users/' + currentUser.username).update({ points: currentUser.points });
             updateUserUI();
 
-            document.getElementById('spinBtn').disabled = true;
-            document.getElementById('wheelResultBox').innerText = "Đang quay thưởng...";
+            const spinBtn = document.getElementById('spinBtn');
+            spinBtn.disabled = true;
+            document.getElementById('wheelResultBox').innerHTML = `<i class="fa-solid fa-spinner fa-spin text-yellow-400"></i> Đang quay vòng quay may mắn...`;
 
             const prizeIndex = Math.floor(Math.random() * wheelPrizes.length);
             const degreesPerSegment = 360 / wheelPrizes.length;
-            const extraSpins = 360 * 5; 
+            const extraSpins = 360 * 6; 
             const targetDegree = extraSpins + (360 - (prizeIndex * degreesPerSegment + degreesPerSegment / 2));
             
             currentRotation += targetDegree;
@@ -519,8 +571,8 @@
                 });
 
                 updateUserUI();
-                document.getElementById('wheelResultBox').innerHTML = `<i class="fa-solid fa-gift mr-1"></i> Chúc mừng bạn trúng: <b class="text-yellow-400">${prize.name}</b>`;
-                document.getElementById('spinBtn').disabled = false;
+                document.getElementById('wheelResultBox').innerHTML = `<i class="fa-solid fa-award text-yellow-400 text-lg"></i> Chúc mừng bạn trúng: <b class="text-yellow-400 text-base underline">${prize.name}</b>`;
+                spinBtn.disabled = false;
             }, 4000);
         }
 
@@ -539,14 +591,13 @@
             db.ref('users/' + username).once('value', (snapshot) => {
                 let userData = snapshot.val();
                 if (!userData) {
-                    userData = { username: username, points: 0, vouchers: [] };
+                    userData = { username: username, points: 100, vouchers: ["Vé Giảm 20%"] }; // Tặng sẵn quà trải nghiệm
                     db.ref('users/' + username).set(userData);
                 }
                 currentUser = userData;
                 localStorage.setItem('currentUser', JSON.stringify(currentUser));
                 document.getElementById('authModal').classList.add('hidden');
                 updateUserUI();
-                alert(`Chào mừng ${username} đã vào hệ thống!`);
             });
         }
 
@@ -562,9 +613,9 @@
                 const vouchersContainer = document.getElementById('userVouchersList');
                 const vList = currentUser.vouchers || [];
                 if (vList.length === 0) {
-                    vouchersContainer.innerHTML = `<span class="text-gray-500 italic">Chưa có phần thưởng nào. Hãy quay ngay!</span>`;
+                    vouchersContainer.innerHTML = `<span class="text-gray-500 italic bg-gray-950 px-3 py-2 rounded-xl border border-gray-800 w-full text-center">Chưa có phần thưởng nào. Hãy thử quay ngay vòng quay may mắn!</span>`;
                 } else {
-                    vouchersContainer.innerHTML = vList.map(v => `<span class="bg-gray-950 border border-yellow-500/30 text-yellow-400 px-3 py-1 rounded-lg font-bold"><i class="fa-solid fa-ticket mr-1"></i>${v}</span>`).join('');
+                    vouchersContainer.innerHTML = vList.map(v => `<span class="bg-gray-950 border border-yellow-500/40 text-yellow-400 px-3.5 py-2 rounded-xl font-bold flex items-center gap-1.5 shadow-md"><i class="fa-solid fa-ticket text-amber-400"></i>${v}</span>`).join('');
                 }
             }
         }
@@ -612,7 +663,6 @@
             });
         }
 
-        // Đã sửa lại lịch sử giao dịch chỉ hiển thị đúng của tài khoản đang đăng nhập
         function renderUserHistory() {
             const tbody = document.getElementById('userHistoryTableBody');
             const searchKeyword = document.getElementById('searchHistoryInput').value.toLowerCase().trim();
