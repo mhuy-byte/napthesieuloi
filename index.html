@@ -32,251 +32,248 @@
         .modal-animate { animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
     </style>
 </head>
-<body class="bg-gray-950 text-gray-100 font-sans selection:bg-yellow-400 selection:text-gray-950">
+<body class="bg-gray-950 text-gray-100 font-sans selection:bg-yellow-400 selection:text-gray-950 min-h-screen flex flex-col justify-between">
 
-    <!-- HEADER / ĐIỀU HƯỚNG -->
-    <header class="bg-gray-900/90 backdrop-blur-md border-b border-gray-800 sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="#home" class="flex items-center space-x-2">
-                <span class="text-2xl font-black text-yellow-400 tracking-wider flex items-center gap-2">
-                    <i class="fa-solid fa-bolt text-yellow-500 animate-pulse"></i> NẠP THẺ SIÊU LỜI
-                </span>
-            </a>
-            <nav class="hidden md:flex space-x-6 font-medium text-sm">
-                <a href="#home" class="hover:text-yellow-400 transition">Trang Chủ</a>
-                <a href="#packages" class="hover:text-yellow-400 transition">Gói Nạp Game</a>
-                <a href="#minigame" class="hover:text-yellow-400 transition text-amber-400 flex items-center gap-1"><i class="fa-solid fa-dharmachakra"></i> Vòng Quay Điểm</a>
-                <a href="#history" class="hover:text-yellow-400 transition">Lịch Sử Giao Dịch</a>
-            </nav>
-            <div class="flex items-center gap-3">
-                <div id="userAccountInfo" class="hidden items-center gap-2 bg-gray-900 border border-gray-800 px-3 py-1.5 rounded-xl text-xs shadow-inner">
-                    <i class="fa-solid fa-user text-yellow-400"></i>
-                    <span id="navUsername" class="font-bold text-white">User</span> |
-                    <span class="text-yellow-400 font-black"><span id="navUserPoints">0</span> Điểm</span>
-                </div>
-                <button onclick="logoutUser()" id="btnLogout" class="hidden bg-red-500/20 text-red-400 px-3 py-1.5 rounded-xl text-xs font-bold hover:bg-red-500/30 transition border border-red-500/30">Đăng Xuất</button>
-            </div>
-        </div>
-    </header>
-
-    <!-- TRANG CHỦ -->
-    <section id="home" class="container mx-auto px-4 py-12 border-b border-gray-900">
-        <div class="glow-banner bg-gradient-to-r from-violet-950 via-indigo-950 to-gray-900 rounded-3xl p-8 md:p-12 border border-yellow-500/30 relative overflow-hidden flex flex-col md:flex-row items-center justify-between shadow-2xl">
-            <div class="z-10 max-w-xl text-center md:text-left">
-                <span class="inline-block bg-gradient-to-r from-yellow-400 to-amber-500 text-gray-950 text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest mb-4 shadow-md">
-                    🔥 Tích Điểm Đổi Quà Liền Tay
-                </span>
-                <h1 class="text-3xl md:text-5xl font-black mb-4 leading-tight bg-gradient-to-r from-white via-yellow-200 to-yellow-400 bg-clip-text text-transparent">
-                    Nạp Game Siêu Tốc - Nhận Điểm Quay Thưởng
-                </h1>
-                <p class="text-gray-300 mb-6 text-sm md:text-base leading-relaxed">
-                    Mỗi đơn hàng thành công sẽ tích lũy điểm thưởng tương ứng (10k = 10 điểm) để tham gia vòng quay may mắn rinh voucher và phần quà độc quyền.
-                </p>
-                <div class="flex flex-wrap justify-center md:justify-start gap-4">
-                    <a href="#packages" class="bg-yellow-400 hover:bg-yellow-300 text-gray-950 font-bold px-6 py-3 rounded-xl shadow-lg transition text-sm flex items-center gap-2">
-                        <i class="fa-solid fa-gamepad"></i> Nạp Ngay
-                    </a>
-                    <a href="#minigame" class="bg-gray-800 hover:bg-gray-700 text-yellow-400 font-bold px-6 py-3 rounded-xl border border-gray-700 transition text-sm flex items-center gap-2">
-                        <i class="fa-solid fa-dharmachakra"></i> Vòng Quay Điểm
-                    </a>
+    <div>
+        <!-- HEADER / ĐIỀU HƯỚNG -->
+        <header class="bg-gray-900/90 backdrop-blur-md border-b border-gray-800 sticky top-0 z-50">
+            <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+                <a href="javascript:void(0)" onclick="switchSection('home')" class="flex items-center space-x-2">
+                    <span class="text-2xl font-black text-yellow-400 tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-bolt text-yellow-500 animate-pulse"></i> NẠP THẺ SIÊU LỜI
+                    </span>
+                </a>
+                <nav class="hidden md:flex space-x-6 font-medium text-sm">
+                    <a href="javascript:void(0)" onclick="switchSection('home')" id="nav-home" class="nav-link hover:text-yellow-400 transition text-yellow-400 font-bold">Trang Chủ</a>
+                    <a href="javascript:void(0)" onclick="switchSection('packages')" id="nav-packages" class="nav-link hover:text-yellow-400 transition">Gói Nạp Game</a>
+                    <a href="javascript:void(0)" onclick="switchSection('minigame')" id="nav-minigame" class="nav-link hover:text-yellow-400 transition text-amber-400 flex items-center gap-1"><i class="fa-solid fa-dharmachakra"></i> Vòng Quay Điểm</a>
+                    <a href="javascript:void(0)" onclick="switchSection('history')" id="nav-history" class="nav-link hover:text-yellow-400 transition">Lịch Sử Giao Dịch</a>
+                </nav>
+                <div class="flex items-center gap-3">
+                    <div id="userAccountInfo" class="hidden items-center gap-2 bg-gray-900 border border-gray-800 px-3 py-1.5 rounded-xl text-xs shadow-inner">
+                        <i class="fa-solid fa-user text-yellow-400"></i>
+                        <span id="navUsername" class="font-bold text-white">User</span> |
+                        <span class="text-yellow-400 font-black"><span id="navUserPoints">0</span> Điểm</span>
+                    </div>
+                    <button onclick="logoutUser()" id="btnLogout" class="hidden bg-red-500/20 text-red-400 px-3 py-1.5 rounded-xl text-xs font-bold hover:bg-red-500/30 transition border border-red-500/30">Đăng Xuất</button>
                 </div>
             </div>
-            <div class="mt-8 md:mt-0 z-10 flex flex-col items-center">
-                <div class="relative animate-float">
-                    <div class="w-40 h-40 md:w-52 md:h-52 bg-gradient-to-tr from-yellow-500 to-amber-300 rounded-3xl p-1 shadow-2xl rotate-3">
-                        <div class="w-full h-full bg-gray-900 rounded-[22px] flex flex-col items-center justify-center p-4 text-center">
-                            <i class="fa-solid fa-gem text-5xl text-yellow-400 mb-2 animate-bounce"></i>
-                            <span class="text-xs text-gray-400 uppercase font-bold">Hoàn Tiền / Tích Điểm</span>
-                            <span class="text-lg font-black text-yellow-400">Siêu Lời</span>
+        </header>
+
+        <!-- TRANG CHỦ -->
+        <section id="home" class="main-section container mx-auto px-4 py-12">
+            <div class="glow-banner bg-gradient-to-r from-violet-950 via-indigo-950 to-gray-900 rounded-3xl p-8 md:p-12 border border-yellow-500/30 relative overflow-hidden flex flex-col md:flex-row items-center justify-between shadow-2xl">
+                <div class="z-10 max-w-xl text-center md:text-left">
+                    <span class="inline-block bg-gradient-to-r from-yellow-400 to-amber-500 text-gray-950 text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest mb-4 shadow-md">
+                        🔥 Tích Điểm Đổi Quà Liền Tay
+                    </span>
+                    <h1 class="text-3xl md:text-5xl font-black mb-4 leading-tight bg-gradient-to-r from-white via-yellow-200 to-yellow-400 bg-clip-text text-transparent">
+                        Nạp Game Siêu Tốc - Nhận Điểm Quay Thưởng
+                    </h1>
+                    <p class="text-gray-300 mb-6 text-sm md:text-base leading-relaxed">
+                        Mỗi đơn hàng thành công sẽ tích lũy điểm thưởng tương ứng (10k = 10 điểm) để tham gia vòng quay may mắn rinh voucher và phần quà độc quyền.
+                    </p>
+                    <div class="flex flex-wrap justify-center md:justify-start gap-4">
+                        <button onclick="switchSection('packages')" class="bg-yellow-400 hover:bg-yellow-300 text-gray-950 font-bold px-6 py-3 rounded-xl shadow-lg transition text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-gamepad"></i> Nạp Ngay
+                        </button>
+                        <button onclick="switchSection('minigame')" class="bg-gray-800 hover:bg-gray-700 text-yellow-400 font-bold px-6 py-3 rounded-xl border border-gray-700 transition text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-dharmachakra"></i> Vòng Quay Điểm
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-8 md:mt-0 z-10 flex flex-col items-center">
+                    <div class="relative animate-float">
+                        <div class="w-40 h-40 md:w-52 md:h-52 bg-gradient-to-tr from-yellow-500 to-amber-300 rounded-3xl p-1 shadow-2xl rotate-3">
+                            <div class="w-full h-full bg-gray-900 rounded-[22px] flex flex-col items-center justify-center p-4 text-center">
+                                <i class="fa-solid fa-gem text-5xl text-yellow-400 mb-2 animate-bounce"></i>
+                                <span class="text-xs text-gray-400 uppercase font-bold">Hoàn Tiền / Tích Điểm</span>
+                                <span class="text-lg font-black text-yellow-400">Siêu Lời</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- GÓI NẠP GAME -->
-    <section id="packages" class="container mx-auto px-4 py-16 border-b border-gray-900">
-        <div class="text-center mb-10">
-            <span class="text-yellow-400 text-xs font-bold uppercase tracking-widest bg-yellow-500/10 px-3 py-1 rounded-full border border-yellow-500/20">Khu Vực Gói Nạp</span>
-            <h2 class="text-3xl font-black mt-3 mb-2">CHỌN TỰA GAME VÀ MỆNH GIÁ</h2>
-            <p class="text-gray-400 text-sm">Mua gói nạp tự động, tích lũy điểm thưởng tương ứng</p>
-        </div>
-
-        <div class="flex justify-center space-x-3 mb-10 overflow-x-auto pb-2">
-            <button onclick="switchGameTab('freefire')" id="tab-btn-freefire" class="game-tab px-6 py-3 rounded-2xl font-bold transition flex items-center gap-2 bg-yellow-400 text-gray-950 shadow-lg shadow-yellow-500/20 text-sm">
-                <i class="fa-solid fa-fire text-red-600"></i> Free Fire
-            </button>
-            <button onclick="switchGameTab('lienquan')" id="tab-btn-lienquan" class="game-tab px-6 py-3 rounded-2xl font-bold transition flex items-center gap-2 bg-gray-900 text-gray-300 border border-gray-800 text-sm">
-                <i class="fa-solid fa-shield-sword text-blue-500"></i> Liên Quân Mobile
-            </button>
-            <button onclick="switchGameTab('fconline')" id="tab-btn-fconline" class="game-tab px-6 py-3 rounded-2xl font-bold transition flex items-center gap-2 bg-gray-900 text-gray-300 border border-gray-800 text-sm">
-                <i class="fa-solid fa-futbol text-emerald-500"></i> FC Online
-            </button>
-        </div>
-
-        <div id="packages-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
-    </section>
-
-    <!-- MINI GAME VÒNG QUAY (THIẾT KẾ LẠI ĐẶC SẮC, NỊNH MẮT) -->
-    <section id="minigame" class="container mx-auto px-4 py-16 border-b border-gray-900">
-        <div class="max-w-2xl mx-auto bg-gradient-to-b from-gray-900 via-gray-900 to-gray-950 border border-yellow-500/40 rounded-3xl p-8 md:p-10 shadow-2xl text-center relative overflow-hidden">
-            <!-- Background glowing blobs -->
-            <div class="absolute -top-16 -left-16 w-52 h-52 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
-            <div class="absolute -bottom-16 -right-16 w-52 h-52 bg-yellow-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
-            <span class="bg-gradient-to-r from-yellow-400 to-amber-500 text-gray-950 font-black text-xs px-4 py-1.5 rounded-full uppercase tracking-wider shadow-md">
-                ✨ Mini Game Đổi Thưởng Độc Quyền
-            </span>
-            <h2 class="text-3xl md:text-4xl font-black mt-3 mb-2 text-white tracking-wide">VÒNG QUAY MAY MẮN</h2>
-            <p class="text-gray-400 text-sm mb-6 max-w-md mx-auto">Sử dụng điểm tích lũy từ đơn nạp thành công để tham gia quay thưởng trúng quà giá trị (<b class="text-yellow-400">50 Điểm / Lần</b>).</p>
-            
-            <div class="inline-flex items-center gap-3 bg-gray-950/80 border border-yellow-500/30 px-6 py-3 rounded-2xl mb-8 shadow-inner">
-                <div class="w-10 h-10 rounded-xl bg-yellow-500/20 text-yellow-400 flex items-center justify-center text-lg">
-                    <i class="fa-solid fa-coins animate-spin"></i>
-                </div>
-                <div class="text-left">
-                    <p class="text-[10px] text-gray-400 uppercase font-bold tracking-wider">Điểm Khả Dụng</p>
-                    <p id="spinUserPointsDisplay" class="text-2xl font-black text-yellow-400">0 Điểm</p>
-                </div>
+        <!-- GÓI NẠP GAME -->
+        <section id="packages" class="main-section container mx-auto px-4 py-16 hidden">
+            <div class="text-center mb-10">
+                <span class="text-yellow-400 text-xs font-bold uppercase tracking-widest bg-yellow-500/10 px-3 py-1 rounded-full border border-yellow-500/20">Khu Vực Gói Nạp</span>
+                <h2 class="text-3xl font-black mt-3 mb-2">CHỌN TỰA GAME VÀ MỆNH GIÁ</h2>
+                <p class="text-gray-400 text-sm">Mua gói nạp tự động, tích lũy điểm thưởng tương ứng</p>
             </div>
 
-            <!-- VÒNG QUAY CANVAS VỚI HIỆU ỨNG GLOW & MŨI TÊN ĐỈNH CAO -->
-            <div class="relative w-72 h-72 md:w-80 md:h-80 mx-auto mb-8 flex items-center justify-center">
-                <!-- Mũi tên chỉ hướng -->
-                <div class="absolute -top-4 z-20 w-0 h-0 border-l-[14px] border-l-transparent border-r-[14px] border-r-transparent border-t-[28px] border-t-yellow-400 filter drop-shadow-[0_4px_8px_rgba(234,179,8,0.6)] animate-bounce"></div>
+            <div class="flex justify-center space-x-3 mb-10 overflow-x-auto pb-2">
+                <button onclick="switchGameTab('freefire')" id="tab-btn-freefire" class="game-tab px-6 py-3 rounded-2xl font-bold transition flex items-center gap-2 bg-yellow-400 text-gray-950 shadow-lg shadow-yellow-500/20 text-sm">
+                    <i class="fa-solid fa-fire text-red-600"></i> Free Fire
+                </button>
+                <button onclick="switchGameTab('lienquan')" id="tab-btn-lienquan" class="game-tab px-6 py-3 rounded-2xl font-bold transition flex items-center gap-2 bg-gray-900 text-gray-300 border border-gray-800 text-sm">
+                    <i class="fa-solid fa-shield-sword text-blue-500"></i> Liên Quân Mobile
+                </button>
+                <button onclick="switchGameTab('fconline')" id="tab-btn-fconline" class="game-tab px-6 py-3 rounded-2xl font-bold transition flex items-center gap-2 bg-gray-900 text-gray-300 border border-gray-800 text-sm">
+                    <i class="fa-solid fa-futbol text-emerald-500"></i> FC Online
+                </button>
+            </div>
+
+            <div id="packages-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+        </section>
+
+        <!-- MINI GAME VÒNG QUAY -->
+        <section id="minigame" class="main-section container mx-auto px-4 py-16 hidden">
+            <div class="max-w-2xl mx-auto bg-gradient-to-b from-gray-900 via-gray-900 to-gray-950 border border-yellow-500/40 rounded-3xl p-8 md:p-10 shadow-2xl text-center relative overflow-hidden">
+                <div class="absolute -top-16 -left-16 w-52 h-52 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute -bottom-16 -right-16 w-52 h-52 bg-yellow-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <span class="bg-gradient-to-r from-yellow-400 to-amber-500 text-gray-950 font-black text-xs px-4 py-1.5 rounded-full uppercase tracking-wider shadow-md">
+                    ✨ Mini Game Đổi Thưởng Độc Quyền
+                </span>
+                <h2 class="text-3xl md:text-4xl font-black mt-3 mb-2 text-white tracking-wide">VÒNG QUAY MAY MẮN</h2>
+                <p class="text-gray-400 text-sm mb-6 max-w-md mx-auto">Sử dụng điểm tích lũy từ đơn nạp thành công để tham gia quay thưởng trúng quà giá trị (<b class="text-yellow-400">50 Điểm / Lần</b>).</p>
                 
-                <!-- Viền phát sáng vòng quay -->
-                <div class="w-full h-full rounded-full p-2 bg-gradient-to-tr from-yellow-600 via-amber-400 to-yellow-200 shadow-[0_0_35px_rgba(234,179,8,0.4)] wheel-glow relative">
-                    <div class="w-full h-full rounded-full overflow-hidden relative bg-gray-950 transition-transform duration-[4000ms] cubic-bezier(0.15, 0.85, 0.15, 1)" id="wheelElement">
-                        <canvas id="wheelCanvas" width="320" height="320" class="w-full h-full"></canvas>
+                <div class="inline-flex items-center gap-3 bg-gray-950/80 border border-yellow-500/30 px-6 py-3 rounded-2xl mb-8 shadow-inner">
+                    <div class="w-10 h-10 rounded-xl bg-yellow-500/20 text-yellow-400 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-coins animate-spin"></i>
+                    </div>
+                    <div class="text-left">
+                        <p class="text-[10px] text-gray-400 uppercase font-bold tracking-wider">Điểm Khả Dụng</p>
+                        <p id="spinUserPointsDisplay" class="text-2xl font-black text-yellow-400">0 Điểm</p>
                     </div>
                 </div>
-                <!-- Tâm vòng quay -->
-                <div class="absolute z-10 w-14 h-14 rounded-full bg-gradient-to-tr from-yellow-500 to-amber-300 border-4 border-gray-950 shadow-lg flex items-center justify-center text-gray-950 font-black text-xs">
-                    <i class="fa-solid fa-bolt text-lg"></i>
+
+                <!-- VÒNG QUAY CANVAS -->
+                <div class="relative w-72 h-72 md:w-80 md:h-80 mx-auto mb-8 flex items-center justify-center">
+                    <div class="absolute -top-4 z-20 w-0 h-0 border-l-[14px] border-l-transparent border-r-[14px] border-r-transparent border-t-[28px] border-t-yellow-400 filter drop-shadow-[0_4px_8px_rgba(234,179,8,0.6)] animate-bounce"></div>
+                    <div class="w-full h-full rounded-full p-2 bg-gradient-to-tr from-yellow-600 via-amber-400 to-yellow-200 shadow-[0_0_35px_rgba(234,179,8,0.4)] wheel-glow relative">
+                        <div class="w-full h-full rounded-full overflow-hidden relative bg-gray-950 transition-transform duration-[4000ms] cubic-bezier(0.15, 0.85, 0.15, 1)" id="wheelElement">
+                            <canvas id="wheelCanvas" width="320" height="320" class="w-full h-full"></canvas>
+                        </div>
+                    </div>
+                    <div class="absolute z-10 w-14 h-14 rounded-full bg-gradient-to-tr from-yellow-500 to-amber-300 border-4 border-gray-950 shadow-lg flex items-center justify-center text-gray-950 font-black text-xs">
+                        <i class="fa-solid fa-bolt text-lg"></i>
+                    </div>
                 </div>
-            </div>
 
-            <div id="wheelResultBox" class="min-h-[44px] mb-6 px-4 py-2 bg-gray-950/60 border border-gray-800 rounded-2xl text-emerald-400 font-bold text-sm flex items-center justify-center gap-2">
-                <i class="fa-solid fa-circle-info text-yellow-400"></i> Sẵn sàng quay thưởng! Chọn nút bên dưới để thử vận may.
-            </div>
-
-            <div>
-                <button onclick="spinWheel()" id="spinBtn" class="bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-500 hover:from-yellow-300 hover:to-amber-400 text-gray-950 font-black px-10 py-4 rounded-2xl shadow-xl transition transform active:scale-95 text-base flex items-center justify-center gap-3 mx-auto w-full max-w-sm tracking-wide">
-                    <i class="fa-solid fa-dharmachakra text-xl"></i> QUAY NGAY (50 ĐIỂM)
-                </button>
-            </div>
-
-            <!-- KHO VẬT PHẨM / VOUCHER CỦA BẠN -->
-            <div class="mt-10 pt-6 border-t border-gray-800 text-left">
-                <h4 class="text-xs font-black uppercase text-yellow-400 tracking-wider mb-3 flex items-center gap-2">
-                    <i class="fa-solid fa-box-archive text-amber-400"></i> Kho Vật Phẩm & Voucher Của Bạn
-                </h4>
-                <div id="userVouchersList" class="flex flex-wrap gap-2 text-xs">
-                    <span class="text-gray-500 italic bg-gray-950 px-3 py-2 rounded-xl border border-gray-800 w-full text-center">Chưa có phần thưởng nào. Hãy thử quay ngay vòng quay may mắn!</span>
+                <div id="wheelResultBox" class="min-h-[44px] mb-6 px-4 py-2 bg-gray-950/60 border border-gray-800 rounded-2xl text-emerald-400 font-bold text-sm flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-circle-info text-yellow-400"></i> Sẵn sàng quay thưởng! Chọn nút bên dưới để thử vận may.
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- LỊCH SỬ GIAO DỊCH -->
-    <section id="history" class="container mx-auto px-4 py-16 border-b border-gray-900">
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-            <div>
-                <span class="text-yellow-400 text-xs font-bold uppercase tracking-widest bg-yellow-500/10 px-3 py-1 rounded-full border border-yellow-500/20">Kiểm Tra Đơn</span>
-                <h2 class="text-2xl font-black mt-2">Lịch Sử Giao Dịch Của Bạn</h2>
-                <p class="text-gray-400 text-xs mt-1">Trạng thái cập nhật thành công sẽ tự động cộng điểm thưởng vào tài khoản cá nhân</p>
-            </div>
-            <div class="w-full md:w-auto">
-                <input type="text" id="searchHistoryInput" onkeyup="renderUserHistory()" placeholder="Tra cứu mã đơn hoặc ID..." class="bg-gray-900 border border-gray-800 rounded-xl px-4 py-2.5 text-sm w-full md:w-72 focus:outline-none focus:border-yellow-400 transition">
-            </div>
-        </div>
-
-        <div class="bg-gray-900 rounded-2xl border border-gray-800 overflow-hidden shadow-xl">
-            <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse">
-                    <thead>
-                        <tr class="bg-gray-800/60 text-gray-400 text-xs uppercase tracking-wider">
-                            <th class="p-4">Mã Đơn</th>
-                            <th class="p-4">ID Nhân Vật</th>
-                            <th class="p-4">Gói Nạp</th>
-                            <th class="p-4">Số Tiền</th>
-                            <th class="p-4">Hình Thức</th>
-                            <th class="p-4">Trạng Thái</th>
-                        </tr>
-                    </thead>
-                    <tbody id="userHistoryTableBody" class="divide-y divide-gray-800/80 text-sm"></tbody>
-                </table>
-            </div>
-        </div>
-    </section>
-
-    <!-- TRANG QUẢN TRỊ ADMIN (ẨN) -->
-    <section id="admin" class="container mx-auto px-4 py-16 hidden">
-        <div class="bg-gray-900 border border-yellow-500/30 rounded-3xl p-6 md:p-8 shadow-2xl">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center pb-6 mb-8 border-b border-gray-800 gap-4">
                 <div>
-                    <span class="bg-red-500/20 text-red-400 border border-red-500/30 text-xs font-bold px-3 py-1 rounded-full uppercase">Khu Vực Đặc Quyền</span>
-                    <h2 class="text-3xl font-black mt-2 flex items-center gap-2"><i class="fa-solid fa-gauge-high text-yellow-400"></i> Bảng Điều Khiển Admin</h2>
-                    <p class="text-gray-400 text-xs mt-1">Duyệt đơn nạp (hiển thị đầy đủ số seri & mã thẻ cào) và cộng điểm tự động</p>
+                    <button onclick="spinWheel()" id="spinBtn" class="bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-500 hover:from-yellow-300 hover:to-amber-400 text-gray-950 font-black px-10 py-4 rounded-2xl shadow-xl transition transform active:scale-95 text-base flex items-center justify-center gap-3 mx-auto w-full max-w-sm tracking-wide">
+                        <i class="fa-solid fa-dharmachakra text-xl"></i> QUAY NGAY (50 ĐIỂM)
+                    </button>
                 </div>
-                <button onclick="logoutAdmin()" class="bg-red-500/20 hover:bg-red-500/30 text-red-400 border border-red-500/30 font-bold px-4 py-2 rounded-xl text-xs transition flex items-center gap-2">
-                    <i class="fa-solid fa-right-from-bracket"></i> Thoát Admin
-                </button>
-            </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
-                <div class="bg-gray-950 p-5 rounded-2xl border border-gray-800 flex items-center justify-between">
-                    <div><p class="text-xs text-gray-400 font-semibold">Tổng Đơn Hàng</p><h3 id="statTotalOrders" class="text-2xl font-black text-white mt-1">0</h3></div>
-                    <div class="w-12 h-12 bg-blue-500/10 text-blue-400 rounded-xl flex items-center justify-center text-xl"><i class="fa-solid fa-receipt"></i></div>
-                </div>
-                <div class="bg-gray-950 p-5 rounded-2xl border border-gray-800 flex items-center justify-between">
-                    <div><p class="text-xs text-gray-400 font-semibold">Đơn Chờ Duyệt</p><h3 id="statPendingOrders" class="text-2xl font-black text-yellow-400 mt-1">0</h3></div>
-                    <div class="w-12 h-12 bg-yellow-500/10 text-yellow-400 rounded-xl flex items-center justify-center text-xl"><i class="fa-solid fa-clock-rotate-left"></i></div>
-                </div>
-                <div class="bg-gray-950 p-5 rounded-2xl border border-gray-800 flex items-center justify-between">
-                    <div><p class="text-xs text-gray-400 font-semibold">Doanh Thu</p><h3 id="statTotalRevenue" class="text-2xl font-black text-green-400 mt-1">0đ</h3></div>
-                    <div class="w-12 h-12 bg-green-500/10 text-green-400 rounded-xl flex items-center justify-center text-xl"><i class="fa-solid fa-wallet"></i></div>
-                </div>
-            </div>
-
-            <div class="flex space-x-3 mb-6 border-b border-gray-800 pb-3">
-                <button onclick="switchAdminTab('orders')" id="admin-tab-btn-orders" class="px-5 py-2.5 rounded-xl font-bold text-sm transition bg-yellow-400 text-gray-950">Quản Lý Đơn Hàng</button>
-                <button onclick="switchAdminTab('packages')" id="admin-tab-btn-packages" class="px-5 py-2.5 rounded-xl font-bold text-sm transition bg-gray-950 text-gray-400 hover:text-white">Chỉnh Sửa Giá Gói Nạp</button>
-            </div>
-
-            <!-- TAB 1: QUẢN LÝ ĐƠN -->
-            <div id="admin-pane-orders" class="admin-pane">
-                <div class="bg-gray-950 rounded-2xl border border-gray-800 overflow-hidden">
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left border-collapse">
-                            <thead>
-                                <tr class="bg-gray-900 text-gray-400 text-xs uppercase tracking-wider">
-                                    <th class="p-4">Mã Đơn</th>
-                                    <th class="p-4">Tài Khoản / ID</th>
-                                    <th class="p-4">Gói Nạp</th>
-                                    <th class="p-4">Số Tiền</th>
-                                    <th class="p-4">Hình Thức & Thẻ Cào</th>
-                                    <th class="p-4">Trạng Thái</th>
-                                    <th class="p-4 text-center">Hành Động</th>
-                                </tr>
-                            </thead>
-                            <tbody id="adminOrdersTableBody" class="divide-y divide-gray-800 text-sm"></tbody>
-                        </table>
+                <!-- KHO VẬT PHẨM & VOUCHER -->
+                <div class="mt-10 pt-6 border-t border-gray-800 text-left">
+                    <h4 class="text-xs font-black uppercase text-yellow-400 tracking-wider mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-box-archive text-amber-400"></i> Kho Vật Phẩm & Voucher Của Bạn
+                    </h4>
+                    <div id="userVouchersList" class="flex flex-wrap gap-2 text-xs">
+                        <span class="text-gray-500 italic bg-gray-950 px-3 py-2 rounded-xl border border-gray-800 w-full text-center">Chưa có phần thưởng nào. Hãy thử quay ngay vòng quay may mắn!</span>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- TAB 2: SỬA GIÁ -->
-            <div id="admin-pane-packages" class="admin-pane hidden">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="adminPackageEditContainer"></div>
+        <!-- LỊCH SỬ GIAO DỊCH -->
+        <section id="history" class="main-section container mx-auto px-4 py-16 hidden">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+                <div>
+                    <span class="text-yellow-400 text-xs font-bold uppercase tracking-widest bg-yellow-500/10 px-3 py-1 rounded-full border border-yellow-500/20">Kiểm Tra Đơn</span>
+                    <h2 class="text-2xl font-black mt-2">Lịch Sử Giao Dịch Của Bạn</h2>
+                    <p class="text-gray-400 text-xs mt-1">Trạng thái cập nhật thành công sẽ tự động cộng điểm thưởng vào tài khoản cá nhân</p>
+                </div>
+                <div class="w-full md:w-auto">
+                    <input type="text" id="searchHistoryInput" onkeyup="renderUserHistory()" placeholder="Tra cứu mã đơn hoặc ID..." class="bg-gray-900 border border-gray-800 rounded-xl px-4 py-2.5 text-sm w-full md:w-72 focus:outline-none focus:border-yellow-400 transition">
+                </div>
             </div>
-        </div>
-    </section>
+
+            <div class="bg-gray-900 rounded-2xl border border-gray-800 overflow-hidden shadow-xl">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-gray-800/60 text-gray-400 text-xs uppercase tracking-wider">
+                                <th class="p-4">Mã Đơn</th>
+                                <th class="p-4">ID Nhân Vật</th>
+                                <th class="p-4">Gói Nạp</th>
+                                <th class="p-4">Số Tiền</th>
+                                <th class="p-4">Hình Thức</th>
+                                <th class="p-4">Trạng Thái</th>
+                            </tr>
+                        </thead>
+                        <tbody id="userHistoryTableBody" class="divide-y divide-gray-800/80 text-sm"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- TRANG QUẢN TRỊ ADMIN (ẨN) -->
+        <section id="admin" class="main-section container mx-auto px-4 py-16 hidden">
+            <div class="bg-gray-900 border border-yellow-500/30 rounded-3xl p-6 md:p-8 shadow-2xl">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center pb-6 mb-8 border-b border-gray-800 gap-4">
+                    <div>
+                        <span class="bg-red-500/20 text-red-400 border border-red-500/30 text-xs font-bold px-3 py-1 rounded-full uppercase">Khu Vực Đặc Quyền</span>
+                        <h2 class="text-3xl font-black mt-2 flex items-center gap-2"><i class="fa-solid fa-gauge-high text-yellow-400"></i> Bảng Điều Khiển Admin</h2>
+                        <p class="text-gray-400 text-xs mt-1">Duyệt đơn nạp (hiển thị đầy đủ số seri & mã thẻ cào) và cộng điểm tự động</p>
+                    </div>
+                    <button onclick="logoutAdmin()" class="bg-red-500/20 hover:bg-red-500/30 text-red-400 border border-red-500/30 font-bold px-4 py-2 rounded-xl text-xs transition flex items-center gap-2">
+                        <i class="fa-solid fa-right-from-bracket"></i> Thoát Admin
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-gray-950 p-5 rounded-2xl border border-gray-800 flex items-center justify-between">
+                        <div><p class="text-xs text-gray-400 font-semibold">Tổng Đơn Hàng</p><h3 id="statTotalOrders" class="text-2xl font-black text-white mt-1">0</h3></div>
+                        <div class="w-12 h-12 bg-blue-500/10 text-blue-400 rounded-xl flex items-center justify-center text-xl"><i class="fa-solid fa-receipt"></i></div>
+                    </div>
+                    <div class="bg-gray-950 p-5 rounded-2xl border border-gray-800 flex items-center justify-between">
+                        <div><p class="text-xs text-gray-400 font-semibold">Đơn Chờ Duyệt</p><h3 id="statPendingOrders" class="text-2xl font-black text-yellow-400 mt-1">0</h3></div>
+                        <div class="w-12 h-12 bg-yellow-500/10 text-yellow-400 rounded-xl flex items-center justify-center text-xl"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                    </div>
+                    <div class="bg-gray-950 p-5 rounded-2xl border border-gray-800 flex items-center justify-between">
+                        <div><p class="text-xs text-gray-400 font-semibold">Doanh Thu</p><h3 id="statTotalRevenue" class="text-2xl font-black text-green-400 mt-1">0đ</h3></div>
+                        <div class="w-12 h-12 bg-green-500/10 text-green-400 rounded-xl flex items-center justify-center text-xl"><i class="fa-solid fa-wallet"></i></div>
+                    </div>
+                </div>
+
+                <div class="flex space-x-3 mb-6 border-b border-gray-800 pb-3">
+                    <button onclick="switchAdminTab('orders')" id="admin-tab-btn-orders" class="px-5 py-2.5 rounded-xl font-bold text-sm transition bg-yellow-400 text-gray-950">Quản Lý Đơn Hàng</button>
+                    <button onclick="switchAdminTab('packages')" id="admin-tab-btn-packages" class="px-5 py-2.5 rounded-xl font-bold text-sm transition bg-gray-950 text-gray-400 hover:text-white">Chỉnh Sửa Giá Gói Nạp</button>
+                </div>
+
+                <!-- TAB 1: QUẢN LÝ ĐƠN -->
+                <div id="admin-pane-orders" class="admin-pane">
+                    <div class="bg-gray-950 rounded-2xl border border-gray-800 overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="bg-gray-900 text-gray-400 text-xs uppercase tracking-wider">
+                                        <th class="p-4">Mã Đơn</th>
+                                        <th class="p-4">Tài Khoản / ID</th>
+                                        <th class="p-4">Gói Nạp</th>
+                                        <th class="p-4">Số Tiền</th>
+                                        <th class="p-4">Hình Thức & Thẻ Cào</th>
+                                        <th class="p-4">Trạng Thái</th>
+                                        <th class="p-4 text-center">Hành Động</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminOrdersTableBody" class="divide-y divide-gray-800 text-sm"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 2: SỬA GIÁ -->
+                <div id="admin-pane-packages" class="admin-pane hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="adminPackageEditContainer"></div>
+                </div>
+            </div>
+        </section>
+    </div>
 
     <!-- FOOTER -->
-    <footer id="support" class="bg-gray-900 border-t border-gray-800 py-12 text-center text-gray-400 text-sm">
+    <footer id="support" class="bg-gray-900 border-t border-gray-800 py-12 text-center text-gray-400 text-sm mt-12">
         <div class="container mx-auto px-4">
             <h3 class="text-lg font-bold text-white mb-2">HỖ TRỢ KHÁCH HÀNG 24/7</h3>
             <p class="mb-6">Mọi thắc mắc về đơn hàng, vui lòng liên hệ trực tiếp qua Zalo/Fanpage.</p>
@@ -284,10 +281,9 @@
         </div>
     </footer>
 
-    <!-- MODAL ĐĂNG KÝ / ĐĂNG NHẬP (THIẾT KẾ LẠI SIÊU NỊNH MẮT, GLASSMORPHISM) -->
+    <!-- MODAL ĐĂNG KÝ / ĐĂNG NHẬP -->
     <div id="authModal" class="fixed inset-0 bg-gray-950/90 backdrop-blur-xl z-50 flex items-center justify-center p-4">
         <div class="bg-gradient-to-b from-gray-900 via-gray-900 to-gray-950 border border-yellow-500/40 w-full max-w-md p-8 md:p-10 rounded-3xl shadow-[0_0_50px_rgba(0,0,0,0.8)] relative overflow-hidden modal-animate">
-            <!-- Glow background decor -->
             <div class="absolute -top-20 -right-20 w-48 h-48 bg-yellow-500/10 rounded-full blur-3xl pointer-events-none"></div>
             <div class="absolute -bottom-20 -left-20 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
@@ -400,7 +396,32 @@
         let packagesData = {};
         let currentActiveGameTab = 'freefire';
 
-        // Cấu hình phần thưởng vòng quay
+        // Hàm chuyển đổi các mục section độc lập nhau
+        function switchSection(sectionId) {
+            document.querySelectorAll('.main-section').forEach(sec => {
+                sec.classList.add('hidden');
+            });
+            const target = document.getElementById(sectionId);
+            if (target) {
+                target.classList.remove('hidden');
+            }
+
+            // Cập nhật trạng thái active trên navbar
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('text-yellow-400', 'font-bold');
+            });
+            const activeNav = document.getElementById('nav-' + sectionId);
+            if (activeNav) {
+                activeNav.classList.add('text-yellow-400', 'font-bold');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (sectionId === 'minigame') {
+                setTimeout(drawWheel, 50);
+            }
+        }
+
         const wheelPrizes = [
             { name: "+50 Điểm Thưởng", type: "points", val: 50, color: "#f59e0b" },
             { name: "Vé Giảm 20%", type: "voucher", val: "Giảm 20%", color: "#3b82f6" },
@@ -479,8 +500,7 @@
                     clickCount = 0;
                     const pass = prompt("Nhập mật khẩu quản trị Admin:");
                     if (pass === "30911") {
-                        document.getElementById('admin').classList.remove('hidden');
-                        window.location.hash = '#admin';
+                        switchSection('admin');
                         renderAdminData();
                         alert("Đăng nhập Admin thành công!");
                     } else if (pass !== null) {
@@ -490,10 +510,9 @@
             });
         };
 
-        // Vẽ vòng quay Canvas
         function drawWheel() {
             const canvas = document.getElementById('wheelCanvas');
-            if (!canvas.getContext) return;
+            if (!canvas || !canvas.getContext) return;
             const ctx = canvas.getContext('2d');
             const numSegments = wheelPrizes.length;
             const arc = (2 * Math.PI) / numSegments;
@@ -510,7 +529,6 @@
                 ctx.lineTo(radius, radius);
                 ctx.fill();
 
-                // Viền ngăn cách các ô
                 ctx.strokeStyle = "#111827";
                 ctx.lineWidth = 3;
                 ctx.stroke();
@@ -591,7 +609,7 @@
             db.ref('users/' + username).once('value', (snapshot) => {
                 let userData = snapshot.val();
                 if (!userData) {
-                    userData = { username: username, points: 100, vouchers: ["Vé Giảm 20%"] }; // Tặng sẵn quà trải nghiệm
+                    userData = { username: username, points: 100, vouchers: ["Vé Giảm 20%"] };
                     db.ref('users/' + username).set(userData);
                 }
                 currentUser = userData;
@@ -709,8 +727,7 @@
         }
 
         function logoutAdmin() {
-            document.getElementById('admin').classList.add('hidden');
-            window.location.hash = '#home';
+            switchSection('home');
         }
 
         function switchAdminTab(tab) {
