@@ -639,7 +639,15 @@
             spinBtn.disabled = true;
             document.getElementById('wheelResultBox').innerHTML = `<i class="fa-solid fa-spinner fa-spin text-yellow-400"></i> Đang quay vòng quay may mắn...`;
 
-            const prizeIndex = Math.floor(Math.random() * wheelPrizes.length);
+            // Tỉ lệ: 75% ra ô "Chúc May Mắn" (index 5), 25% còn lại chia đều cho 5 ô quà phía trên
+            let prizeIndex;
+            const rand = Math.random();
+            if (rand < 0.75) {
+                prizeIndex = 5; 
+            } else {
+                prizeIndex = Math.floor(Math.random() * 5); 
+            }
+
             const degreesPerSegment = 360 / wheelPrizes.length;
             const extraSpins = 360 * 6; 
             const targetDegree = extraSpins + (360 - (prizeIndex * degreesPerSegment + degreesPerSegment / 2));
