@@ -237,7 +237,7 @@
                     <div>
                         <span class="bg-red-500/20 text-red-400 border border-red-500/30 text-xs font-bold px-3 py-1 rounded-full uppercase">Khu Vực Đặc Quyền</span>
                         <h2 class="text-3xl font-black mt-2 flex items-center gap-2"><i class="fa-solid fa-gauge-high text-yellow-400"></i> Bảng Điều Khiển Admin</h2>
-                        <p class="text-gray-400 text-xs mt-1">Duyệt đơn nạp (hiển thị đầy đủ số seri & mã thẻ cào) và cộng điểm tự động</p>
+                        <p class="text-gray-400 text-xs mt-1">Duyệt đơn nạp (hiển thị mã GD / seri thẻ) và cộng điểm tự động</p>
                     </div>
                     <button onclick="logoutAdmin()" class="bg-red-500/20 hover:bg-red-500/30 text-red-400 border border-red-500/30 font-bold px-4 py-2 rounded-xl text-xs transition flex items-center gap-2">
                         <i class="fa-solid fa-right-from-bracket"></i> Thoát Admin
@@ -275,7 +275,7 @@
                                         <th class="p-4">Tài Khoản / ID</th>
                                         <th class="p-4">Gói Nạp</th>
                                         <th class="p-4">Số Tiền</th>
-                                        <th class="p-4">Hình Thức & Thẻ Cào</th>
+                                        <th class="p-4">Hình Thức & Thông Tin Thanh Toán</th>
                                         <th class="p-4">Trạng Thái</th>
                                         <th class="p-4 text-center">Hành Động</th>
                                     </tr>
@@ -342,7 +342,7 @@
         </div>
     </div>
 
-    <!-- MODAL THANH TOÁN (ĐÃ THAY ẢNH QR CODE TỪ GITHUB ANH1.JPG) -->
+    <!-- MODAL THANH TOÁN -->
     <div id="checkoutModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300 p-4">
         <div class="bg-gray-900 border border-gray-800 w-full max-w-lg p-8 rounded-3xl shadow-2xl relative transform scale-95 transition-transform duration-300 max-h-[90vh] overflow-y-auto" id="checkoutModalContent">
             <button onclick="closeCheckoutModal()" class="absolute top-5 right-5 text-gray-400 hover:text-white text-xl w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center transition"><i class="fa-solid fa-xmark"></i></button>
@@ -369,6 +369,14 @@
                         </label>
                     </div>
                 </div>
+
+                <!-- CẢNH BÁO MÀU ĐỎ YÊU CẦU HOÀN TẤT THANH TOÁN -->
+                <div class="bg-red-500/10 border border-red-500/30 p-3 rounded-2xl">
+                    <p class="text-xs text-red-400 font-bold text-center leading-relaxed">
+                        ⚠️ Phải hoàn thành thanh toán trước khi bấm xác nhận! Nếu chưa thanh toán mà bấm xác nhận, đơn sẽ bị hủy vì chưa nhận được thanh toán.
+                    </p>
+                </div>
+
                 <div id="scratchCardSection" class="hidden space-y-3 bg-gray-950/60 p-4 rounded-2xl border border-gray-800">
                     <div>
                         <label class="block text-xs font-semibold text-gray-300 mb-1">Nhà Mạng</label>
@@ -388,21 +396,32 @@
                     </div>
                 </div>
                 
-                <!-- PHẦN HIỂN THỊ ẢNH QR CODE TỪ GITHUB (anh1.jpg) -->
-                <div id="bankingSection" class="p-4 rounded-2xl bg-yellow-500/5 border border-yellow-500/20 text-center space-y-2">
-                    <p class="text-xs text-yellow-300 font-bold uppercase tracking-wider mb-2">QUÉT MÃ QR ĐỂ CHUYỂN KHOẢN</p>
-                    <div class="relative inline-block overflow-hidden rounded-2xl border-2 border-yellow-500/40 shadow-xl bg-gray-950 p-2">
-                        <img src="https://raw.githubusercontent.com/mhuy-byte/napthesieuloi/main/anh1.jpg" alt="QR Chuyển Khoản" class="w-52 md:w-60 mx-auto rounded-xl object-contain">
+                <!-- ẢNH QR CODE THU GỌN VÀ NÚT TẢI ẢNH VỀ MÁY -->
+                <div id="bankingSection" class="p-3 rounded-2xl bg-yellow-500/5 border border-yellow-500/20 text-center space-y-2">
+                    <p class="text-xs text-yellow-300 font-bold uppercase tracking-wider">QUÉT HOẶC TẢI ẢNH QR ĐỂ CHUYỂN KHOẢN</p>
+                    <div class="relative inline-block overflow-hidden rounded-xl border border-yellow-500/40 shadow-md bg-gray-950 p-1">
+                        <img src="https://raw.githubusercontent.com/mhuy-byte/napthesieuloi/main/anh1.jpg" alt="QR Chuyển Khoản" class="w-32 md:w-36 mx-auto rounded-lg object-contain">
                     </div>
-                    <p class="text-xs text-gray-300 mt-2">Nội dung chuyển khoản tự động:<br><b class="text-yellow-400 font-mono text-sm">NAPGAME [ID_CỦA_BẠN]</b></p>
+                    <div>
+                        <a href="https://raw.githubusercontent.com/mhuy-byte/napthesieuloi/main/anh1.jpg" download="anh1.jpg" target="_blank" class="inline-flex items-center gap-1.5 bg-gray-800 hover:bg-gray-700 text-yellow-400 text-xs font-bold px-3 py-1.5 rounded-lg transition shadow">
+                            <i class="fa-solid fa-download"></i> Tải ảnh QR về máy
+                        </a>
+                    </div>
+                    <p class="text-[11px] text-gray-300">Nội dung chuyển khoản:<br><b class="text-yellow-400 font-mono text-xs">NAPGAME [ID_CỦA_BẠN]</b></p>
                 </div>
 
-                <button type="submit" class="w-full bg-yellow-400 hover:bg-yellow-300 text-gray-950 font-black py-3 rounded-xl shadow-lg transition text-sm">Gửi Đơn Nạp Cho Admin</button>
+                <!-- Ô NHẬP MÃ CHUYỂN KHOẢN (MÃ GIAO DỊCH) -->
+                <div id="transferCodeField" class="space-y-1">
+                    <label class="block text-xs font-semibold text-gray-300 mb-1">Mã Giao Dịch Chuyển Khoản <span class="text-red-500">*</span></label>
+                    <input type="text" id="transferCodeInput" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-yellow-400" placeholder="Nhập mã GD / mã bill chuyển tiền...">
+                </div>
+
+                <button type="submit" class="w-full bg-yellow-400 hover:bg-yellow-300 text-gray-950 font-black py-3 rounded-xl shadow-lg transition text-sm">Xác Nhận Đã Thanh Toán</button>
             </form>
         </div>
     </div>
 
-    <!-- MODAL THÔNG BÁO XÁC NHẬN ĐƠN HÀNG (CÓ HOẠT ẢNH NHẢY NHÓT VUI NHỘN) -->
+    <!-- MODAL THÔNG BÁO CHỜ DUYỆT ĐƠN (CÓ HOẠT ẢNH NHẢY NHÓT VUI NHỘN) -->
     <div id="successModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300 p-4">
         <div class="bg-gradient-to-b from-gray-900 to-gray-950 border border-yellow-500/50 w-full max-w-sm p-8 rounded-3xl shadow-[0_0_50px_rgba(234,179,8,0.3)] text-center relative modal-animate space-y-4">
             <!-- Hoạt ảnh nhảy nhót vui nhộn -->
@@ -427,7 +446,7 @@
             </div>
 
             <button onclick="closeSuccessModal()" class="w-full bg-gradient-to-r from-yellow-400 to-amber-400 hover:from-yellow-300 hover:to-amber-300 text-gray-950 font-black py-3.5 rounded-xl shadow-lg transition text-sm uppercase tracking-wide">
-                Đã Hiểu, Quay Lại Trang Chủ
+                Đã Hiểu, Xem Lịch Sử Đơn
             </button>
         </div>
     </div>
@@ -770,7 +789,9 @@
                 else badge = `<span class="bg-red-500/10 text-red-400 border border-red-500/20 px-3 py-1 rounded-full text-xs font-bold inline-flex items-center gap-1.5"><i class="fa-solid fa-xmark-circle"></i> Đã hủy</span>`;
 
                 let methodDisplay = o.method;
-                if (o.method.includes('Thẻ cào')) {
+                if (o.method.includes('Chuyển khoản')) {
+                    methodDisplay = `Chuyển khoản QR<br><span class="text-[10px] text-yellow-400 font-mono">Mã GD: ${o.transferCode || 'Không có'}</span>`;
+                } else if (o.method.includes('Thẻ cào')) {
                     methodDisplay = `Thẻ cào (${o.telco})<br><span class="text-[10px] text-gray-400 font-mono">Seri: ${o.serial} | PIN: ${o.pin}</span>`;
                 }
 
@@ -820,7 +841,9 @@
                 else badge = `<span class="text-red-400 font-bold">Đã hủy</span>`;
 
                 let methodDetails = o.method;
-                if (o.method.includes('Thẻ cào')) {
+                if (o.method.includes('Chuyển khoản')) {
+                    methodDetails = `<b class="text-yellow-300">Chuyển khoản QR</b><br><span class="font-mono text-xs text-yellow-400">Mã GD: ${o.transferCode || 'Không có'}</span>`;
+                } else if (o.method.includes('Thẻ cào')) {
                     methodDetails = `<b class="text-yellow-300">Thẻ cào (${o.telco})</b><br><span class="font-mono text-xs text-gray-300">Seri: ${o.serial}<br>PIN: ${o.pin}</span>`;
                 }
 
@@ -915,7 +938,6 @@
             setTimeout(() => { modal.classList.add('hidden'); }, 300);
         }
 
-        // Đóng/mở modal thông báo thành công có hoạt ảnh nhảy nhót
         function openSuccessModal(orderCode) {
             document.getElementById('successOrderCodeDisplay').innerText = `Mã đơn: ${orderCode}`;
             const modal = document.getElementById('successModal');
@@ -928,7 +950,7 @@
             modal.classList.add('opacity-0');
             setTimeout(() => { 
                 modal.classList.add('hidden'); 
-                switchSection('history'); // Tự động chuyển qua trang lịch sử xem đơn
+                switchSection('history');
             }, 300);
         }
 
@@ -937,9 +959,11 @@
             if (method === 'Thẻ cào') {
                 document.getElementById('scratchCardSection').classList.remove('hidden');
                 document.getElementById('bankingSection').classList.add('hidden');
+                document.getElementById('transferCodeField').classList.add('hidden');
             } else {
                 document.getElementById('scratchCardSection').classList.add('hidden');
                 document.getElementById('bankingSection').classList.remove('hidden');
+                document.getElementById('transferCodeField').classList.remove('hidden');
             }
         }
 
@@ -952,6 +976,7 @@
             let telco = "";
             let serial = "";
             let pin = "";
+            let transferCode = "";
 
             if(method === 'Thẻ cào') {
                 telco = document.getElementById('cardTelco').value;
@@ -959,6 +984,12 @@
                 pin = document.getElementById('cardPin').value;
                 if (!serial || !pin) {
                     alert("Vui lòng điền đầy đủ số seri và mã thẻ cào!");
+                    return;
+                }
+            } else {
+                transferCode = document.getElementById('transferCodeInput').value.trim();
+                if (!transferCode) {
+                    alert("Vui lòng nhập mã giao dịch chuyển khoản để xác nhận thanh toán!");
                     return;
                 }
             }
@@ -971,6 +1002,7 @@
                 packageName: selectedPackageInfo.name,
                 price: selectedPackageInfo.price,
                 method: paymentDetail,
+                transferCode: transferCode,
                 telco: telco,
                 serial: serial,
                 pin: pin,
@@ -981,7 +1013,7 @@
             db.ref('orders').push(newOrder, (error) => {
                 if (!error) {
                     closeCheckoutModal();
-                    openSuccessModal(newOrderCode); // Hiển thị thông báo xin vui lòng chờ 3-5 phút kèm hiệu ứng nhảy nhót
+                    openSuccessModal(newOrderCode);
                 } else {
                     alert("Có lỗi xảy ra, vui lòng thử lại.");
                 }
